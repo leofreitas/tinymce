@@ -7,7 +7,7 @@ let swag = require('@ephox/swag');
 let path = require('path');
 
 let plugins = [
-  'advlist', 'anchor', 'autolink', 'autoresize', 'autosave', 'bbcode', 'charmap', 'code', 'codesample',
+  'advlist', 'anchor', 'atividade', 'autolink', 'autoresize', 'autosave', 'bbcode', 'charmap', 'code', 'codesample',
   'colorpicker', /*'compat3x', */ 'contextmenu', 'directionality', 'emoticons', 'help', 'fullpage',
   'fullscreen', 'hr', 'image', 'imagetools', 'importcss', 'insertdatetime', 'legacyoutput', 'link',
   'lists', 'media', 'nonbreaking', 'noneditable', 'pagebreak', 'paste', 'preview', 'print', 'save',
