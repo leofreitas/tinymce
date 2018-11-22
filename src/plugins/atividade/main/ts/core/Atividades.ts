@@ -11,7 +11,6 @@
 import Tools from 'tinymce/core/api/util/Tools';
 import XHR from 'tinymce/core/api/util/XHR';
 import Settings from '../api/Settings';
-import DateTimeHelper from './DateTimeHelper';
 
 const createAtividadeList = function (editorSettings, callback) {
   return function () {
@@ -82,15 +81,6 @@ const InsertAtividade = function (editor, ui, html) {
   }
 
   Tools.each(dom.select('*', el), function (n) {
-    // Replace cdate
-    if (hasClass(n, Settings.getCreationDateClasses(editor).replace(/\s+/g, '|'))) {
-      n.innerHTML = DateTimeHelper.getDateTime(editor, Settings.getCdateFormat(editor));
-    }
-
-    // Replace mdate
-    if (hasClass(n, Settings.getModificationDateClasses(editor).replace(/\s+/g, '|'))) {
-      n.innerHTML = DateTimeHelper.getDateTime(editor, Settings.getMdateFormat(editor));
-    }
 
     // Replace selection
     if (hasClass(n, Settings.getSelectedContentClasses(editor).replace(/\s+/g, '|'))) {

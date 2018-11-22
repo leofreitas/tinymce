@@ -31,7 +31,7 @@ const getAtividadeReplaceValues = function (editor) {
 };
 
 const getAtividades = function (editorSettings) {
-  return editorSettings.templates;
+  return editorSettings.atividades;
 };
 
 const getCdateFormat = function (editor) {

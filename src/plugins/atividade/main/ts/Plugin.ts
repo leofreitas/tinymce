@@ -10,13 +10,11 @@
 
 import PluginManager from 'tinymce/core/api/PluginManager';
 import Commands from './api/Commands';
-import FilterContent from './core/FilterContent';
 import Buttons from './ui/Buttons';
 
 PluginManager.add('atividade', function (editor) {
   Buttons.register(editor);
   Commands.register(editor);
-  FilterContent.setup(editor);
 });
 
 export default function () { }

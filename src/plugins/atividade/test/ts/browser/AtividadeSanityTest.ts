@@ -18,7 +18,7 @@ UnitTest.asynctest('browser.tinymce.plugins.atividade.AtividadeSanityTest', func
 
     Pipeline.async({}, [
       Logger.t('test basic template insertion', GeneralSteps.sequence([
-        tinyApis.sSetSetting('templates', [{ title: 'a', description: 'b', content: '<strong>c</strong>' }]),
+        tinyApis.sSetSetting('atividades', [{ title: 'a', description: 'b', content: '<strong>c</strong>' }]),
         tinyUi.sClickOnToolbar('click on template button', 'div[aria-label="Insere Atividade"] > button'),
         tinyUi.sWaitForPopup('wait for popup', 'div[role="dialog"][aria-label="Insere Atividade"]'),
         tinyUi.sClickOnUi('click on ok button', 'div.mce-primary button'),
@@ -27,7 +27,7 @@ UnitTest.asynctest('browser.tinymce.plugins.atividade.AtividadeSanityTest', func
 
       Logger.t('test basic content replacement', GeneralSteps.sequence([
         tinyApis.sSetContent(''),
-        tinyApis.sSetSetting('templates', [{ title: 'a', description: 'b', content: '<p>{$name} {$email}</p>' }]),
+        tinyApis.sSetSetting('atividades', [{ title: 'a', description: 'b', content: '<p>{$name} {$email}</p>' }]),
         tinyApis.sSetSetting('template_replace_values', { name: 'Tester', email: 'test@test.com' }),
         tinyUi.sClickOnToolbar('click on template button', 'div[aria-label="Insere Atividade"] > button'),
         tinyUi.sWaitForPopup('wait for popup', 'div[role="dialog"][aria-label="Insere Atividade"]'),
@@ -37,7 +37,7 @@ UnitTest.asynctest('browser.tinymce.plugins.atividade.AtividadeSanityTest', func
 
       Logger.t('test loading in snippet from other file', GeneralSteps.sequence([
         tinyApis.sSetContent(''),
-        tinyApis.sSetSetting('templates', [{ title: 'a', description: 'b', url: '/project/src/plugins/template/test/html/test_template.html' }]),
+        tinyApis.sSetSetting('atividades', [{ title: 'a', description: 'b', url: '/project/src/plugins/template/test/html/test_template.html' }]),
         tinyUi.sClickOnToolbar('click on template button', 'div[aria-label="Insere Atividade"] > button'),
         Chain.asStep({}, [
           tinyUi.cWaitForPopup('wait for popup', 'div[role="dialog"][aria-label="Insere Atividade"]'),

@@ -56,7 +56,7 @@ const open = function (editor, atividadeList) {
   let templateHtml;
 
   if (!atividadeList || atividadeList.length === 0) {
-    const message = editor.translate('No templates defined.');
+    const message = editor.translate('Nenhuma atividade selecionada.');
     editor.notificationManager.open({ text: message, type: 'info' });
     return;
   }

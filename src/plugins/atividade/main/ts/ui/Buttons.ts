@@ -12,8 +12,8 @@ import Atividades from '../core/Atividades';
 import Dialog from './Dialog';
 
 const showDialog = function (editor) {
-  return function (templates) {
-    Dialog.open(editor, templates);
+  return function (atividades) {
+    Dialog.open(editor, atividades);
   };
 };
 
@@ -24,7 +24,7 @@ const register = function (editor) {
   });
 
   editor.addMenuItem('template', {
-    text: 'Template',
+    text: 'Atividade',
     onclick: Atividades.createAtividadeList(editor.settings, showDialog(editor)),
     icon: 'template',
     context: 'insert'
