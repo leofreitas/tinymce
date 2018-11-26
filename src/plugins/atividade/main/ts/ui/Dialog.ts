@@ -53,7 +53,7 @@ const insertIframeHtml = function (editor, win, html) {
 const open = function (editor, atividadeList) {
   let win;
   const values = [];
-  let templateHtml;
+  let atividadeHTML;
 
   if (!atividadeList || atividadeList.length === 0) {
     const message = editor.translate('Nenhuma atividade selecionada.');
@@ -61,14 +61,14 @@ const open = function (editor, atividadeList) {
     return;
   }
 
-  Tools.each(atividadeList, function (template) {
+  Tools.each(atividadeList, function (atividade) {
     values.push({
       selected: !values.length,
-      text: template.title,
+      text: atividade.title,
       value: {
-        url: template.url,
-        content: template.content,
-        description: template.description
+        url: atividade.url,
+        content: atividade.content,
+        description: atividade.description
       }
     });
   });
@@ -80,13 +80,13 @@ const open = function (editor, atividadeList) {
       XHR.send({
         url: value.url,
         success (html) {
-          templateHtml = html;
-          insertIframeHtml(editor, win, templateHtml);
+          atividadeHTML = html;
+          insertIframeHtml(editor, win, atividadeHTML);
         }
       });
     } else {
-      templateHtml = value.content;
-      insertIframeHtml(editor, win, templateHtml);
+      atividadeHTML = value.content;
+      insertIframeHtml(editor, win, atividadeHTML);
     }
 
     win.find('#description')[0].text(e.control.value().description);
@@ -111,7 +111,7 @@ const open = function (editor, atividadeList) {
             items: {
               type: 'listbox',
               label: 'Atividades',
-              name: 'template',
+              name: 'atividade',
               values,
               onselect: onSelectAtividade
             }
@@ -132,7 +132,7 @@ const open = function (editor, atividadeList) {
     ],
 
     onsubmit () {
-      Atividades.InsertAtividade(editor, false, templateHtml);
+      Atividades.InsertAtividade(editor, false, atividadeHTML);
     },
 
     minWidth: Settings.getDialogWidth(editor),

@@ -23,10 +23,10 @@ const register = function (editor) {
     onclick: Atividades.createAtividadeList(editor.settings, showDialog(editor))
   });
 
-  editor.addMenuItem('template', {
+  editor.addMenuItem('atividade', {
     text: 'Atividade',
     onclick: Atividades.createAtividadeList(editor.settings, showDialog(editor)),
-    icon: 'template',
+    icon: 'plus',
     context: 'insert'
   });
 };

@@ -58,7 +58,7 @@ UnitTest.asynctest('browser.tinymce.plugins.atividade.AtividadeSanityTest', func
       ]))
     ], onSuccess, onFailure);
   }, {
-    plugins: 'template',
+    plugins: 'atividade',
     toolbar: 'template',
     indent: false,
     skin_url: '/project/js/tinymce/skins/lightgray'
