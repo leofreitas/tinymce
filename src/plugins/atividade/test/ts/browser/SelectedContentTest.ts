@@ -30,7 +30,7 @@ UnitTest.asynctest('browser.tinymce.plugins.atividade.SelectedContentTest', func
       Logger.t('test selectedcontent replacement with custom class', GeneralSteps.sequence([
         tinyApis.sSetContent('Text'),
         tinyApis.sSetSelection([0, 0], 0, [0, 0], 4),
-        tinyApis.sSetSetting('template_selected_content_classes', 'customSelected'),
+        tinyApis.sSetSetting('atividade_selected_content_classes', 'customSelected'),
         tinyApis.sSetSetting('templates', [{ title: 'a', description: 'b', content: '<h1 class="customSelected">This will be replaced/h1>' }]),
         tinyUi.sClickOnToolbar('click on atividade button', 'div[aria-label="Insere Atividade"] > button'),
         tinyUi.sWaitForPopup('wait for popup', 'div[role="dialog"][aria-label="Insere Atividade"]'),

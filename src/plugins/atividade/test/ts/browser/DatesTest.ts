@@ -25,7 +25,7 @@ UnitTest.asynctest('browser.tinymce.plugins.template.DatesTest', function () {
     Pipeline.async({}, [
       Logger.t('test cdate in snippet with default class', GeneralSteps.sequence([
         tinyApis.sSetSetting('templates', [{ title: 'a', description: 'b', content: '<p class="cdate">x</p>' }]),
-        tinyApis.sSetSetting('template_cdate_format', 'fake date'),
+        tinyApis.sSetSetting('atividade_cdate_format', 'fake date'),
         tinyUi.sClickOnToolbar('click on template button', 'div[aria-label="Insere Atividade"] > button'),
         tinyUi.sWaitForPopup('wait for popup', 'div[role="dialog"][aria-label="Insere Atividade"]'),
         tinyUi.sClickOnUi('click on ok button', 'div.mce-primary button'),
@@ -34,16 +34,16 @@ UnitTest.asynctest('browser.tinymce.plugins.template.DatesTest', function () {
       ])),
 
       Logger.t('test cdate in snippet with custom class', GeneralSteps.sequence([
-        tinyApis.sSetSetting('template_cdate_classes', 'customCdateClass'),
+        tinyApis.sSetSetting('atividade_cdate_classes', 'customCdateClass'),
         tinyApis.sSetSetting('templates', [{ title: 'a', description: 'b', content: '<p class="customCdateClass">x</p>' }]),
-        tinyApis.sSetSetting('template_cdate_format', 'fake date'),
+        tinyApis.sSetSetting('atividade_cdate_format', 'fake date'),
         tinyUi.sClickOnToolbar('click on template button', 'div[aria-label="Insere Atividade"] > button'),
         tinyUi.sWaitForPopup('wait for popup', 'div[role="dialog"][aria-label="Insere Atividade"]'),
         tinyUi.sClickOnUi('click on ok button', 'div.mce-primary button'),
         tinyApis.sAssertContent('<p class="customCdateClass">fake date</p>'),
-        sDeleteSetting('template_cdate_classes'),
+        sDeleteSetting('atividade_cdate_classes'),
         sDeleteSetting('templates'),
-        sDeleteSetting('template_cdate_format'),
+        sDeleteSetting('atividade_cdate_format'),
         tinyApis.sSetContent('')
       ])),
 
@@ -52,43 +52,43 @@ UnitTest.asynctest('browser.tinymce.plugins.template.DatesTest', function () {
           'templates',
           [{ title: 'a', description: 'b', content: '<div class="mceTmpl"><p class="mdate"></p><p class="cdate"></p></div>' }]
         ),
-        tinyApis.sSetSetting('template_mdate_format', 'fake modified date'),
-        tinyApis.sSetSetting('template_cdate_format', 'fake created date'),
+        tinyApis.sSetSetting('atividade_mdate_format', 'fake modified date'),
+        tinyApis.sSetSetting('atividade_cdate_format', 'fake created date'),
         tinyUi.sClickOnToolbar('click on template button', 'div[aria-label="Insere Atividade"] > button'),
         tinyUi.sWaitForPopup('wait for popup', 'div[role="dialog"][aria-label="Insere Atividade"]'),
         tinyUi.sClickOnUi('click on ok button', 'div.mce-primary button'),
         tinyApis.sAssertContent('<div class="mceTmpl"><p class="mdate">fake modified date</p><p class="cdate">fake created date</p></div>'),
-        tinyApis.sSetSetting('template_mdate_format', 'changed modified date'),
+        tinyApis.sSetSetting('atividade_mdate_format', 'changed modified date'),
         tinyApis.sAssertContent('<div class="mceTmpl"><p class="mdate">changed modified date</p><p class="cdate">fake created date</p></div>'),
         sDeleteSetting('templates'),
-        sDeleteSetting('template_mdate_format'),
-        sDeleteSetting('template_cdate_template'),
+        sDeleteSetting('atividade_mdate_format'),
+        sDeleteSetting('atividade_cdate_template'),
         tinyApis.sSetContent('')
       ])),
 
       Logger.t('test mdate updates with each serialization with custom class', GeneralSteps.sequence([
-        tinyApis.sSetSetting('template_mdate_classes', 'modified'),
+        tinyApis.sSetSetting('atividade_mdate_classes', 'modified'),
         tinyApis.sSetSetting(
           'templates',
           [{ title: 'a', description: 'b', content: '<div class="mceTmpl"><p class="modified"></p><p class="cdate"></p></div>' }]
         ),
-        tinyApis.sSetSetting('template_mdate_format', 'fake modified date'),
-        tinyApis.sSetSetting('template_cdate_format', 'fake created date'),
-        tinyUi.sClickOnToolbar('click on template button', 'div[aria-label="Insere Atividade"] > button'),
+        tinyApis.sSetSetting('atividade_mdate_format', 'fake modified date'),
+        tinyApis.sSetSetting('atividade_cdate_format', 'fake created date'),
+        tinyUi.sClickOnToolbar('click on atividade button', 'div[aria-label="Insere Atividade"] > button'),
         tinyUi.sWaitForPopup('wait for popup', 'div[role="dialog"][aria-label="Insere Atividade"]'),
         tinyUi.sClickOnUi('click on ok button', 'div.mce-primary button'),
         tinyApis.sAssertContent('<div class="mceTmpl"><p class="modified">fake modified date</p><p class="cdate">fake created date</p></div>'),
-        tinyApis.sSetSetting('template_mdate_format', 'changed modified date'),
+        tinyApis.sSetSetting('atividade_mdate_format', 'changed modified date'),
         tinyApis.sAssertContent('<div class="mceTmpl"><p class="modified">changed modified date</p><p class="cdate">fake created date</p></div>'),
-        sDeleteSetting('template_mdate_classes'),
+        sDeleteSetting('atividade_mdate_classes'),
         sDeleteSetting('templates'),
-        sDeleteSetting('template_mdate_format'),
-        sDeleteSetting('template_cdate_template')
+        sDeleteSetting('atividade_mdate_format'),
+        sDeleteSetting('atividade_cdate_template')
       ]))
     ], onSuccess, onFailure);
   }, {
-    plugins: 'template',
-    toolbar: 'template',
+    plugins: 'atividade',
+    toolbar: 'atividade',
     indent: false,
     skin_url: '/project/js/tinymce/skins/lightgray'
   }, success, failure);

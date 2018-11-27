@@ -12,8 +12,8 @@ declare let tinymce: any;
 
 tinymce.init({
   selector: 'textarea.tinymce',
-  plugins: 'atividade',
-  toolbar: 'template',
+  plugins: 'atividade code',
+  toolbar: 'plus code',
   skin_url: '../../../../../js/tinymce/skins/lightgray',
   height: 600,
   atividades: [

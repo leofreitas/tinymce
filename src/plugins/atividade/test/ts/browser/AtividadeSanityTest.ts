@@ -17,9 +17,9 @@ UnitTest.asynctest('browser.tinymce.plugins.atividade.AtividadeSanityTest', func
     const tinyApis = TinyApis(editor);
 
     Pipeline.async({}, [
-      Logger.t('test basic template insertion', GeneralSteps.sequence([
+      Logger.t('test basic atividade insertion', GeneralSteps.sequence([
         tinyApis.sSetSetting('atividades', [{ title: 'a', description: 'b', content: '<strong>c</strong>' }]),
-        tinyUi.sClickOnToolbar('click on template button', 'div[aria-label="Insere Atividade"] > button'),
+        tinyUi.sClickOnToolbar('click on atividade button', 'div[aria-label="Insere Atividade"] > button'),
         tinyUi.sWaitForPopup('wait for popup', 'div[role="dialog"][aria-label="Insere Atividade"]'),
         tinyUi.sClickOnUi('click on ok button', 'div.mce-primary button'),
         tinyApis.sAssertContent('<p><strong>c</strong></p>')
@@ -28,8 +28,8 @@ UnitTest.asynctest('browser.tinymce.plugins.atividade.AtividadeSanityTest', func
       Logger.t('test basic content replacement', GeneralSteps.sequence([
         tinyApis.sSetContent(''),
         tinyApis.sSetSetting('atividades', [{ title: 'a', description: 'b', content: '<p>{$name} {$email}</p>' }]),
-        tinyApis.sSetSetting('template_replace_values', { name: 'Tester', email: 'test@test.com' }),
-        tinyUi.sClickOnToolbar('click on template button', 'div[aria-label="Insere Atividade"] > button'),
+        tinyApis.sSetSetting('atividade_replace_values', { name: 'Tester', email: 'test@test.com' }),
+        tinyUi.sClickOnToolbar('click on atividade button', 'div[aria-label="Insere Atividade"] > button'),
         tinyUi.sWaitForPopup('wait for popup', 'div[role="dialog"][aria-label="Insere Atividade"]'),
         tinyUi.sClickOnUi('click on ok button', 'div.mce-primary button'),
         tinyApis.sAssertContent('<p>Tester test@test.com</p>')
@@ -37,8 +37,8 @@ UnitTest.asynctest('browser.tinymce.plugins.atividade.AtividadeSanityTest', func
 
       Logger.t('test loading in snippet from other file', GeneralSteps.sequence([
         tinyApis.sSetContent(''),
-        tinyApis.sSetSetting('atividades', [{ title: 'a', description: 'b', url: '/project/src/plugins/template/test/html/test_template.html' }]),
-        tinyUi.sClickOnToolbar('click on template button', 'div[aria-label="Insere Atividade"] > button'),
+        tinyApis.sSetSetting('atividades', [{ title: 'a', description: 'b', url: '/project/src/plugins/atividade/test/html/test_atividade.html' }]),
+        tinyUi.sClickOnToolbar('click on atividade button', 'div[aria-label="Insere Atividade"] > button'),
         Chain.asStep({}, [
           tinyUi.cWaitForPopup('wait for popup', 'div[role="dialog"][aria-label="Insere Atividade"]'),
           UiFinder.cWaitForState('iframe is loaded', 'iframe', function (elm) {
@@ -52,14 +52,14 @@ UnitTest.asynctest('browser.tinymce.plugins.atividade.AtividadeSanityTest', func
 
       Logger.t('test command', GeneralSteps.sequence([
         tinyApis.sSetContent(''),
-        tinyApis.sSetSetting('template_replace_values', { name: 'Tester' }),
+        tinyApis.sSetSetting('atividade_replace_values', { name: 'Tester' }),
         tinyApis.sExecCommand('mceInsertAtividade', '<p>{$name}</p>'),
         tinyApis.sAssertContent('<p>Tester</p>')
       ]))
     ], onSuccess, onFailure);
   }, {
     plugins: 'atividade',
-    toolbar: 'template',
+    toolbar: 'atividade',
     indent: false,
     skin_url: '/project/js/tinymce/skins/lightgray'
   }, success, failure);

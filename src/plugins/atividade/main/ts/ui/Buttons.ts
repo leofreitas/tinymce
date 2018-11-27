@@ -18,7 +18,7 @@ const showDialog = function (editor) {
 };
 
 const register = function (editor) {
-  editor.addButton('template', {
+  editor.addButton('plus', {
     title: 'Insere atividade',
     onclick: Atividades.createAtividadeList(editor.settings, showDialog(editor))
   });

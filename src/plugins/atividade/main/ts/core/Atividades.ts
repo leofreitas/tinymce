@@ -72,8 +72,8 @@ const InsertAtividade = function (editor, ui, html) {
 
   html = replaceAtividadeValues(editor, html, Settings.getAtividadeReplaceValues(editor));
   el = dom.create('div', null, html);
-
-    // Find template element within div
+  //console.log(html);
+  // Find atividade element within div
   n = dom.select('.mceTmpl', el);
   if (n && n.length > 0) {
     el = dom.create('div', null);
