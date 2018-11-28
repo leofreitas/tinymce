@@ -72,7 +72,7 @@ const InsertAtividade = function (editor, ui, html) {
 
   html = replaceAtividadeValues(editor, html, Settings.getAtividadeReplaceValues(editor));
   el = dom.create('div', null, html);
-  //console.log(html);
+
   // Find atividade element within div
   n = dom.select('.mceTmpl', el);
   if (n && n.length > 0) {
