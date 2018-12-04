@@ -17,7 +17,7 @@ tinymce.init({
   skin_url: '../../../../../js/tinymce/skins/lightgray',
   height: 600,
   atividades: [
-    { title: 'Atividade 1', description: 'Descrição da atividade 1', content: '<div id="id">Conteúdo da atividade 1</div>' },
+    { title: 'Atividade 1', description: 'Descrição da atividade 1', content: 'Conteúdo da atividade 1' },
     { title: 'Atividade 2', description: 'Descrição da atividade 2', content: 'Conteúdo da atividade 2' }
   ]
 });

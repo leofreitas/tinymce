@@ -51,7 +51,7 @@ const replaceVals = function (editor, e) {
 
   Tools.each(dom.select('*', e), function (e) {
     Tools.each(vl, function (v, k) {
-      if (dom.hasClass(e, k)) {
+    if (dom.hasClass(e, k)) {
         if (typeof vl[k] === 'function') {
           vl[k](e);
         }
@@ -72,26 +72,8 @@ const InsertAtividade = function (editor, ui, html) {
 
   html = replaceAtividadeValues(editor, html, Settings.getAtividadeReplaceValues(editor));
   el = dom.create('div', null, html);
+  editor.insertContent('<div contentEditable="false">'+el.innerHTML+'</div>');
 
-  // Find atividade element within div
-  n = dom.select('.mceTmpl', el);
-  if (n && n.length > 0) {
-    el = dom.create('div', null);
-    el.appendChild(n[0].cloneNode(true));
-  }
-
-  Tools.each(dom.select('*', el), function (n) {
-
-    // Replace selection
-    if (hasClass(n, Settings.getSelectedContentClasses(editor).replace(/\s+/g, '|'))) {
-      n.innerHTML = sel;
-    }
-  });
-
-  replaceVals(editor, el);
-
-  editor.execCommand('mceInsertContent', false, el.innerHTML);
-  editor.addVisual();
 };
 
 export default {
