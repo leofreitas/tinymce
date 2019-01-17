@@ -2,15 +2,15 @@ import { Assertions, Chain, Guard, Mouse, NamedChain, Pipeline, UiFinder } from 
 import { UnitTest } from '@ephox/bedrock';
 import { ApiChains, Editor, TinyDom, UiChains } from '@ephox/mcagar';
 
-import ImagePlugin from 'tinymce/plugins/image/Plugin';
+import InfograficoPlugin from 'tinymce/plugins/infografico/Plugin';
 import ModernTheme from 'tinymce/themes/modern/Theme';
 
-UnitTest.asynctest('browser.tinymce.plugins.image.FigureResizeTest', function () {
+UnitTest.asynctest('browser.tinymce.plugins.infografico.FigureResizeTest', function () {
   const success = arguments[arguments.length - 2];
   const failure = arguments[arguments.length - 1];
 
   ModernTheme();
-  ImagePlugin();
+  InfograficoPlugin();
 
   const cGetBody = Chain.mapper(function (editor: any) {
     return TinyDom.fromDom(editor.getBody());
@@ -39,11 +39,11 @@ UnitTest.asynctest('browser.tinymce.plugins.image.FigureResizeTest', function ()
         plugins: 'image',
         toolbar: 'image',
         indent: false,
-        image_caption: true,
+        infografico_caption: true,
         height: 400,
         skin_url: '/project/js/tinymce/skins/lightgray'
       }),
-      UiChains.cClickOnToolbar('click image button', 'div[aria-label="Insert/edit image"]'),
+      UiChains.cClickOnToolbar('click image button', 'div[aria-label="Inserir/editar infográfico"]'),
       UiChains.cFillActiveDialog({
         src: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
         width: 100,

@@ -30,7 +30,7 @@ const onSrcChange = function (evt, editor) {
 
     control.value(srcURL);
 
-    Utils.getImageSize(editor.documentBaseURI.toAbsolute(control.value()), function (data) {
+    Utils.getInfograficoSize(editor.documentBaseURI.toAbsolute(control.value()), function (data) {
       if (data.width && data.height && Settings.hasDimensions(editor)) {
         rootControl.find('#width').value(data.width);
         rootControl.find('#height').value(data.height);
@@ -61,11 +61,11 @@ const getGeneralItems = function (editor, imageListCtrl) {
   ];
 
   if (Settings.hasDescription(editor)) {
-    generalFormItems.push({ name: 'alt', type: 'textbox', label: 'Image description' });
+    generalFormItems.push({ name: 'alt', type: 'textbox', label: 'Infografico description' });
   }
 
-  if (Settings.hasImageTitle(editor)) {
-    generalFormItems.push({ name: 'title', type: 'textbox', label: 'Image Title' });
+  if (Settings.hasInfograficoTitle(editor)) {
+    generalFormItems.push({ name: 'title', type: 'textbox', label: 'Infografico Title' });
   }
 
   if (Settings.hasDimensions(editor)) {
@@ -92,7 +92,7 @@ const getGeneralItems = function (editor, imageListCtrl) {
     });
   }
 
-  if (Settings.hasImageCaption(editor)) {
+  if (Settings.hasInfograficoCaption(editor)) {
     generalFormItems.push({ name: 'caption', type: 'checkbox', label: 'Caption' });
   }
 

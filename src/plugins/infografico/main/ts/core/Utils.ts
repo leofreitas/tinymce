@@ -24,7 +24,7 @@ const parseIntAndGetMax = function (val1, val2) {
   return Math.max(parseInt(val1, 10), parseInt(val2, 10));
 };
 
-const getImageSize = function (url, callback) {
+const getInfograficoSize = function (url, callback) {
   const img = document.createElement('img');
 
   function done(width, height) {
@@ -127,8 +127,8 @@ const mergeMargins = function (css) {
   return css;
 };
 
-const createImageList = function (editor, callback) {
-  const imageList = Settings.getImageList(editor);
+const createInfograficoList = function (editor, callback) {
+  const imageList = Settings.getInfograficoList(editor);
 
   if (typeof imageList === 'string') {
     XHR.send({
@@ -144,8 +144,8 @@ const createImageList = function (editor, callback) {
   }
 };
 
-const waitLoadImage = function (editor, data, imgElm) {
-  function selectImage() {
+const waitLoadInfografico = function (editor, data, imgElm) {
+  function selectInfografico() {
     imgElm.onload = imgElm.onerror = null;
 
     if (editor.selection) {
@@ -162,10 +162,10 @@ const waitLoadImage = function (editor, data, imgElm) {
       });
     }
 
-    selectImage();
+    selectInfografico();
   };
 
-  imgElm.onerror = selectImage;
+  imgElm.onerror = selectInfografico;
 };
 
 const blobToDataUri = function (blob) {
@@ -182,12 +182,12 @@ const blobToDataUri = function (blob) {
 };
 
 export default {
-  getImageSize,
+  getInfograficoSize,
   buildListItems,
   removePixelSuffix,
   addPixelSuffix,
   mergeMargins,
-  createImageList,
-  waitLoadImage,
+  createInfograficoList,
+  waitLoadInfografico,
   blobToDataUri
 };

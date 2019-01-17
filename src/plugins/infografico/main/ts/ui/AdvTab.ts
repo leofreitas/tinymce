@@ -1,8 +1,8 @@
 import Settings from '../api/Settings';
 import Utils from '../core/Utils';
 import { Editor } from 'tinymce/core/api/Editor';
-import { normalizeCss } from 'tinymce/plugins/image/core/ImageSelection';
-import { defaultData, getStyleValue } from 'tinymce/plugins/image/core/ImageData';
+import { normalizeCss } from 'tinymce/plugins/infografico/core/InfograficoSelection';
+import { defaultData, getStyleValue } from 'tinymce/plugins/infografico/core/InfograficoData';
 import { Merger } from '@ephox/katamari';
 
 const updateVSpaceHSpaceBorder = function (editor) {

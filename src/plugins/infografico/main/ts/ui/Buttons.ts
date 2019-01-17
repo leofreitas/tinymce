@@ -13,14 +13,14 @@ import Dialog from './Dialog';
 const register = function (editor) {
   editor.addButton('image', {
     icon: 'image',
-    tooltip: 'Insert/edit image',
+    tooltip: 'Inserir/editar infográfico',
     onclick: Dialog(editor).open,
     stateSelector: 'img:not([data-mce-object],[data-mce-placeholder]),figure.image'
   });
 
   editor.addMenuItem('image', {
     icon: 'image',
-    text: 'Image',
+    text: 'Infografico',
     onclick: Dialog(editor).open,
     context: 'insert',
     prependToContext: true

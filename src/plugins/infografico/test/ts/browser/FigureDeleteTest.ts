@@ -2,16 +2,16 @@ import { Chain, GeneralSteps, Logger, Mouse, Pipeline, UiControls, UiFinder } fr
 import { UnitTest } from '@ephox/bedrock';
 import { TinyApis, TinyDom, TinyLoader, TinyUi } from '@ephox/mcagar';
 
-import ImagePlugin from 'tinymce/plugins/image/Plugin';
+import InfograficoPlugin from 'tinymce/plugins/infografico/Plugin';
 import ModernTheme from 'tinymce/themes/modern/Theme';
 import { document } from '@ephox/dom-globals';
 
-UnitTest.asynctest('browser.tinymce.plugins.image.FigureDeleteTest', function () {
+UnitTest.asynctest('browser.tinymce.plugins.infografico.FigureDeleteTest', function () {
   const success = arguments[arguments.length - 2];
   const failure = arguments[arguments.length - 1];
 
   ModernTheme();
-  ImagePlugin();
+  InfograficoPlugin();
 
   TinyLoader.setup(function (editor, onSuccess, onFailure) {
     const tinyApis = TinyApis(editor);
@@ -22,7 +22,7 @@ UnitTest.asynctest('browser.tinymce.plugins.image.FigureDeleteTest', function ()
       Logger.t('removing src in dialog should remove figure element', GeneralSteps.sequence([
         tinyApis.sSetContent('<figure class="image"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" /><figcaption>x</figcaption></figure>'),
         tinyApis.sSetSelection([], 1, [], 2),
-        tinyUi.sClickOnToolbar('click on image button', 'div[aria-label="Insert/edit image"] button'),
+        tinyUi.sClickOnToolbar('click on image button', 'div[aria-label="Inserir/editar infográfico"] button'),
         Chain.asStep({}, [
           tinyUi.cWaitForPopup('Wait for dialog', 'div[role="dialog"]'),
           UiFinder.cFindIn('label:contains("Source")'),
@@ -39,7 +39,7 @@ UnitTest.asynctest('browser.tinymce.plugins.image.FigureDeleteTest', function ()
       Logger.t('clicking caption textbox removes figure and adds image only', GeneralSteps.sequence([
         tinyApis.sSetContent('<figure class="image"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" /><figcaption>x</figcaption></figure>'),
         tinyApis.sSetSelection([], 1, [], 2),
-        tinyUi.sClickOnToolbar('click on image button', 'div[aria-label="Insert/edit image"] button'),
+        tinyUi.sClickOnToolbar('click on image button', 'div[aria-label="Inserir/editar infográfico"] button'),
         Chain.asStep({}, [
           tinyUi.cWaitForPopup('Wait for dialog', 'div[role="dialog"]'),
           UiFinder.cFindIn('label:contains("Caption")'),
@@ -49,14 +49,14 @@ UnitTest.asynctest('browser.tinymce.plugins.image.FigureDeleteTest', function ()
           Mouse.cClick
         ]),
         tinyUi.sClickOnUi('click on ok button', 'button:contains("Ok")'),
-        tinyApis.sAssertContentPresence({ 'figure.image': 0 })
+        tinyApis.sAssertContentPresence({ 'figure.infografico': 0 })
       ]))
 
     ], onSuccess, onFailure);
   }, {
     plugins: 'image',
     toolbar: 'image',
-    image_caption: true,
+    infografico_caption: true,
     skin_url: '/project/js/tinymce/skins/lightgray'
   }, success, failure);
 });

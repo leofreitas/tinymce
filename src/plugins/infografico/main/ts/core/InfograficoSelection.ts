@@ -1,5 +1,5 @@
 /**
- * ImageSelection.ts
+ * InfograficoSelection.ts
  *
  * Released under LGPL License.
  * Copyright (c) 1999-2018 Ephox Corp. All rights reserved
@@ -9,8 +9,8 @@
  */
 
 import { Editor } from 'tinymce/core/api/Editor';
-import { defaultData, read, ImageData, create, isFigure, write } from 'tinymce/plugins/image/core/ImageData';
-import Utils from 'tinymce/plugins/image/core/Utils';
+import { defaultData, read, InfograficoData, create, isFigure, write } from 'tinymce/plugins/infografico/core/InfograficoData';
+import Utils from 'tinymce/plugins/infografico/core/Utils';
 import { HTMLElement } from '@ephox/dom-globals';
 
 const normalizeCss = (editor: Editor, cssText: string): string => {
@@ -20,7 +20,7 @@ const normalizeCss = (editor: Editor, cssText: string): string => {
   return editor.dom.styles.serialize(compressed);
 };
 
-const getSelectedImage = (editor: Editor): HTMLElement => {
+const getSelectedInfografico = (editor: Editor): HTMLElement => {
   const imgElm = editor.selection.getNode() as HTMLElement;
   const figureElm = editor.dom.getParent(imgElm, 'figure.image') as HTMLElement;
 
@@ -52,12 +52,12 @@ const splitTextBlock = (editor: Editor, figure: HTMLElement) => {
   }
 };
 
-const readImageDataFromSelection = (editor: Editor): ImageData => {
-  const image = getSelectedImage(editor);
+const readInfograficoDataFromSelection = (editor: Editor): InfograficoData => {
+  const image = getSelectedInfografico(editor);
   return image ? read((css) => normalizeCss(editor, css), image) : defaultData();
 };
 
-const insertImageAtCaret = (editor: Editor, data: ImageData) => {
+const insertInfograficoAtCaret = (editor: Editor, data: InfograficoData) => {
   const elm = create((css) => normalizeCss(editor, css), data);
 
   editor.dom.setAttrib(elm, 'data-mce-id', '__mcenew');
@@ -79,7 +79,7 @@ const syncSrcAttr = (editor: Editor, image: HTMLElement) => {
   editor.dom.setAttrib(image, 'src', image.getAttribute('src'));
 };
 
-const deleteImage = (editor: Editor, image: HTMLElement) => {
+const deleteInfografico = (editor: Editor, image: HTMLElement) => {
   if (image) {
     const elm = editor.dom.is(image.parentNode, 'figure.image') ? image.parentNode : image;
 
@@ -94,8 +94,8 @@ const deleteImage = (editor: Editor, image: HTMLElement) => {
   }
 };
 
-const writeImageDataToSelection = (editor: Editor, data: ImageData) => {
-  const image = getSelectedImage(editor);
+const writeInfograficoDataToSelection = (editor: Editor, data: InfograficoData) => {
+  const image = getSelectedInfografico(editor);
 
   write((css) => normalizeCss(editor, css), data, image);
   syncSrcAttr(editor, image);
@@ -106,25 +106,25 @@ const writeImageDataToSelection = (editor: Editor, data: ImageData) => {
     editor.selection.select(image.parentNode);
   } else {
     editor.selection.select(image);
-    Utils.waitLoadImage(editor, data, image);
+    Utils.waitLoadInfografico(editor, data, image);
   }
 };
 
-const insertOrUpdateImage = (editor: Editor, data: ImageData) => {
-  const image = getSelectedImage(editor);
+const insertOrUpdateInfografico = (editor: Editor, data: InfograficoData) => {
+  const image = getSelectedInfografico(editor);
   if (image) {
     if (data.src) {
-      writeImageDataToSelection(editor, data);
+      writeInfograficoDataToSelection(editor, data);
     } else {
-      deleteImage(editor, image);
+      deleteInfografico(editor, image);
     }
   } else if (data.src) {
-    insertImageAtCaret(editor, data);
+    insertInfograficoAtCaret(editor, data);
   }
 };
 
 export {
   normalizeCss,
-  readImageDataFromSelection,
-  insertOrUpdateImage
+  readInfograficoDataFromSelection,
+  insertOrUpdateInfografico
 };

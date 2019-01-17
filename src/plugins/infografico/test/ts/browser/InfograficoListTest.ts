@@ -5,17 +5,17 @@ import { UnitTest } from '@ephox/bedrock';
 import { TinyApis, TinyDom, TinyLoader, TinyUi } from '@ephox/mcagar';
 
 import DOMUtils from 'tinymce/core/api/dom/DOMUtils';
-import ImagePlugin from 'tinymce/plugins/image/Plugin';
+import InfograficoPlugin from 'tinymce/plugins/infografico/Plugin';
 import ModernTheme from 'tinymce/themes/modern/Theme';
 import { document } from '@ephox/dom-globals';
 import { Element } from '@ephox/sugar';
 
-UnitTest.asynctest('browser.tinymce.plugins.image.ImageListTest', function () {
+UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoListTest', function () {
   const success = arguments[arguments.length - 2];
   const failure = arguments[arguments.length - 1];
 
   ModernTheme();
-  ImagePlugin();
+  InfograficoPlugin();
 
   const cFakeEvent = function (name) {
     return Chain.op(function (elm: Element) {
@@ -29,14 +29,14 @@ UnitTest.asynctest('browser.tinymce.plugins.image.ImageListTest', function () {
 
     Pipeline.async({}, [
       Logger.t('click image list, check that source changes, change source and check that image list changes', GeneralSteps.sequence([
-        tinyApis.sSetSetting('image_list', [
+        tinyApis.sSetSetting('infografico_list', [
           { title: 'Dog', value: 'mydog.jpg' },
           { title: 'Cat', value: 'mycat.jpg' }
         ]),
-        tinyUi.sClickOnToolbar('click image button', 'div[aria-label="Insert/edit image"] button'),
+        tinyUi.sClickOnToolbar('click image button', 'div[aria-label="Inserir/editar infográfico"] button'),
         Chain.asStep({}, [
           tinyUi.cWaitForPopup('wait for dialog', 'div[role="dialog"]'),
-          UiFinder.cFindIn('label:contains("Image list") + div > button'),
+          UiFinder.cFindIn('label:contains("Infografico list") + div > button'),
           Mouse.cClick
         ]),
         Chain.asStep(TinyDom.fromDom(document.body), [
@@ -57,7 +57,7 @@ UnitTest.asynctest('browser.tinymce.plugins.image.ImageListTest', function () {
                 cFakeEvent('change')
               ]),
               Chain.fromChains([
-                UiFinder.cFindIn('label:contains("Image list") + div > button > span:contains("Cat")')
+                UiFinder.cFindIn('label:contains("Infografico list") + div > button > span:contains("Cat")')
               ])
             ]
           )

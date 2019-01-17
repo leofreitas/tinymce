@@ -13,7 +13,7 @@ import Commands from './api/Commands';
 import FilterContent from './core/FilterContent';
 import Buttons from './ui/Buttons';
 
-PluginManager.add('image', function (editor) {
+PluginManager.add('infografico', function (editor) {
   FilterContent.setup(editor);
   Buttons.register(editor);
   Commands.register(editor);

@@ -10,9 +10,9 @@
 
 import Tools from 'tinymce/core/api/util/Tools';
 
-const hasImageClass = function (node) {
+const hasInfograficoClass = function (node) {
   const className = node.attr('class');
-  return className && /\bimage\b/.test(className);
+  return className && /\binfo\b/.test(className);
 };
 
 const toggleContentEditableState = function (state) {
@@ -26,7 +26,7 @@ const toggleContentEditableState = function (state) {
     while (i--) {
       node = nodes[i];
 
-      if (hasImageClass(node)) {
+      if (hasInfograficoClass(node)) {
         node.attr('contenteditable', state ? 'false' : null);
         Tools.each(node.getAll('figcaption'), toggleContentEditable);
       }

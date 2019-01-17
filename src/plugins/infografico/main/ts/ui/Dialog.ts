@@ -16,7 +16,7 @@ import SizeManager from './SizeManager';
 import UploadTab from './UploadTab';
 import { Fun, Merger } from '@ephox/katamari';
 import { Editor } from 'tinymce/core/api/Editor';
-import { insertOrUpdateImage, readImageDataFromSelection } from 'tinymce/plugins/image/core/ImageSelection';
+import { insertOrUpdateInfografico, readInfograficoDataFromSelection } from 'tinymce/plugins/infografico/core/InfograficoSelection';
 
 const submitForm = (editor: Editor, evt) => {
   const win = evt.control.getRoot();
@@ -24,8 +24,8 @@ const submitForm = (editor: Editor, evt) => {
   SizeManager.updateSize(win);
 
   editor.undoManager.transact(() => {
-    const data = Merger.merge(readImageDataFromSelection(editor), win.toJSON());
-    insertOrUpdateImage(editor, data);
+    const data = Merger.merge(readInfograficoDataFromSelection(editor), win.toJSON());
+    insertOrUpdateInfografico(editor, data);
   });
 
   editor.editorUpload.uploadImagesAuto();
@@ -33,13 +33,13 @@ const submitForm = (editor: Editor, evt) => {
 
 export default function (editor) {
   function showDialog(imageList) {
-    const data = readImageDataFromSelection(editor);
+    const data = readInfograficoDataFromSelection(editor);
     let win, imageListCtrl;
 
     if (imageList) {
       imageListCtrl = {
         type: 'listbox',
-        label: 'Image list',
+        label: 'Infografico list',
         name: 'image-list',
         values: Utils.buildListItems(
           imageList,
@@ -80,7 +80,7 @@ export default function (editor) {
 
       // Advanced dialog shows general+advanced tabs
       win = editor.windowManager.open({
-        title: 'Insert/edit image',
+        title: 'Inserir/editar infográfico',
         data,
         bodyType: 'tabpanel',
         body,
@@ -89,7 +89,7 @@ export default function (editor) {
     } else {
       // Simple default dialog
       win = editor.windowManager.open({
-        title: 'Insert/edit image',
+        title: 'Inserir/editar infográfico',
         data,
         body: MainTab.getGeneralItems(editor, imageListCtrl),
         onSubmit: Fun.curry(submitForm, editor)
@@ -100,7 +100,7 @@ export default function (editor) {
   }
 
   function open() {
-    Utils.createImageList(editor, showDialog);
+    Utils.createInfograficoList(editor, showDialog);
   }
 
   return {

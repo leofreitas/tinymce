@@ -60,19 +60,19 @@ const replaceVals = function (editor, e) {
   });
 };
 
-const hasClass = function (n, c) {
-  return new RegExp('\\b' + c + '\\b', 'g').test(n.className);
-};
+// const hasClass = function (n, c) {
+//  return new RegExp('\\b' + c + '\\b', 'g').test(n.className);
+// };
 
 const InsertAtividade = function (editor, ui, html) {
   let el;
-  let n;
+//  let n;
   const dom = editor.dom;
-  const sel = editor.selection.getContent();
+//  const sel = editor.selection.getContent();
 
   html = replaceAtividadeValues(editor, html, Settings.getAtividadeReplaceValues(editor));
   el = dom.create('div', null, html);
-  editor.insertContent('<div contentEditable="false">'+el.innerHTML+'</div>');
+  editor.insertContent('<div contentEditable="false">' + el.innerHTML + '</div>');
 
 };
 

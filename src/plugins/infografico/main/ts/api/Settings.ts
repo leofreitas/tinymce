@@ -9,59 +9,59 @@
  */
 
 const hasDimensions = function (editor) {
-  return editor.settings.image_dimensions === false ? false : true;
+  return editor.settings.infograficos_dimensions === false ? false : true;
 };
 
 const hasAdvTab = function (editor) {
-  return editor.settings.image_advtab === true ? true : false;
+  return editor.settings.infografico_advtab === true ? true : false;
 };
 
 const getPrependUrl = function (editor) {
-  return editor.getParam('image_prepend_url', '');
+  return editor.getParam('infografico_prepend_url', '');
 };
 
 const getClassList = function (editor) {
-  return editor.getParam('image_class_list');
+  return editor.getParam('infografico_class_list');
 };
 
 const hasDescription = function (editor) {
-  return editor.settings.image_description === false ? false : true;
+  return editor.settings.infograficos_description === false ? false : true;
 };
 
-const hasImageTitle = function (editor) {
-  return editor.settings.image_title === true ? true : false;
+const hasInfograficoTitle = function (editor) {
+  return editor.settings.infograficos_title === true ? true : false;
 };
 
-const hasImageCaption = function (editor) {
-  return editor.settings.image_caption === true ? true : false;
+const hasInfograficoCaption = function (editor) {
+  return editor.settings.infograficos_caption === true ? true : false;
 };
 
-const getImageList = function (editor) {
-  return editor.getParam('image_list', false);
+const getInfograficoList = function (editor) {
+  return editor.getParam('infografico_list', false);
 };
 
 const hasUploadUrl = function (editor) {
-  return editor.getParam('images_upload_url', false);
+  return editor.getParam('infograficos_upload_url', false);
 };
 
 const hasUploadHandler = function (editor) {
-  return editor.getParam('images_upload_handler', false);
+  return editor.getParam('infograficos_upload_handler', false);
 };
 
 const getUploadUrl = function (editor) {
-  return editor.getParam('images_upload_url');
+  return editor.getParam('infograficos_upload_url');
 };
 
 const getUploadHandler = function (editor) {
-  return editor.getParam('images_upload_handler');
+  return editor.getParam('infograficos_upload_handler');
 };
 
 const getUploadBasePath = function (editor) {
-  return editor.getParam('images_upload_base_path');
+  return editor.getParam('infograficos_upload_base_path');
 };
 
 const getUploadCredentials = function (editor) {
-  return editor.getParam('images_upload_credentials');
+  return editor.getParam('infograficos_upload_credentials');
 };
 
 export default {
@@ -70,9 +70,9 @@ export default {
   getPrependUrl,
   getClassList,
   hasDescription,
-  hasImageTitle,
-  hasImageCaption,
-  getImageList,
+  hasInfograficoTitle,
+  hasInfograficoCaption,
+  getInfograficoList,
   hasUploadUrl,
   hasUploadHandler,
   getUploadUrl,

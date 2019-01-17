@@ -3,11 +3,11 @@ import { UnitTest } from '@ephox/bedrock';
 import { LegacyUnit, TinyLoader } from '@ephox/mcagar';
 
 import Env from 'tinymce/core/api/Env';
-import Plugin from 'tinymce/plugins/image/Plugin';
+import Plugin from 'tinymce/plugins/infografico/Plugin';
 import Theme from 'tinymce/themes/modern/Theme';
 import { document } from '@ephox/dom-globals';
 
-UnitTest.asynctest('browser.tinymce.plugins.image.ImagePluginTest', function () {
+UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', function () {
   const success = arguments[arguments.length - 2];
   const failure = arguments[arguments.length - 1];
   const suite = LegacyUnit.createSuite();
@@ -16,13 +16,13 @@ UnitTest.asynctest('browser.tinymce.plugins.image.ImagePluginTest', function () 
   Plugin();
 
   const teardown = function (editor) {
-    delete editor.settings.image_dimensions;
+    delete editor.settings.infograficos_dimensions;
     delete editor.settings.file_browser_callback;
-    delete editor.settings.image_list;
-    delete editor.settings.image_class_list;
+    delete editor.settings.infograficos_list;
+    delete editor.settings.infograficos_class_list;
     delete editor.settings.document_base_url;
-    delete editor.settings.image_advtab;
-    delete editor.settings.image_caption;
+    delete editor.settings.infografico_advtab;
+    delete editor.settings.infograficos_caption;
   };
 
   const cleanHtml = function (html) {
@@ -55,7 +55,7 @@ UnitTest.asynctest('browser.tinymce.plugins.image.ImagePluginTest', function () 
 
   suite.test('Default image dialog on empty editor', function (editor) {
     editor.setContent('');
-    editor.execCommand('mceImage', true);
+    editor.execCommand('mceInfografico', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',
@@ -78,10 +78,10 @@ UnitTest.asynctest('browser.tinymce.plugins.image.ImagePluginTest', function () 
     );
   });
 
-  suite.test('Image dialog image_dimensions: false', function (editor) {
-    editor.settings.image_dimensions = false;
+  suite.test('Infografico dialog infografico_dimensions: false', function (editor) {
+    editor.settings.infograficos_dimensions = false;
     editor.setContent('');
-    editor.execCommand('mceImage', true);
+    editor.execCommand('mceInfografico', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',
@@ -103,19 +103,19 @@ UnitTest.asynctest('browser.tinymce.plugins.image.ImagePluginTest', function () 
 
   if (Env.ceFalse) {
     suite.test('All image dialog ui options on empty editor', function (editor) {
-      editor.settings.image_caption = true;
-      editor.settings.image_list = [
+      editor.settings.infograficos_caption = true;
+      editor.settings.infograficos_list = [
         { title: 'link1', value: 'link1' },
         { title: 'link2', value: 'link2' }
       ];
 
-      editor.settings.image_class_list = [
+      editor.settings.infograficos_class_list = [
         { title: 'class1', value: 'class1' },
         { title: 'class2', value: 'class2' }
       ];
 
       editor.setContent('');
-      editor.execCommand('mceImage', true);
+      editor.execCommand('mceInfografico', true);
 
       LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
         'alt': '',
@@ -150,19 +150,19 @@ UnitTest.asynctest('browser.tinymce.plugins.image.ImagePluginTest', function () 
     });
   } else {
     suite.test('All image dialog ui options on empty editor (old IE)', function (editor) {
-      editor.settings.image_caption = true;
-      editor.settings.image_list = [
+      editor.settings.infograficos_caption = true;
+      editor.settings.infograficos_list = [
         { title: 'link1', value: 'link1' },
         { title: 'link2', value: 'link2' }
       ];
 
-      editor.settings.image_class_list = [
+      editor.settings.infograficos_class_list = [
         { title: 'class1', value: 'class1' },
         { title: 'class2', value: 'class2' }
       ];
 
       editor.setContent('');
-      editor.execCommand('mceImage', true);
+      editor.execCommand('mceInfografico', true);
 
       LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
         alt: '',
@@ -190,12 +190,12 @@ UnitTest.asynctest('browser.tinymce.plugins.image.ImagePluginTest', function () 
     });
   }
 
-  suite.test('Image recognizes relative src url and prepends relative image_prepend_url setting.', function (editor) {
+  suite.test('Infografico recognizes relative src url and prepends relative infografico_prepend_url setting.', function (editor) {
     let win, elementId, element;
 
-    editor.settings.image_prepend_url = 'testing/images/';
+    editor.settings.infograficos_prepend_url = 'testing/images/';
     editor.setContent('');
-    editor.execCommand('mceImage', true);
+    editor.execCommand('mceInfografico', true);
 
     const data = {
       src: 'src',
@@ -214,16 +214,16 @@ UnitTest.asynctest('browser.tinymce.plugins.image.ImagePluginTest', function () 
 
     LegacyUnit.equal(
       cleanHtml(editor.getContent()),
-      '<p><img src="' + editor.settings.image_prepend_url + 'src" alt="alt" /></p>'
+      '<p><img src="' + editor.settings.infograficos_prepend_url + 'src" alt="alt" /></p>'
     );
   });
 
-  suite.test('Image recognizes relative src url and prepends absolute image_prepend_url setting.', function (editor) {
+  suite.test('Infografico recognizes relative src url and prepends absolute infografico_prepend_url setting.', function (editor) {
     let win, elementId, element;
 
-    editor.settings.image_prepend_url = 'http://abc.local/images/';
+    editor.settings.infograficos_prepend_url = 'http://abc.local/images/';
     editor.setContent('');
-    editor.execCommand('mceImage', true);
+    editor.execCommand('mceInfografico', true);
 
     const data = {
       src: 'src',
@@ -242,13 +242,13 @@ UnitTest.asynctest('browser.tinymce.plugins.image.ImagePluginTest', function () 
 
     LegacyUnit.equal(
       cleanHtml(editor.getContent()),
-      '<p><img src="' + editor.settings.image_prepend_url + 'src" alt="alt" /></p>'
+      '<p><img src="' + editor.settings.infograficos_prepend_url + 'src" alt="alt" /></p>'
     );
   });
 
   suite.test('Advanced image dialog border option on editor with content', function (editor) {
-    editor.settings.image_advtab = true;
-    editor.settings.image_dimensions = false;
+    editor.settings.infografico_advtab = true;
+    editor.settings.infograficos_dimensions = false;
 
     editor.setContent('<p>a</p>');
     const rng = editor.dom.createRng();
@@ -256,7 +256,7 @@ UnitTest.asynctest('browser.tinymce.plugins.image.ImagePluginTest', function () 
     rng.setEnd(editor.dom.select('p')[0].firstChild, 1);
     editor.selection.setRng(rng);
 
-    editor.execCommand('mceImage', true);
+    editor.execCommand('mceInfografico', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',
@@ -282,11 +282,11 @@ UnitTest.asynctest('browser.tinymce.plugins.image.ImagePluginTest', function () 
   });
 
   suite.test('Advanced image dialog margin space options on empty editor', function (editor) {
-    editor.settings.image_advtab = true;
-    editor.settings.image_dimensions = false;
+    editor.settings.infografico_advtab = true;
+    editor.settings.infograficos_dimensions = false;
 
     editor.setContent('');
-    editor.execCommand('mceImage', true);
+    editor.execCommand('mceInfografico', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',
@@ -313,11 +313,11 @@ UnitTest.asynctest('browser.tinymce.plugins.image.ImagePluginTest', function () 
   });
 
   suite.test('Advanced image dialog border style only options on empty editor', function (editor) {
-    editor.settings.image_advtab = true;
-    editor.settings.image_dimensions = false;
+    editor.settings.infografico_advtab = true;
+    editor.settings.infograficos_dimensions = false;
 
     editor.setContent('');
-    editor.execCommand('mceImage', true);
+    editor.execCommand('mceInfografico', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',
@@ -343,11 +343,11 @@ UnitTest.asynctest('browser.tinymce.plugins.image.ImagePluginTest', function () 
   });
 
   suite.test('Advanced image dialog margin style only options on empty editor', function (editor) {
-    editor.settings.image_advtab = true;
-    editor.settings.image_dimensions = false;
+    editor.settings.infografico_advtab = true;
+    editor.settings.infograficos_dimensions = false;
 
     editor.setContent('');
-    editor.execCommand('mceImage', true);
+    editor.execCommand('mceInfografico', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',
@@ -373,11 +373,11 @@ UnitTest.asynctest('browser.tinymce.plugins.image.ImagePluginTest', function () 
   });
 
   suite.test('Advanced image dialog overriden border style options on empty editor', function (editor) {
-    editor.settings.image_advtab = true;
-    editor.settings.image_dimensions = false;
+    editor.settings.infografico_advtab = true;
+    editor.settings.infograficos_dimensions = false;
 
     editor.setContent('');
-    editor.execCommand('mceImage', true);
+    editor.execCommand('mceInfografico', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',
@@ -404,11 +404,11 @@ UnitTest.asynctest('browser.tinymce.plugins.image.ImagePluginTest', function () 
   });
 
   suite.test('Advanced image dialog overriden margin style options on empty editor', function (editor) {
-    editor.settings.image_advtab = true;
-    editor.settings.image_dimensions = false;
+    editor.settings.infografico_advtab = true;
+    editor.settings.infograficos_dimensions = false;
 
     editor.setContent('');
-    editor.execCommand('mceImage', true);
+    editor.execCommand('mceInfografico', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',
@@ -436,11 +436,11 @@ UnitTest.asynctest('browser.tinymce.plugins.image.ImagePluginTest', function () 
   });
 
   suite.test('Advanced image dialog non-shorthand horizontal margin style change test', function (editor) {
-    editor.settings.image_advtab = true;
-    editor.settings.image_dimensions = false;
+    editor.settings.infografico_advtab = true;
+    editor.settings.infograficos_dimensions = false;
 
     editor.setContent('');
-    editor.execCommand('mceImage', true);
+    editor.execCommand('mceInfografico', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',
@@ -467,11 +467,11 @@ UnitTest.asynctest('browser.tinymce.plugins.image.ImagePluginTest', function () 
   });
 
   suite.test('Advanced image dialog non-shorthand vertical margin style change test', function (editor) {
-    editor.settings.image_advtab = true;
-    editor.settings.image_dimensions = false;
+    editor.settings.infografico_advtab = true;
+    editor.settings.infograficos_dimensions = false;
 
     editor.setContent('');
-    editor.execCommand('mceImage', true);
+    editor.execCommand('mceInfografico', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',
@@ -498,11 +498,11 @@ UnitTest.asynctest('browser.tinymce.plugins.image.ImagePluginTest', function () 
   });
 
   suite.test('Advanced image dialog shorthand margin 1 value style change test', function (editor) {
-    editor.settings.image_advtab = true;
-    editor.settings.image_dimensions = false;
+    editor.settings.infografico_advtab = true;
+    editor.settings.infograficos_dimensions = false;
 
     editor.setContent('');
-    editor.execCommand('mceImage', true);
+    editor.execCommand('mceInfografico', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',
@@ -529,11 +529,11 @@ UnitTest.asynctest('browser.tinymce.plugins.image.ImagePluginTest', function () 
   });
 
   suite.test('Advanced image dialog shorthand margin 2 value style change test', function (editor) {
-    editor.settings.image_advtab = true;
-    editor.settings.image_dimensions = false;
+    editor.settings.infografico_advtab = true;
+    editor.settings.infograficos_dimensions = false;
 
     editor.setContent('');
-    editor.execCommand('mceImage', true);
+    editor.execCommand('mceInfografico', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',
@@ -560,11 +560,11 @@ UnitTest.asynctest('browser.tinymce.plugins.image.ImagePluginTest', function () 
   });
 
   suite.test('Advanced image dialog shorthand margin 2 value style change test', function (editor) {
-    editor.settings.image_advtab = true;
-    editor.settings.image_dimensions = false;
+    editor.settings.infografico_advtab = true;
+    editor.settings.infograficos_dimensions = false;
 
     editor.setContent('');
-    editor.execCommand('mceImage', true);
+    editor.execCommand('mceInfografico', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',
@@ -591,11 +591,11 @@ UnitTest.asynctest('browser.tinymce.plugins.image.ImagePluginTest', function () 
   });
 
   suite.test('Advanced image dialog shorthand margin 3 value style change test', function (editor) {
-    editor.settings.image_advtab = true;
-    editor.settings.image_dimensions = false;
+    editor.settings.infografico_advtab = true;
+    editor.settings.infograficos_dimensions = false;
 
     editor.setContent('');
-    editor.execCommand('mceImage', true);
+    editor.execCommand('mceInfografico', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',
@@ -622,11 +622,11 @@ UnitTest.asynctest('browser.tinymce.plugins.image.ImagePluginTest', function () 
   });
 
   suite.test('Advanced image dialog shorthand margin 4 value style change test', function (editor) {
-    editor.settings.image_advtab = true;
-    editor.settings.image_dimensions = false;
+    editor.settings.infografico_advtab = true;
+    editor.settings.infograficos_dimensions = false;
 
     editor.setContent('');
-    editor.execCommand('mceImage', true);
+    editor.execCommand('mceInfografico', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',
@@ -653,11 +653,11 @@ UnitTest.asynctest('browser.tinymce.plugins.image.ImagePluginTest', function () 
   });
 
   suite.test('Advanced image dialog shorthand margin 4 value style change test', function (editor) {
-    editor.settings.image_advtab = true;
-    editor.settings.image_dimensions = false;
+    editor.settings.infografico_advtab = true;
+    editor.settings.infograficos_dimensions = false;
 
     editor.setContent('');
-    editor.execCommand('mceImage', true);
+    editor.execCommand('mceInfografico', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',

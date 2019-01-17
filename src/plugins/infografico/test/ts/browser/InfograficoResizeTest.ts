@@ -5,16 +5,16 @@ import { UnitTest } from '@ephox/bedrock';
 import { TinyLoader, TinyUi } from '@ephox/mcagar';
 
 import DOMUtils from 'tinymce/core/api/dom/DOMUtils';
-import ImagePlugin from 'tinymce/plugins/image/Plugin';
+import InfograficoPlugin from 'tinymce/plugins/infografico/Plugin';
 import ModernTheme from 'tinymce/themes/modern/Theme';
 import { Element } from '@ephox/sugar';
 
-UnitTest.asynctest('browser.tinymce.plugins.image.ImageResizeTest', function () {
+UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoResizeTest', function () {
   const success = arguments[arguments.length - 2];
   const failure = arguments[arguments.length - 1];
 
   ModernTheme();
-  ImagePlugin();
+  InfograficoPlugin();
 
   const cFakeEvent = function (name) {
     return Chain.op(function (elm: Element) {
@@ -27,7 +27,7 @@ UnitTest.asynctest('browser.tinymce.plugins.image.ImageResizeTest', function () 
 
     Pipeline.async({}, [
       Logger.t('image proportion constrains should work directly', GeneralSteps.sequence([
-        tinyUi.sClickOnToolbar('click image button', 'div[aria-label="Insert/edit image"] button'),
+        tinyUi.sClickOnToolbar('click image button', 'div[aria-label="Inserir/editar infográfico"] button'),
         Chain.asStep({}, [
           Chain.fromParent(tinyUi.cWaitForPopup('Wait for dialog', 'div[role="dialog"]'),
             [

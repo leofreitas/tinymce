@@ -4,10 +4,10 @@ import { Arr } from '@ephox/katamari';
 import { TinyApis, TinyLoader, TinyUi } from '@ephox/mcagar';
 
 import Conversions from 'tinymce/core/file/Conversions';
-import Plugin from 'tinymce/plugins/image/Plugin';
+import Plugin from 'tinymce/plugins/infografico/Plugin';
 import Theme from 'tinymce/themes/modern/Theme';
 
-UnitTest.asynctest('browser.tinymce.plugins.image.ImagePluginTest', function () {
+UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', function () {
   const success = arguments[arguments.length - 2];
   const failure = arguments[arguments.length - 1];
 
@@ -34,11 +34,11 @@ UnitTest.asynctest('browser.tinymce.plugins.image.ImagePluginTest', function () 
       ]);
     };
 
-    const sAssertImageTab = function (title, isPresent) {
+    const sAssertInfograficoTab = function (title, isPresent) {
       return GeneralSteps.sequence([
-        ui.sClickOnToolbar('Trigger Image dialog', 'div[aria-label="Insert/edit image"]'),
+        ui.sClickOnToolbar('Trigger Infografico dialog', 'div[aria-label="Inserir/editar infográfico"]'),
         Chain.asStep({}, [
-          ui.cWaitForPopup('Wait for Image dialog', 'div[role="dialog"][aria-label="Insert/edit image"]'),
+          ui.cWaitForPopup('Wait for Infografico dialog', 'div[role="dialog"][aria-label="Inserir/editar infográfico"]'),
           Chain.op(function (container) {
             const expected = {};
             expected['.mce-tab:contains("' + title + '")'] = isPresent ? 1 : 0;
@@ -53,7 +53,7 @@ UnitTest.asynctest('browser.tinymce.plugins.image.ImagePluginTest', function () 
       Conversions.uriToBlob(b64).then(function (blob) {
         Pipeline.async({}, [
           Chain.asStep({}, [
-            cPopupToDialog('div[role="dialog"][aria-label="Insert/edit image"]'),
+            cPopupToDialog('div[role="dialog"][aria-label="Inserir/editar infográfico"]'),
             Chain.op(function (win) {
               const browseBtn = win.find('browsebutton')[0];
               browseBtn.value = function () {
@@ -68,7 +68,7 @@ UnitTest.asynctest('browser.tinymce.plugins.image.ImagePluginTest', function () 
 
     const sAssertTextValue = function (fieldName, value) {
       return Chain.asStep({}, [
-        cPopupToDialog('div[role="dialog"][aria-label="Insert/edit image"]'),
+        cPopupToDialog('div[role="dialog"][aria-label="Inserir/editar infográfico"]'),
         Chain.op(function (win) {
           Assertions.assertEq('Assert field ' + src + ' value ', value, win.find('#' + fieldName).value());
         })
@@ -76,60 +76,60 @@ UnitTest.asynctest('browser.tinymce.plugins.image.ImagePluginTest', function () 
     };
 
     Pipeline.async({}, [
-      Logger.t('Upload tab should not be present without images_upload_url or images_upload_handler', GeneralSteps.sequence([
+      Logger.t('Upload tab should not be present without infograficos_upload_url or infograficos_upload_handler', GeneralSteps.sequence([
         api.sSetContent('<p><img src="' + src + '" /></p>'),
         api.sSelect('img', []),
-        sAssertImageTab('Upload', false)
+        sAssertInfograficoTab('Upload', false)
       ])),
 
-      Logger.t('Upload tab should be present when images_upload_url is set to some truthy value', GeneralSteps.sequence([
+      Logger.t('Upload tab should be present when infograficos_upload_url is set to some truthy value', GeneralSteps.sequence([
         api.sSetContent('<p><img src="' + src + '" /></p>'),
         api.sSelect('img', []),
-        api.sSetSetting('image_advtab', false), // make sure that Advanced tab appears separately
-        api.sSetSetting('images_upload_url', 'postAcceptor.php'),
-        sAssertImageTab('Upload', true),
-        sAssertImageTab('Advanced', false),
-        api.sSetSetting('image_advtab', true),
-        api.sDeleteSetting('images_upload_url'),
-        sAssertImageTab('Upload', false),
-        sAssertImageTab('Advanced', true)
+        api.sSetSetting('infografico_advtab', false), // make sure that Advanced tab appears separately
+        api.sSetSetting('infograficos_upload_url', 'postAcceptor.php'),
+        sAssertInfograficoTab('Upload', true),
+        sAssertInfograficoTab('Advanced', false),
+        api.sSetSetting('infografico_advtab', true),
+        api.sDeleteSetting('infograficos_upload_url'),
+        sAssertInfograficoTab('Upload', false),
+        sAssertInfograficoTab('Advanced', true)
       ])),
 
-      Logger.t('Upload tab should be present when images_upload_handler is set to some truthy value', GeneralSteps.sequence([
+      Logger.t('Upload tab should be present when infograficos_upload_handler is set to some truthy value', GeneralSteps.sequence([
         api.sSetContent('<p><img src="' + src + '" /></p>'),
         api.sSelect('img', []),
-        api.sSetSetting('image_advtab', false), // make sure that Advanced tab appears separately
-        api.sSetSetting('images_upload_handler', function (blobInfo, success) {
+        api.sSetSetting('infografico_advtab', false), // make sure that Advanced tab appears separately
+        api.sSetSetting('infograficos_upload_handler', function (blobInfo, success) {
           return success('file.jpg');
         }),
-        sAssertImageTab('Upload', true),
-        sAssertImageTab('Advanced', false),
-        api.sSetSetting('image_advtab', true),
-        api.sDeleteSetting('images_upload_handler'),
-        sAssertImageTab('Upload', false),
-        sAssertImageTab('Advanced', true)
+        sAssertInfograficoTab('Upload', true),
+        sAssertInfograficoTab('Advanced', false),
+        api.sSetSetting('infografico_advtab', true),
+        api.sDeleteSetting('infograficos_upload_handler'),
+        sAssertInfograficoTab('Upload', false),
+        sAssertInfograficoTab('Advanced', true)
       ])),
 
-      Logger.t('Image uploader test with custom route', GeneralSteps.sequence([
+      Logger.t('Infografico uploader test with custom route', GeneralSteps.sequence([
         api.sSetContent(''),
-        api.sSetSetting('images_upload_url', '/custom/imageUpload'),
-        ui.sClickOnToolbar('Trigger Image dialog', 'div[aria-label="Insert/edit image"]'),
-        ui.sWaitForPopup('Wait for Image dialog', 'div[role="dialog"][aria-label="Insert/edit image"]'),
+        api.sSetSetting('infograficos_upload_url', '/custom/imageUpload'),
+        ui.sClickOnToolbar('Trigger Infografico dialog', 'div[aria-label="Inserir/editar infográfico"]'),
+        ui.sWaitForPopup('Wait for Infografico dialog', 'div[role="dialog"][aria-label="Inserir/editar infográfico"]'),
         ui.sClickOnUi('Switch to Upload tab', '.mce-tab:contains("Upload")'),
         sTriggerUpload,
         ui.sWaitForUi('Wait for General tab to activate', '.mce-tab.mce-active:contains("General")'),
         sAssertTextValue('src', 'uploaded_image.jpg'),
-        api.sDeleteSetting('images_upload_url'),
+        api.sDeleteSetting('infograficos_upload_url'),
         ui.sClickOnUi('Close dialog', 'button:contains("Cancel")')
       ])),
 
-      Logger.t('Image uploader test with images_upload_handler', GeneralSteps.sequence([
+      Logger.t('Infografico uploader test with infograficos_upload_handler', GeneralSteps.sequence([
         api.sSetContent(''),
-        api.sSetSetting('images_upload_handler', function (blobInfo, success) {
+        api.sSetSetting('infograficos_upload_handler', function (blobInfo, success) {
           return success('file.jpg');
         }),
-        ui.sClickOnToolbar('Trigger Image dialog', 'div[aria-label="Insert/edit image"]'),
-        ui.sWaitForPopup('Wait for Image dialog', 'div[role="dialog"][aria-label="Insert/edit image"]'),
+        ui.sClickOnToolbar('Trigger Infografico dialog', 'div[aria-label="Inserir/editar infográfico"]'),
+        ui.sWaitForPopup('Wait for Infografico dialog', 'div[role="dialog"][aria-label="Inserir/editar infográfico"]'),
         ui.sClickOnUi('Switch to Upload tab', '.mce-tab:contains("Upload")'),
         sTriggerUpload,
         ui.sWaitForUi('Wait for General tab to activate', '.mce-tab.mce-active:contains("General")'),
@@ -137,13 +137,13 @@ UnitTest.asynctest('browser.tinymce.plugins.image.ImagePluginTest', function () 
         ui.sClickOnUi('Close dialog', 'button:contains("Cancel")')
       ])),
 
-      Logger.t('Test that we get full base64 string in images_upload_handler', GeneralSteps.sequence([
+      Logger.t('Test that we get full base64 string in infograficos_upload_handler', GeneralSteps.sequence([
         api.sSetContent(''),
-        api.sSetSetting('images_upload_handler', function (blobInfo, success) {
+        api.sSetSetting('infograficos_upload_handler', function (blobInfo, success) {
           return success(blobInfo.base64());
         }),
-        ui.sClickOnToolbar('Trigger Image dialog', 'div[aria-label="Insert/edit image"]'),
-        ui.sWaitForPopup('Wait for Image dialog', 'div[role="dialog"][aria-label="Insert/edit image"]'),
+        ui.sClickOnToolbar('Trigger Infografico dialog', 'div[aria-label="Inserir/editar infográfico"]'),
+        ui.sWaitForPopup('Wait for Infografico dialog', 'div[role="dialog"][aria-label="Inserir/editar infográfico"]'),
         ui.sClickOnUi('Switch to Upload tab', '.mce-tab:contains("Upload")'),
         sTriggerUpload,
         ui.sWaitForUi('Wait for General tab to activate', '.mce-tab.mce-active:contains("General")'),

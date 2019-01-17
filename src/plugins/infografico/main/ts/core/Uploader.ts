@@ -41,7 +41,7 @@ export default function (settings) {
     };
 
     xhr.onerror = function () {
-      failure('Image upload failed due to a XHR Transport error. Code: ' + xhr.status);
+      failure('Infografico upload failed due to a XHR Transport error. Code: ' + xhr.status);
     };
 
     xhr.onload = function () {

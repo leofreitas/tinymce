@@ -1,11 +1,11 @@
 import { Chain, Logger, Pipeline, Assertions, ApproxStructure, RawAssertions, Step } from '@ephox/agar';
 import { Element, Html, SelectorFind, Node } from '@ephox/sugar';
 import { UnitTest } from '@ephox/bedrock';
-import { read, write, create, isImage, isFigure, defaultData, getStyleValue } from 'tinymce/plugins/image/core/ImageData';
+import { read, write, create, isInfografico, isFigure, defaultData, getStyleValue } from 'tinymce/plugins/infografico/core/InfograficoData';
 import { Merger, Obj, Arr } from '@ephox/katamari';
 import { DOMUtils } from 'tinymce/core/api/dom/DOMUtils';
 
-UnitTest.asynctest('browser.tinymce.plugins.image.core.ImageDataTest', (success, failure) => {
+UnitTest.asynctest('browser.tinymce.plugins.image.core.InfograficoDataTest', (success, failure) => {
   const cSetHtml = (html) => {
     return Chain.op(function (elm: Element) {
       Html.set(elm, html);
@@ -27,12 +27,12 @@ UnitTest.asynctest('browser.tinymce.plugins.image.core.ImageDataTest', (success,
     return Chain.inject(Element.fromDom(create(normalizeCss, data)));
   };
 
-  const cReadFromImage = Chain.mapper(function (elm: Element) {
+  const cReadFromInfografico = Chain.mapper(function (elm: Element) {
     const img = Node.name(elm) === 'img' ? elm : SelectorFind.descendant(elm, 'img').getOrDie('failed to find image');
     return { model: read(normalizeCss, img.dom()), image: img, parent: elm };
   });
 
-  const cWriteToImage = Chain.op(function (data: any) {
+  const cWriteToInfografico = Chain.op(function (data: any) {
     write(normalizeCss, data.model, data.image.dom());
   });
 
@@ -54,8 +54,8 @@ UnitTest.asynctest('browser.tinymce.plugins.image.core.ImageDataTest', (success,
     });
   };
 
-  const cAssertImage = Chain.op(function (data: any) {
-    RawAssertions.assertEq('Should be an image', true, isImage(data.image.dom()));
+  const cAssertInfografico = Chain.op(function (data: any) {
+    RawAssertions.assertEq('Should be an image', true, isInfografico(data.image.dom()));
   });
 
   const cAssertFigure = Chain.op(function (data: any) {
@@ -85,7 +85,7 @@ UnitTest.asynctest('browser.tinymce.plugins.image.core.ImageDataTest', (success,
         border: '4',
         borderStyle: 'dotted'
       }),
-      cReadFromImage,
+      cReadFromInfografico,
       cAssertModel({
         src: 'some.gif',
         alt: 'alt',
@@ -121,7 +121,7 @@ UnitTest.asynctest('browser.tinymce.plugins.image.core.ImageDataTest', (success,
           }
         });
       })),
-      cAssertImage
+      cAssertInfografico
     ])),
     Logger.t('Create image with empty fields except src', Chain.asStep({}, [
       cCreate({
@@ -138,7 +138,7 @@ UnitTest.asynctest('browser.tinymce.plugins.image.core.ImageDataTest', (success,
         border: '',
         borderStyle: ''
       }),
-      cReadFromImage,
+      cReadFromInfografico,
       cAssertModel({
         src: 'some.gif',
         alt: '',
@@ -174,7 +174,7 @@ UnitTest.asynctest('browser.tinymce.plugins.image.core.ImageDataTest', (success,
           }
         });
       })),
-      cAssertImage
+      cAssertInfografico
     ])),
     Logger.t('Create figure from data', Chain.asStep({}, [
       cCreate({
@@ -191,7 +191,7 @@ UnitTest.asynctest('browser.tinymce.plugins.image.core.ImageDataTest', (success,
         border: '4',
         borderStyle: 'dotted'
       }),
-      cReadFromImage,
+      cReadFromInfografico,
       cAssertModel({
         src: 'some.gif',
         alt: 'alt',
@@ -247,7 +247,7 @@ UnitTest.asynctest('browser.tinymce.plugins.image.core.ImageDataTest', (success,
     ])),
     Logger.t('Read/write model to simple image without change', Chain.asStep(Element.fromTag('div'), [
       cSetHtml('<img src="some.gif">'),
-      cReadFromImage,
+      cReadFromInfografico,
       cAssertModel({
         src: 'some.gif',
         alt: '',
@@ -262,7 +262,7 @@ UnitTest.asynctest('browser.tinymce.plugins.image.core.ImageDataTest', (success,
         border: '',
         borderStyle: ''
       }),
-      cWriteToImage,
+      cWriteToInfografico,
       cAssertStructure(ApproxStructure.build(function (s, str) {
         return s.element('div', {
           children: [
@@ -291,7 +291,7 @@ UnitTest.asynctest('browser.tinymce.plugins.image.core.ImageDataTest', (success,
     ])),
     Logger.t('Read/write model to complex image without change', Chain.asStep(Element.fromTag('div'), [
       cSetHtml('<img src="some.gif" class="class" width="100" height="200" style="margin: 1px 2px; border: 1px solid red" alt="alt" title="title">'),
-      cReadFromImage,
+      cReadFromInfografico,
       cAssertModel({
         src: 'some.gif',
         alt: 'alt',
@@ -306,7 +306,7 @@ UnitTest.asynctest('browser.tinymce.plugins.image.core.ImageDataTest', (success,
         border: '1',
         borderStyle: 'solid'
       }),
-      cWriteToImage,
+      cWriteToInfografico,
       cAssertStructure(ApproxStructure.build(function (s, str) {
         return s.element('div', {
           children: [
@@ -335,7 +335,7 @@ UnitTest.asynctest('browser.tinymce.plugins.image.core.ImageDataTest', (success,
     ])),
     Logger.t('Read/write model to simple image with changes', Chain.asStep(Element.fromTag('div'), [
       cSetHtml('<img src="some.gif">'),
-      cReadFromImage,
+      cReadFromInfografico,
       cUpdateModel({
         src: 'some2.gif',
         alt: 'alt',
@@ -350,7 +350,7 @@ UnitTest.asynctest('browser.tinymce.plugins.image.core.ImageDataTest', (success,
         border: '3',
         borderStyle: 'dotted'
       }),
-      cWriteToImage,
+      cWriteToInfografico,
       cAssertStructure(ApproxStructure.build(function (s, str) {
         return s.element('div', {
           children: [
@@ -379,7 +379,7 @@ UnitTest.asynctest('browser.tinymce.plugins.image.core.ImageDataTest', (success,
     ])),
     Logger.t('Read/write model to complex image with changes', Chain.asStep(Element.fromTag('div'), [
       cSetHtml('<img src="some.gif" class="class" width="100" height="200" style="margin: 1px 2px; border: 1px solid red" alt="alt" title="title">'),
-      cReadFromImage,
+      cReadFromInfografico,
       cUpdateModel({
         src: 'some2.gif',
         alt: 'alt2',
@@ -394,7 +394,7 @@ UnitTest.asynctest('browser.tinymce.plugins.image.core.ImageDataTest', (success,
         border: '4',
         borderStyle: 'dotted'
       }),
-      cWriteToImage,
+      cWriteToInfografico,
       cAssertStructure(ApproxStructure.build(function (s, str) {
         return s.element('div', {
           children: [
@@ -423,11 +423,11 @@ UnitTest.asynctest('browser.tinymce.plugins.image.core.ImageDataTest', (success,
     ])),
     Logger.t('Toggle caption on', Chain.asStep(Element.fromTag('div'), [
       cSetHtml('<img src="some.gif">'),
-      cReadFromImage,
+      cReadFromInfografico,
       cUpdateModel({
         caption: true
       }),
-      cWriteToImage,
+      cWriteToInfografico,
       cAssertStructure(ApproxStructure.build(function (s, str) {
         return s.element('div', {
           children: [
@@ -458,11 +458,11 @@ UnitTest.asynctest('browser.tinymce.plugins.image.core.ImageDataTest', (success,
     ])),
     Logger.t('Toggle caption off', Chain.asStep(Element.fromTag('div'), [
       cSetHtml('<figure class="image" contenteditable="false"><img src="some.gif"><figcaption contenteditable="true">Caption</figcaption></figure>'),
-      cReadFromImage,
+      cReadFromInfografico,
       cUpdateModel({
         caption: false
       }),
-      cWriteToImage,
+      cWriteToInfografico,
       cAssertStructure(ApproxStructure.build(function (s, str) {
         return s.element('div', {
           children: [
@@ -477,11 +477,11 @@ UnitTest.asynctest('browser.tinymce.plugins.image.core.ImageDataTest', (success,
     ])),
     Logger.t('Update figure image data', Chain.asStep(Element.fromTag('div'), [
       cSetHtml('<figure class="image" contenteditable="false"><img src="some.gif"><figcaption contenteditable="true">Caption</figcaption></figure>'),
-      cReadFromImage,
+      cReadFromInfografico,
       cUpdateModel({
         src: 'some2.gif'
       }),
-      cWriteToImage,
+      cWriteToInfografico,
       cAssertStructure(ApproxStructure.build(function (s, str) {
         return s.element('div', {
           children: [
@@ -512,7 +512,7 @@ UnitTest.asynctest('browser.tinymce.plugins.image.core.ImageDataTest', (success,
     ])),
     Logger.t('Read/write model to image with style size without change', Chain.asStep(Element.fromTag('div'), [
       cSetHtml('<img src="some.gif" style="width: 100px; height: 200px">'),
-      cReadFromImage,
+      cReadFromInfografico,
       cAssertModel({
         src: 'some.gif',
         alt: '',
@@ -527,7 +527,7 @@ UnitTest.asynctest('browser.tinymce.plugins.image.core.ImageDataTest', (success,
         border: '',
         borderStyle: ''
       }),
-      cWriteToImage,
+      cWriteToInfografico,
       cAssertStructure(ApproxStructure.build(function (s, str) {
         return s.element('div', {
           children: [
@@ -557,7 +557,7 @@ UnitTest.asynctest('browser.tinymce.plugins.image.core.ImageDataTest', (success,
     ])),
     Logger.t('Read/write model to image with style size with size change', Chain.asStep(Element.fromTag('div'), [
       cSetHtml('<img src="some.gif" style="width: 100px; height: 200px">'),
-      cReadFromImage,
+      cReadFromInfografico,
       cAssertModel({
         src: 'some.gif',
         alt: '',
@@ -576,7 +576,7 @@ UnitTest.asynctest('browser.tinymce.plugins.image.core.ImageDataTest', (success,
         width: '150',
         height: '250'
       }),
-      cWriteToImage,
+      cWriteToInfografico,
       cAssertStructure(ApproxStructure.build(function (s, str) {
         return s.element('div', {
           children: [

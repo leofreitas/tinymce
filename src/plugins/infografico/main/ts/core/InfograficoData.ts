@@ -1,5 +1,5 @@
 /**
- * ImageData.ts
+ * InfograficoData.ts
  *
  * Released under LGPL License.
  * Copyright (c) 1999-2018 Ephox Corp. All rights reserved
@@ -8,14 +8,14 @@
  * Contributing: http://www.tinymce.com/contributing
  */
 
-import Utils from 'tinymce/plugins/image/core/Utils';
+import Utils from 'tinymce/plugins/infografico/core/Utils';
 import DOMUtils from 'tinymce/core/api/dom/DOMUtils';
 import { Merger } from '@ephox/katamari';
 import { HTMLElement, Node, document } from '@ephox/dom-globals';
 
 const DOM = DOMUtils.DOM;
 
-interface ImageData {
+interface InfograficoData {
   src: string;
   alt: string;
   title: string;
@@ -154,9 +154,9 @@ const setBorderStyle = (image: HTMLElement, value: string) => {
 const getBorderStyle = (image: HTMLElement) => getStyle(image, 'borderStyle');
 
 const isFigure = (elm: Node) => elm.nodeName === 'FIGURE';
-const isImage = (elm: Node) => elm.nodeName === 'IMG';
+const isInfografico = (elm: Node) => elm.nodeName === 'IMG';
 
-const defaultData = (): ImageData => {
+const defaultData = (): InfograficoData => {
   return {
     src: '',
     alt: '',
@@ -173,7 +173,7 @@ const defaultData = (): ImageData => {
   };
 };
 
-const getStyleValue = (normalizeCss: CssNormalizer, data: ImageData): string => {
+const getStyleValue = (normalizeCss: CssNormalizer, data: InfograficoData): string => {
   const image = document.createElement('img');
 
   setAttrib(image, 'style', data.style);
@@ -197,7 +197,7 @@ const getStyleValue = (normalizeCss: CssNormalizer, data: ImageData): string => 
   return normalizeCss(image.getAttribute('style'));
 };
 
-const create = (normalizeCss: CssNormalizer, data: ImageData): HTMLElement => {
+const create = (normalizeCss: CssNormalizer, data: InfograficoData): HTMLElement => {
   const image = document.createElement('img');
   write(normalizeCss, Merger.merge(data, { caption: false }), image);
 
@@ -217,7 +217,7 @@ const create = (normalizeCss: CssNormalizer, data: ImageData): HTMLElement => {
   }
 };
 
-const read = (normalizeCss: CssNormalizer, image: HTMLElement): ImageData => {
+const read = (normalizeCss: CssNormalizer, image: HTMLElement): InfograficoData => {
   return {
     src: getAttrib(image, 'src'),
     alt: getAttrib(image, 'alt'),
@@ -234,7 +234,7 @@ const read = (normalizeCss: CssNormalizer, image: HTMLElement): ImageData => {
   };
 };
 
-const updateProp = (image: HTMLElement, oldData: ImageData, newData: ImageData, name: string, set: (image: HTMLElement, name: string, value: string) => void) => {
+const updateProp = (image: HTMLElement, oldData: InfograficoData, newData: InfograficoData, name: string, set: (image: HTMLElement, name: string, value: string) => void) => {
   if (newData[name] !== oldData[name]) {
     set(image, name, newData[name]);
   }
@@ -247,7 +247,7 @@ const normalized = (set: (image: HTMLElement, value: string) => void, normalizeC
   };
 };
 
-const write = (normalizeCss: CssNormalizer, newData: ImageData, image: HTMLElement) => {
+const write = (normalizeCss: CssNormalizer, newData: InfograficoData, image: HTMLElement) => {
   const oldData = read(normalizeCss, image);
 
   updateProp(image, oldData, newData, 'caption', (image, _name, _value) => toggleCaption(image));
@@ -265,11 +265,11 @@ const write = (normalizeCss: CssNormalizer, newData: ImageData, image: HTMLEleme
 };
 
 export {
-  ImageData,
+  InfograficoData,
   getStyleValue,
   defaultData,
   isFigure,
-  isImage,
+  isInfografico,
   create,
   read,
   write
