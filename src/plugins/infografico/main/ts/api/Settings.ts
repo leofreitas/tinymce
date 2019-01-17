@@ -24,6 +24,10 @@ const getClassList = function (editor) {
   return editor.getParam('infografico_class_list');
 };
 
+const hasNumberItems = function (editor) {
+  return editor.settings.infografico_number_items === true ? true : false;
+};
+
 const hasDescription = function (editor) {
   return editor.settings.infograficos_description === false ? false : true;
 };
@@ -69,6 +73,7 @@ export default {
   hasAdvTab,
   getPrependUrl,
   getClassList,
+  hasNumberItems,
   hasDescription,
   hasInfograficoTitle,
   hasInfograficoCaption,

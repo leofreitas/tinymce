@@ -22,6 +22,7 @@ interface InfograficoData {
   width: string;
   height: string;
   class: string;
+  numberitems: string;
   style: string;
   caption: boolean;
   hspace: string;
@@ -164,6 +165,7 @@ const defaultData = (): InfograficoData => {
     width: '',
     height: '',
     class: '',
+    numberitems: '',
     style: '',
     caption: false,
     hspace: '',
@@ -203,6 +205,7 @@ const create = (normalizeCss: CssNormalizer, data: InfograficoData): HTMLElement
 
   // Always set alt even if data.alt is an empty string
   setAttrib(image, 'alt', data.alt);
+  setAttrib(image, 'numberitems', data.numberitems);
 
   if (data.caption) {
     const figure = DOM.create('figure', { class: 'image' });
@@ -225,6 +228,7 @@ const read = (normalizeCss: CssNormalizer, image: HTMLElement): InfograficoData 
     width: getSize(image, 'width'),
     height: getSize(image, 'height'),
     class: getAttrib(image, 'class'),
+    class: getAttrib(image, 'numberitems'),
     style: normalizeCss(getAttrib(image, 'style')),
     caption: hasCaption(image),
     hspace: getHspace(image),
@@ -257,6 +261,7 @@ const write = (normalizeCss: CssNormalizer, newData: InfograficoData, image: HTM
   updateProp(image, oldData, newData, 'width', setSize('width', normalizeCss));
   updateProp(image, oldData, newData, 'height', setSize('height', normalizeCss));
   updateProp(image, oldData, newData, 'class', setAttrib);
+  updateProp(image, oldData, newData, 'numberitems', setAttrib);
   updateProp(image, oldData, newData, 'style', normalized((image, value) => setAttrib(image, 'style', value), normalizeCss));
   updateProp(image, oldData, newData, 'hspace', normalized(setHspace, normalizeCss));
   updateProp(image, oldData, newData, 'vspace', normalized(setVspace, normalizeCss));

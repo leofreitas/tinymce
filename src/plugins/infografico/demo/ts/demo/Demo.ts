@@ -17,16 +17,18 @@ tinymce.init({
   plugins: 'infografico code',
   toolbar: 'undo redo | image code',
   infografico_caption: true,
+  infograficos_dimensions: false,
   infografico_advtab: true,
   infografico_title: true,
   infografico_class_list: [
-    { title: 'None', value: '' },
-    { title: 'Class1', value: 'class1' },
-    { title: 'Class2', value: 'class2' }
+    { title: 'Nenhum', value: '' },
+    { title: 'Números', value: 'numeros' },
+    { title: 'Letras', value: 'letras' }
   ],
-  infograficos_upload_url: 'postAcceptor.php',
+  infografico_number_items: true,
+  // infograficos_upload_url: 'postAcceptor.php',
   file_picker_callback (callback, value, meta) {
-    callback('https://www.google.com/logos/google.jpg', { alt: 'My alt text' });
+     callback('https://www.google.com/logos/google.jpg', { alt: 'My alt text' });
   },
   height: 600
 });

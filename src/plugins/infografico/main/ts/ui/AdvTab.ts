@@ -63,7 +63,7 @@ const updateStyle = (editor: Editor, win) => {
 
 const makeTab = function (editor) {
   return {
-    title: 'Advanced',
+    title: 'Bordas',
     type: 'form',
     pack: 'start',
     items: [
@@ -112,7 +112,7 @@ const makeTab = function (editor) {
               { text: 'None', value: 'none' },
               { text: 'Hidden', value: 'hidden' }
             ]
-          }
+          },{ name: 'borderitems', type: 'colorpicker', label: 'Cor da borda' }
         ]
       }
     ]

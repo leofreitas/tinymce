@@ -3,6 +3,17 @@ import Settings from '../api/Settings';
 import Utils from '../core/Utils';
 import SizeManager from './SizeManager';
 
+const createTextBox = function (editor) {
+  return function (evt) {
+    const dom = editor.dom;
+    const rootControl = evt.control.rootControl;
+
+    const data = rootControl.toJSON();    
+    console.log(data);
+    //rootControl.find('#numberitems').value(data.numberitems);
+  }
+};
+
 const onSrcChange = function (evt, editor) {
   let srcURL, prependURL, absoluteURLPattern;
   const meta = evt.meta || {};
@@ -61,11 +72,11 @@ const getGeneralItems = function (editor, imageListCtrl) {
   ];
 
   if (Settings.hasDescription(editor)) {
-    generalFormItems.push({ name: 'alt', type: 'textbox', label: 'Infografico description' });
+    generalFormItems.push({ name: 'alt', type: 'textbox', label: 'Descrição do Infográfico' });
   }
 
   if (Settings.hasInfograficoTitle(editor)) {
-    generalFormItems.push({ name: 'title', type: 'textbox', label: 'Infografico Title' });
+    generalFormItems.push({ name: 'title', type: 'textbox', label: 'Título do Infográfico' });
   }
 
   if (Settings.hasDimensions(editor)) {
@@ -78,7 +89,7 @@ const getGeneralItems = function (editor, imageListCtrl) {
     generalFormItems.push({
       name: 'class',
       type: 'listbox',
-      label: 'Class',
+      label: 'Índice do marcador',
       values: Utils.buildListItems(
         Settings.getClassList(editor),
         function (item) {
@@ -89,6 +100,39 @@ const getGeneralItems = function (editor, imageListCtrl) {
           }
         }
       )
+    });
+  }
+
+  //if (Settings.hasShapeItems(editor)) {
+    generalFormItems.push({
+      name: 'shapeitems',
+      type: 'listbox',
+      label: 'Forma do marcador',
+      values: [
+              { text: 'Selecione...', value: '' },
+              { text: 'Círculo', value: 'circulo' },
+              { text: 'Quadrado', value: 'quadrado' },
+              { text: 'Triângulo', value: 'triangulo' }
+      ],
+    });
+  //}
+   generalFormItems.push({ name: 'backgrounditems', type: 'colorpicker', label: 'Cor do marcador' });
+
+  if (Settings.hasNumberItems(editor)) {
+    generalFormItems.push({
+      name: 'numberitems',
+      type: 'listbox',
+      label: 'Quantidade de blocos',
+      values: [
+              { text: 'Selecione...', value: '' },
+              { text: '1', value: '1' },
+              { text: '2', value: '2' },
+              { text: '3', value: '3' },
+              { text: '4', value: '4' },
+              { text: '5', value: '5' },
+              { text: '6', value: '6' }
+      ],
+      onselect: createTextBox(editor)
     });
   }
 
