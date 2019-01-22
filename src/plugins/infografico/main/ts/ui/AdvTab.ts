@@ -112,7 +112,7 @@ const makeTab = function (editor) {
               { text: 'None', value: 'none' },
               { text: 'Hidden', value: 'hidden' }
             ]
-          },{ name: 'borderitems', type: 'colorpicker', label: 'Cor da borda' }
+          }, { name: 'borderitems', type: 'colorpicker', label: 'Cor da borda' }
         ]
       }
     ]

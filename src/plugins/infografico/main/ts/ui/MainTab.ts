@@ -5,13 +5,12 @@ import SizeManager from './SizeManager';
 
 const createTextBox = function (editor) {
   return function (evt) {
-    const dom = editor.dom;
+    // const dom = editor.dom;
     const rootControl = evt.control.rootControl;
-
-    const data = rootControl.toJSON();    
-    console.log(data);
-    //rootControl.find('#numberitems').value(data.numberitems);
-  }
+    const data = rootControl.toJSON();
+    // console.log(data);
+    rootControl.find('#numberitems').value(data.numberitems);
+   };
 };
 
 const onSrcChange = function (evt, editor) {
@@ -103,8 +102,8 @@ const getGeneralItems = function (editor, imageListCtrl) {
     });
   }
 
-  //if (Settings.hasShapeItems(editor)) {
-    generalFormItems.push({
+  // if (Settings.hasShapeItems(editor)) {
+  generalFormItems.push({
       name: 'shapeitems',
       type: 'listbox',
       label: 'Forma do marcador',
@@ -114,9 +113,9 @@ const getGeneralItems = function (editor, imageListCtrl) {
               { text: 'Quadrado', value: 'quadrado' },
               { text: 'Triângulo', value: 'triangulo' }
       ],
-    });
-  //}
-   generalFormItems.push({ name: 'backgrounditems', type: 'colorpicker', label: 'Cor do marcador' });
+  });
+  // }
+  generalFormItems.push({ name: 'backgrounditems', type: 'colorpicker', label: 'Cor do marcador' });
 
   if (Settings.hasNumberItems(editor)) {
     generalFormItems.push({

@@ -228,7 +228,7 @@ const read = (normalizeCss: CssNormalizer, image: HTMLElement): InfograficoData 
     width: getSize(image, 'width'),
     height: getSize(image, 'height'),
     class: getAttrib(image, 'class'),
-    class: getAttrib(image, 'numberitems'),
+    numberitems: getAttrib(image, 'numberitems'),
     style: normalizeCss(getAttrib(image, 'style')),
     caption: hasCaption(image),
     hspace: getHspace(image),
