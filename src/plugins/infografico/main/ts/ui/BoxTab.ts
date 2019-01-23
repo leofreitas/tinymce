@@ -10,10 +10,6 @@ const updateVSpaceHSpaceBorder = function (editor) {
     const dom = editor.dom;
     const rootControl = evt.control.rootControl;
 
-    if (!Settings.hasAdvTab(editor)) {
-      return;
-    }
-
     const data = rootControl.toJSON();
     let css = dom.parseStyle(data.style);
 
@@ -63,12 +59,30 @@ const updateStyle = (editor: Editor, win) => {
 
 const makeTab = function (editor) {
   return {
-    title: 'Bordas',
+    title: 'Box Texto',
     type: 'form',
     pack: 'start',
     items: [
+      { 
+        label: 'Cor da borda', 
+        name: 'bordercolor', 
+        type: 'colorpicker',
+        style: 'max-height: 70px'
+      },
+      { 
+        label: 'Cor do texto', 
+        name: 'textcolor', 
+        type: 'colorpicker',
+        style: 'max-height: 70px'
+      },
+      { 
+        label: 'Cor do fundo', 
+        name: 'textcolor', 
+        type: 'colorpicker',
+        style: 'max-height: 70px'
+      },
       {
-        label: 'Style',
+        label: 'CSS adic.',
         name: 'style',
         type: 'textbox',
         onchange: updateVSpaceHSpaceBorder(editor)
@@ -88,10 +102,10 @@ const makeTab = function (editor) {
         },
         items: [
           { label: 'Vertical space', name: 'vspace' },
-          { label: 'Border width', name: 'border' },
+          { label: 'Largura da borda', name: 'border' },
           { label: 'Horizontal space', name: 'hspace' },
           {
-            label: 'Border style',
+            label: 'Estilo da borda',
             type: 'listbox',
             name: 'borderStyle',
             width: 90,
@@ -100,7 +114,7 @@ const makeTab = function (editor) {
               updateStyle(editor, evt.control.rootControl);
             },
             values: [
-              { text: 'Select...', value: '' },
+              { text: 'Selecione...', value: '' },
               { text: 'Solid', value: 'solid' },
               { text: 'Dotted', value: 'dotted' },
               { text: 'Dashed', value: 'dashed' },
@@ -112,7 +126,7 @@ const makeTab = function (editor) {
               { text: 'None', value: 'none' },
               { text: 'Hidden', value: 'hidden' }
             ]
-          }, { name: 'borderitems', type: 'colorpicker', label: 'Cor da borda' }
+          },
         ]
       }
     ]

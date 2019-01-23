@@ -10,7 +10,9 @@
 
 import Settings from '../api/Settings';
 import Utils from '../core/Utils';
-import AdvTab from './AdvTab';
+import MarcadorTab from './MarcadorTab';
+import BoxTab from './BoxTab';
+import ContentTab from './ContentTab';
 import MainTab from './MainTab';
 import SizeManager from './SizeManager';
 import UploadTab from './UploadTab';
@@ -65,14 +67,14 @@ export default function (editor) {
       };
     }
 
-    if (Settings.hasAdvTab(editor) || Settings.hasUploadUrl(editor) || Settings.hasUploadHandler(editor)) {
+    if (!Settings.hasUploadUrl(editor) || Settings.hasUploadHandler(editor)) {
       const body = [
         MainTab.makeTab(editor, imageListCtrl)
       ];
 
-      if (Settings.hasAdvTab(editor)) {
-        body.push(AdvTab.makeTab(editor));
-      }
+      body.push(MarcadorTab.makeTab(editor));
+      body.push(BoxTab.makeTab(editor));
+      body.push(ContentTab.makeTab(editor));
 
       if (Settings.hasUploadUrl(editor) || Settings.hasUploadHandler(editor)) {
         body.push(UploadTab.makeTab(editor));

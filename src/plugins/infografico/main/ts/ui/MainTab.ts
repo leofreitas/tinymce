@@ -84,39 +84,6 @@ const getGeneralItems = function (editor, imageListCtrl) {
     );
   }
 
-  if (Settings.getClassList(editor)) {
-    generalFormItems.push({
-      name: 'class',
-      type: 'listbox',
-      label: 'Índice do marcador',
-      values: Utils.buildListItems(
-        Settings.getClassList(editor),
-        function (item) {
-          if (item.value) {
-            item.textStyle = function () {
-              return editor.formatter.getCssText({ inline: 'img', classes: [item.value] });
-            };
-          }
-        }
-      )
-    });
-  }
-
-  // if (Settings.hasShapeItems(editor)) {
-  generalFormItems.push({
-      name: 'shapeitems',
-      type: 'listbox',
-      label: 'Forma do marcador',
-      values: [
-              { text: 'Selecione...', value: '' },
-              { text: 'Círculo', value: 'circulo' },
-              { text: 'Quadrado', value: 'quadrado' },
-              { text: 'Triângulo', value: 'triangulo' }
-      ],
-  });
-  // }
-  generalFormItems.push({ name: 'backgrounditems', type: 'colorpicker', label: 'Cor do marcador' });
-
   if (Settings.hasNumberItems(editor)) {
     generalFormItems.push({
       name: 'numberitems',
@@ -144,7 +111,7 @@ const getGeneralItems = function (editor, imageListCtrl) {
 
 const makeTab = function (editor, imageListCtrl) {
   return {
-    title: 'General',
+    title: 'Geral',
     type: 'form',
     items: getGeneralItems(editor, imageListCtrl)
   };

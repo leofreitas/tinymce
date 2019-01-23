@@ -12,9 +12,6 @@ const hasDimensions = function (editor) {
   return editor.settings.infograficos_dimensions === false ? false : true;
 };
 
-const hasAdvTab = function (editor) {
-  return editor.settings.infografico_advtab === true ? true : false;
-};
 
 const getPrependUrl = function (editor) {
   return editor.getParam('infografico_prepend_url', '');
@@ -70,7 +67,6 @@ const getUploadCredentials = function (editor) {
 
 export default {
   hasDimensions,
-  hasAdvTab,
   getPrependUrl,
   getClassList,
   hasNumberItems,
