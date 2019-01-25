@@ -10,9 +10,9 @@ const updateVSpaceHSpaceBorder = function (editor) {
     const dom = editor.dom;
     const rootControl = evt.control.rootControl;
 
-    if (!Settings.hasAdvTab(editor)) {
-      return;
-    }
+    // if (!Settings.hasAdvTab(editor)) {
+    //  return;
+    // }
 
     const data = rootControl.toJSON();
     let css = dom.parseStyle(data.style);
@@ -93,21 +93,21 @@ const makeTab = function (editor) {
               { text: 'Triângulo', value: 'triangulo' }
         ]
       },
-      { 
-        label: 'Cor da borda', 
-        name: 'bordercolor', 
+      {
+        label: 'Cor da borda',
+        name: 'bordercolor',
         type: 'colorpicker',
         style: 'max-height: 70px'
       },
-      { 
-        label: 'Cor do texto', 
-        name: 'textcolor', 
+      {
+        label: 'Cor do texto',
+        name: 'textcolor',
         type: 'colorpicker',
         style: 'max-height: 70px'
       },
-      { 
-        label: 'Cor do fundo', 
-        name: 'textcolor', 
+      {
+        label: 'Cor do fundo',
+        name: 'textcolor',
         type: 'colorpicker',
         style: 'max-height: 70px'
       },

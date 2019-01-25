@@ -12,7 +12,6 @@ const hasDimensions = function (editor) {
   return editor.settings.infograficos_dimensions === false ? false : true;
 };
 
-
 const getPrependUrl = function (editor) {
   return editor.getParam('infografico_prepend_url', '');
 };
