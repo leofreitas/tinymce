@@ -18,14 +18,18 @@ const createTextBox = function (editor) {
         // const elem = document.getElementById('bloco-' + i);
         // console.log(elem);
         // elem.parentNode.parentNode.remove();
-        const btn = editor.dom.create('input' , {type: 'text', value : i , class : 'mce-textbox mce-abs-layout-item' });
+        const line = editor.dom.create('div', {class:'mce-container mce-abs-layout-item mce-first mce-last mce-formitem', hidefocus: 1, tabindex: -1, style: 'left: 15px; top:' +  i * 15 + 'px; width: 98%; height: 30px;'});
+        const btn = editor.dom.create('input', {type: 'text', id: 'bloco-' + i, class: 'mce-textbox mce-abs-layout-item mce-form-item' });
+        const lbl = editor.dom.create('label', {id: 'bloco-' + i + '-l', html: 'Bloco ' + i, class: 'mce-widget mce-label mce-abs-layout-item mce-first', for: 'bloco-' + i, style: 'line-height: 16px; left: 0px; top: 7px; width: 40%; height: 16px;'});
         const linkElm = editor.dom.create('div', {
-           class: 'mce-container',
-           style: 'left: 15px; top:' + i * 50 + 'px; width: 424px; height: 16px;',
+           class: 'mce-container mce-abs-layout-item mce-last mce-formitem',
+           style: 'left: 10px; top:' + i * 40 + 'px; width: 60%; height: 16px;',
            unselectable: 'on',
            contenteditable: 'false'
         }, btn);
-        Content.appendChild(linkElm);
+        linkElm.appendChild(lbl);
+        line.appendChild(linkElm);
+        Content.appendChild(line);
     }
  };
 };
@@ -47,12 +51,12 @@ const getContentItems = function (editor) {
         ],
         onselect: createTextBox(editor)
       },
-      { id: 'bloco-1', type: 'textbox', label: 'Bloco 1', style: 'display: none' },
-      { id: 'bloco-2', type: 'textbox', label: 'Bloco 2', style: 'display: none' },
-      { id: 'bloco-3', type: 'textbox', label: 'Bloco 3', style: 'display: none' },
-      { id: 'bloco-4', type: 'textbox', label: 'Bloco 4', style: 'display: none' },
-      { id: 'bloco-5', type: 'textbox', label: 'Bloco 5', style: 'display: none' },
-      { id: 'bloco-6', type: 'textbox', label: 'Bloco 6', style: 'display: none' }
+  //    { id: 'bloco-1', type: 'textbox', label: 'Bloco 1' },
+  //    { id: 'bloco-2', type: 'textbox', label: 'Bloco 2' },
+  //    { id: 'bloco-3', type: 'textbox', label: 'Bloco 3' },
+  //    { id: 'bloco-4', type: 'textbox', label: 'Bloco 4' },
+  //    { id: 'bloco-5', type: 'textbox', label: 'Bloco 5' },
+  //    { id: 'bloco-6', type: 'textbox', label: 'Bloco 6' }
     ];
     return generalContentItems;
 };
