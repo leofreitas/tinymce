@@ -18,7 +18,7 @@ const createTextBox = function (editor) {
         // const elem = document.getElementById('bloco-' + i);
         // console.log(elem);
         // elem.parentNode.parentNode.remove();
-        const line = editor.dom.create('div', {class:'mce-container mce-abs-layout-item mce-first mce-last mce-formitem', hidefocus: 1, tabindex: -1, style: 'left: 15px; top:' +  i * 15 + 'px; width: 98%; height: 30px;'});
+        const line = editor.dom.create('div', {class: 'mce-container mce-abs-layout-item mce-first mce-last mce-formitem', hidefocus: 1, tabindex: -1, style: 'left: 15px; top:' +  i * 15 + 'px; width: 98%; height: 30px;'});
         const btn = editor.dom.create('input', {type: 'text', id: 'bloco-' + i, class: 'mce-textbox mce-abs-layout-item mce-form-item' });
         const lbl = editor.dom.create('label', {id: 'bloco-' + i + '-l', html: 'Bloco ' + i, class: 'mce-widget mce-label mce-abs-layout-item mce-first', for: 'bloco-' + i, style: 'line-height: 16px; left: 0px; top: 7px; width: 40%; height: 16px;'});
         const linkElm = editor.dom.create('div', {
@@ -72,5 +72,6 @@ const makeTab = function (editor) {
 };
 
 export default {
-  makeTab
+  makeTab,
+  getContentItems
 };
