@@ -2,19 +2,7 @@ import Tools from 'tinymce/core/api/util/Tools';
 import Settings from '../api/Settings';
 import Utils from '../core/Utils';
 import SizeManager from './SizeManager';
-import ContentTab from './ContentTab';
-
-const createTextBox = function (editor) {
-  return function (evt) {
-    // const dom = editor.dom;
-    const rootControl = evt.control.rootControl;
-    const data = rootControl.toJSON();
-    // console.log(data);
-    rootControl.find('#numberitems').value(data.numberitems);
-    const Content = ContentTab.getContentItems();
-console.log(Content[data.numberitems]);
-   };
-};
+// import ContentTab from './ContentTab';
 
 const onSrcChange = function (evt, editor) {
   let srcURL, prependURL, absoluteURLPattern;
@@ -26,6 +14,8 @@ const onSrcChange = function (evt, editor) {
   if (imageListCtrl) {
     imageListCtrl.value(editor.convertURL(control.value(), 'src'));
   }
+
+  console.log(meta);
 
   Tools.each(meta, function (value, key) {
     rootControl.find('#' + key).value(value);
@@ -82,28 +72,10 @@ const getGeneralItems = function (editor, imageListCtrl) {
   }
 
   if (Settings.hasDimensions(editor)) {
-    generalFormItems.push(
+      generalFormItems.push(
       SizeManager.createUi()
     );
   }
-
-  /*if (Settings.hasNumberItems(editor)) {
-    generalFormItems.push({
-      name: 'numberitems',
-      type: 'listbox',
-      label: 'Quantidade de blocos',
-      values: [
-              { text: 'Selecione...', value: '' },
-              { text: '1', value: '1' },
-              { text: '2', value: '2' },
-              { text: '3', value: '3' },
-              { text: '4', value: '4' },
-              { text: '5', value: '5' },
-              { text: '6', value: '6' }
-      ],
-      onselect: createTextBox(editor)
-    });
-  }*/
 
   if (Settings.hasInfograficoCaption(editor)) {
     generalFormItems.push({ name: 'caption', type: 'checkbox', label: 'Caption' });

@@ -176,7 +176,7 @@ const defaultData = (): InfograficoData => {
 };
 
 const getStyleValue = (normalizeCss: CssNormalizer, data: InfograficoData): string => {
-  const image = document.createElement('img');
+  const image = document.createElement('div');
 
   setAttrib(image, 'style', data.style);
 
@@ -205,7 +205,7 @@ const create = (normalizeCss: CssNormalizer, data: InfograficoData): HTMLElement
 
   // Always set alt even if data.alt is an empty string
   setAttrib(image, 'alt', data.alt);
-  setAttrib(image, 'numberitems', data.numberitems);
+  setAttrib(image, 'numberitems', data.bloco1);
 
   if (data.caption) {
     const figure = DOM.create('figure', { class: 'image' });
