@@ -2,6 +2,7 @@ import Tools from 'tinymce/core/api/util/Tools';
 import Settings from '../api/Settings';
 import Utils from '../core/Utils';
 import SizeManager from './SizeManager';
+import ContentTab from './ContentTab';
 
 const createTextBox = function (editor) {
   return function (evt) {
@@ -10,6 +11,8 @@ const createTextBox = function (editor) {
     const data = rootControl.toJSON();
     // console.log(data);
     rootControl.find('#numberitems').value(data.numberitems);
+    const Content = ContentTab.getContentItems();
+console.log(Content[data.numberitems]);
    };
 };
 
@@ -84,7 +87,7 @@ const getGeneralItems = function (editor, imageListCtrl) {
     );
   }
 
-  if (Settings.hasNumberItems(editor)) {
+  /*if (Settings.hasNumberItems(editor)) {
     generalFormItems.push({
       name: 'numberitems',
       type: 'listbox',
@@ -100,7 +103,7 @@ const getGeneralItems = function (editor, imageListCtrl) {
       ],
       onselect: createTextBox(editor)
     });
-  }
+  }*/
 
   if (Settings.hasInfograficoCaption(editor)) {
     generalFormItems.push({ name: 'caption', type: 'checkbox', label: 'Caption' });

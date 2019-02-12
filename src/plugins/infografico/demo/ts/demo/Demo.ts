@@ -25,7 +25,7 @@ tinymce.init({
     { title: 'Números', value: 'numeros' },
     { title: 'Letras', value: 'letras' }
   ],
-  infografico_number_items: true,
+  infografico_number_items: 6,
   // infograficos_upload_url: 'postAcceptor.php',
   file_picker_callback (callback, value, meta) {
      callback('https://www.google.com/logos/google.jpg', { alt: 'My alt text' });

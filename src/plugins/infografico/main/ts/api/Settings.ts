@@ -21,7 +21,8 @@ const getClassList = function (editor) {
 };
 
 const hasNumberItems = function (editor) {
-  return editor.settings.infografico_number_items === true ? true : false;
+  return editor.settings.infografico_number_items;
+  // === true ? true : false;
 };
 
 const hasDescription = function (editor) {
