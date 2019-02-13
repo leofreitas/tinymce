@@ -15,7 +15,7 @@ const onSrcChange = function (evt, editor) {
     imageListCtrl.value(editor.convertURL(control.value(), 'src'));
   }
 
-  console.log(meta);
+  // console.log(meta);
 
   Tools.each(meta, function (value, key) {
     rootControl.find('#' + key).value(value);

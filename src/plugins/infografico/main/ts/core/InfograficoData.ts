@@ -205,7 +205,7 @@ const create = (normalizeCss: CssNormalizer, data: InfograficoData): HTMLElement
 
   // Always set alt even if data.alt is an empty string
   setAttrib(image, 'alt', data.alt);
-  setAttrib(image, 'numberitems', data.bloco1);
+  setAttrib(image, 'numberitems', data.numberitems);
 
   if (data.caption) {
     const figure = DOM.create('figure', { class: 'image' });
