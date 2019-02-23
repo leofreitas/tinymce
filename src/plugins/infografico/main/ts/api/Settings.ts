@@ -7,6 +7,11 @@
  * License: http://www.tinymce.com/license
  * Contributing: http://www.tinymce.com/contributing
  */
+import { Editor } from 'tinymce/core/api/Editor';
+
+type ColorPickerCallback = (editor: Editor, pickValue: (value: string) => void, value: string) => void;
+
+const getColorPickerCallback = (editor: Editor): ColorPickerCallback => editor.getParam('color_picker_callback');
 
 const hasDimensions = function (editor) {
   return editor.settings.infograficos_dimensions === false ? false : true;
@@ -78,5 +83,6 @@ export default {
   getUploadUrl,
   getUploadHandler,
   getUploadBasePath,
-  getUploadCredentials
+  getUploadCredentials,
+  getColorPickerCallback
 };

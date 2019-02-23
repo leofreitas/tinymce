@@ -10,10 +10,6 @@ const updateVSpaceHSpaceBorder = function (editor) {
     const dom = editor.dom;
     const rootControl = evt.control.rootControl;
 
-    // if (!Settings.hasAdvTab(editor)) {
-    //  return;
-    // }
-
     const data = rootControl.toJSON();
     let css = dom.parseStyle(data.style);
 
@@ -54,6 +50,21 @@ const updateVSpaceHSpaceBorder = function (editor) {
   };
 };
 
+const createColorPickAction = function (editor) {
+  const colorPickerCallback = Settings.getColorPickerCallback(editor);
+  if (colorPickerCallback) {
+    return function (evt) {
+      return colorPickerCallback.call(
+        editor,
+        function (value) {
+          evt.control.value(value).fire('change');
+        },
+        evt.control.value()
+      );
+    };
+  }
+};
+
 const updateStyle = (editor: Editor, win) => {
   win.find('#style').each((ctrl) => {
     const value = getStyleValue((css) => normalizeCss(editor, css), Merger.merge(defaultData(), win.toJSON()));
@@ -61,12 +72,8 @@ const updateStyle = (editor: Editor, win) => {
   });
 };
 
-const makeTab = function (editor) {
-  return {
-    title: 'Marcador',
-    type: 'form',
-    pack: 'start',
-    items: [
+const getContentItems = function (editor) {
+    const generalContentItems = [
       {
         name: 'class',
         type: 'listbox',
@@ -95,21 +102,21 @@ const makeTab = function (editor) {
       },
       {
         label: 'Cor da borda',
-        name: 'bordercolor',
-        type: 'colorpicker',
-        style: 'max-height: 70px'
+        type: 'colorbox',
+        name: 'borderColor',
+        onaction: createColorPickAction(editor)
       },
       {
-        label: 'Cor do texto',
-        name: 'textcolor',
-        type: 'colorpicker',
-        style: 'max-height: 70px'
+        label: 'Cor do Fundo',
+        type: 'colorbox',
+        name: 'backgroundColor',
+        onaction: createColorPickAction(editor)
       },
       {
-        label: 'Cor do fundo',
-        name: 'textcolor',
-        type: 'colorpicker',
-        style: 'max-height: 70px'
+        label: 'Cor do Texto',
+        type: 'colorbox',
+        name: 'textColor',
+        onaction: createColorPickAction(editor)
       },
       {
         label: 'CSS adic.',
@@ -159,10 +166,20 @@ const makeTab = function (editor) {
           },
         ]
       }
-    ]
+    ];
+    return generalContentItems;
+};
+
+const makeTab = function (editor) {
+  return {
+    title: 'Marcador',
+    type: 'form',
+    pack: 'start',
+    items: getContentItems(editor)
   };
 };
 
 export default {
-  makeTab
+  makeTab,
+  getContentItems
 };

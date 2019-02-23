@@ -16,6 +16,14 @@ const getContentItems = function (editor) {
             generalContentItems.push( { id: 'bloco-' + i, type: 'textbox', label: 'Bloco ' + i } );
         }
     }
+/*generalContentItems.push( { label: 'Border color', type: 'colorbox',  name: 'borderColor', onaction: createColorPickAction(editor) } ),
+          generalContentItems.push( {
+            label: 'Background color',
+            type: 'colorbox',
+            name: 'backgroundColor',
+            onaction: createColorPickAction(editor)
+          });*/
+
     return generalContentItems;
 };
 

@@ -1,4 +1,4 @@
-// import Settings from '../api/Settings';
+import Settings from '../api/Settings';
 import Utils from '../core/Utils';
 import { Editor } from 'tinymce/core/api/Editor';
 import { normalizeCss } from 'tinymce/plugins/infografico/core/InfograficoSelection';
@@ -57,29 +57,44 @@ const updateStyle = (editor: Editor, win) => {
   });
 };
 
+const createColorPickAction = function (editor) {
+  const colorPickerCallback = Settings.getColorPickerCallback(editor);
+  if (colorPickerCallback) {
+    return function (evt) {
+      return colorPickerCallback.call(
+        editor,
+        function (value) {
+          evt.control.value(value).fire('change');
+        },
+        evt.control.value()
+      );
+    };
+  }
+};
+
 const makeTab = function (editor) {
   return {
     title: 'Box Texto',
     type: 'form',
     pack: 'start',
     items: [
-      {
+     {
         label: 'Cor da borda',
-        name: 'bordercolor',
-        type: 'colorpicker',
-        style: 'max-height: 70px'
+        type: 'colorbox',
+        name: 'borderColorBox',
+        onaction: createColorPickAction(editor)
       },
       {
-        label: 'Cor do texto',
-        name: 'textcolor',
-        type: 'colorpicker',
-        style: 'max-height: 70px'
+        label: 'Cor do Fundo',
+        type: 'colorbox',
+        name: 'backgroundColorBox',
+        onaction: createColorPickAction(editor)
       },
       {
-        label: 'Cor do fundo',
-        name: 'textcolor',
-        type: 'colorpicker',
-        style: 'max-height: 70px'
+        label: 'Cor do Texto',
+        type: 'colorbox',
+        name: 'textColorBox',
+        onaction: createColorPickAction(editor)
       },
       {
         label: 'CSS adic.',
