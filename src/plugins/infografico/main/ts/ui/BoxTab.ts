@@ -45,7 +45,7 @@ const updateVSpaceHSpaceBorder = function (editor) {
     } else {
       rootControl.find('#borderStyle').value('');
     }
-
+console.log("Gre "+css);
     rootControl.find('#style').value(dom.serializeStyle(dom.parseStyle(dom.serializeStyle(css))));
   };
 };
@@ -72,6 +72,14 @@ const createColorPickAction = function (editor) {
   }
 };
 
+const updateObjectColor = function (editor) {
+  return function (evt) {
+    const rootControl = evt.control.rootControl;
+    const data = rootControl.toJSON();
+    rootControl.find('#'+evt.control._name).value(data.value);
+   };
+};
+
 const makeTab = function (editor) {
   return {
     title: 'Box Texto',
@@ -81,27 +89,30 @@ const makeTab = function (editor) {
      {
         label: 'Cor da borda',
         type: 'colorbox',
-        name: 'borderColorBox',
-        onaction: createColorPickAction(editor)
+        name: 'bordercolorbox',
+        onaction: createColorPickAction(editor),
+        onchange: updateObjectColor(editor)
       },
       {
         label: 'Cor do Fundo',
         type: 'colorbox',
-        name: 'backgroundColorBox',
-        onaction: createColorPickAction(editor)
+        name: 'backgroundcolorbox',
+        onaction: createColorPickAction(editor),
+        onchange: updateObjectColor(editor)
       },
       {
         label: 'Cor do Texto',
         type: 'colorbox',
-        name: 'textColorBox',
-        onaction: createColorPickAction(editor)
+        name: 'textcolorbox',
+        onaction: createColorPickAction(editor),
+        onchange: updateObjectColor(editor)
       },
-      {
+      /*{
         label: 'CSS adic.',
         name: 'style',
         type: 'textbox',
         onchange: updateVSpaceHSpaceBorder(editor)
-      },
+      },*/
       {
         type: 'form',
         layout: 'grid',

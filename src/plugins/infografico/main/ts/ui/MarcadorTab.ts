@@ -65,6 +65,14 @@ const createColorPickAction = function (editor) {
   }
 };
 
+const updateObjectColor = function (editor) {
+  return function (evt) {
+    const rootControl = evt.control.rootControl;
+    const data = rootControl.toJSON();
+    rootControl.find('#'+evt.control._name).value(data.value);
+   };
+};
+
 const updateStyle = (editor: Editor, win) => {
   win.find('#style').each((ctrl) => {
     const value = getStyleValue((css) => normalizeCss(editor, css), Merger.merge(defaultData(), win.toJSON()));
@@ -103,24 +111,27 @@ const getContentItems = function (editor) {
       {
         label: 'Cor da borda',
         type: 'colorbox',
-        name: 'borderColor',
-        onaction: createColorPickAction(editor)
+        name: 'bordercolormarcador',
+        onaction: createColorPickAction(editor),
+        onchange: updateObjectColor(editor)
       },
       {
         label: 'Cor do Fundo',
         type: 'colorbox',
-        name: 'backgroundColor',
-        onaction: createColorPickAction(editor)
+        name: 'backgroundcolormarcador',
+        onaction: createColorPickAction(editor),
+        onchange: updateObjectColor(editor)
       },
       {
         label: 'Cor do Texto',
         type: 'colorbox',
-        name: 'textColor',
-        onaction: createColorPickAction(editor)
+        name: 'textcolormarcador',
+        onaction: createColorPickAction(editor),
+        onchange: updateObjectColor(editor)
       },
       {
         label: 'CSS adic.',
-        name: 'stylemarcador',
+        name: 'style',
         type: 'textbox',
         onchange: updateVSpaceHSpaceBorder(editor)
       },

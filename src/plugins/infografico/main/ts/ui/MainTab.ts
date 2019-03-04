@@ -10,12 +10,15 @@ const onSrcChange = function (evt, editor) {
   const control = evt.control;
   const rootControl = control.rootControl;
   const imageListCtrl = rootControl.find('#image-list')[0];
+  const nitems = Settings.getNumberItems(editor);
 
   if (imageListCtrl) {
     imageListCtrl.value(editor.convertURL(control.value(), 'src'));
   }
 
-  // console.log(meta);
+  if(nitems > 0){
+rootControl.find('#numberitems').value(nitems);  
+}
 
   Tools.each(meta, function (value, key) {
     rootControl.find('#' + key).value(value);

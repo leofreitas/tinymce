@@ -23,6 +23,12 @@ interface InfograficoData {
   height: string;
   class: string;
   numberitems: string;
+  backgroundcolorbox: string;
+  bordercolorbox: string;
+  textcolorbox: string;
+  backgroundcolorbmarcador: string;
+  bordercolormarcador: string;
+  textcolormarcador: string;
   style: string;
   caption: boolean;
   hspace: string;
@@ -166,6 +172,12 @@ const defaultData = (): InfograficoData => {
     height: '',
     class: '',
     numberitems: '',
+    backgroundcolorbox: '',
+    bordercolorbox: '',
+    textcolorbox: '',
+    backgroundcolormarcador: '',
+    bordercolormarcador: '',
+    textcolormarcador: '',
     style: '',
     caption: false,
     hspace: '',
@@ -206,6 +218,12 @@ const create = (normalizeCss: CssNormalizer, data: InfograficoData): HTMLElement
   // Always set alt even if data.alt is an empty string
   setAttrib(image, 'alt', data.alt);
   setAttrib(image, 'numberitems', data.numberitems);
+  setAttrib(image, 'backgroundcolorbox', data.backgroundcolorbox);
+  setAttrib(image, 'bordercolorbox', data.bordercolorbox);
+  setAttrib(image, 'textcolorbox', data.textcolorbox);
+  setAttrib(image, 'backgroundcolormarcador', data.backgroundcolormarcador);
+  setAttrib(image, 'bordercolormarcador', data.bordercolormarcador);
+  setAttrib(image, 'textcolormarcador', data.textcolormarcador);
 
   if (data.caption) {
     const figure = DOM.create('figure', { class: 'image' });
@@ -229,6 +247,12 @@ const read = (normalizeCss: CssNormalizer, image: HTMLElement): InfograficoData 
     height: getSize(image, 'height'),
     class: getAttrib(image, 'class'),
     numberitems: getAttrib(image, 'numberitems'),
+    backgroundcolorbox: getAttrib(image, 'backgroundcolorbox'),
+    bordercolorbox: getAttrib(image, 'bordercolorbox'),
+    textcolorbox: getAttrib(image, 'textcolorbox'),
+    backgroundcolormarcador: getAttrib(image, 'backgroundcolormarcador'),
+    bordercolormarcador: getAttrib(image, 'bordercolormarcador'),
+    textcolormarcador: getAttrib(image, 'textcolormarcador'),
     style: normalizeCss(getAttrib(image, 'style')),
     caption: hasCaption(image),
     hspace: getHspace(image),
@@ -262,6 +286,12 @@ const write = (normalizeCss: CssNormalizer, newData: InfograficoData, image: HTM
   updateProp(image, oldData, newData, 'height', setSize('height', normalizeCss));
   updateProp(image, oldData, newData, 'class', setAttrib);
   updateProp(image, oldData, newData, 'numberitems', setAttrib);
+  updateProp(image, oldData, newData, 'backgroundcolorbox', setAttrib);
+  updateProp(image, oldData, newData, 'bordercolorbox', setAttrib);
+  updateProp(image, oldData, newData, 'textcolorbox', setAttrib);
+  updateProp(image, oldData, newData, 'backgroundcolormarcador', setAttrib);
+  updateProp(image, oldData, newData, 'bordercolormarcador', setAttrib);
+  updateProp(image, oldData, newData, 'textcolormarcador', setAttrib);
   updateProp(image, oldData, newData, 'style', normalized((image, value) => setAttrib(image, 'style', value), normalizeCss));
   updateProp(image, oldData, newData, 'hspace', normalized(setHspace, normalizeCss));
   updateProp(image, oldData, newData, 'vspace', normalized(setVspace, normalizeCss));
