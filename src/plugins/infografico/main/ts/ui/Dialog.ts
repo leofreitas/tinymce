@@ -31,6 +31,7 @@ const submitForm = (editor: Editor, evt) => {
   });
 
   editor.editorUpload.uploadImagesAuto();
+  ContentTab.registerText(editor);
 };
 
 export default function (editor) {
