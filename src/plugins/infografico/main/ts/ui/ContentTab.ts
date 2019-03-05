@@ -8,6 +8,8 @@ import { document, HTMLInputElement } from '@ephox/dom-globals';
 // import { document } from '@ephox/dom-globals';
 
 const registerText = function (editor) {
+  // const cont = editor.getBody();
+  // console.log(editor.get('blk1'));
 
   const ni = Settings.getNumberItems(editor);
   let addHtml = '';

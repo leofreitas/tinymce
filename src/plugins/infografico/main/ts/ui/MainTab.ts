@@ -1,8 +1,6 @@
 import Tools from 'tinymce/core/api/util/Tools';
 import Settings from '../api/Settings';
 import Utils from '../core/Utils';
-import SizeManager from './SizeManager';
-// import ContentTab from './ContentTab';
 
 const onSrcChange = function (evt, editor) {
   let srcURL, prependURL, absoluteURLPattern;
@@ -40,7 +38,7 @@ const onSrcChange = function (evt, editor) {
       if (data.width && data.height && Settings.hasDimensions(editor)) {
         rootControl.find('#width').value(data.width);
         rootControl.find('#height').value(data.height);
-        SizeManager.syncSize(rootControl);
+        // SizeManager.syncSize(rootControl);
       }
     });
   }
@@ -76,7 +74,7 @@ const getGeneralItems = function (editor, imageListCtrl) {
 
   if (Settings.hasDimensions(editor)) {
       generalFormItems.push(
-      SizeManager.createUi()
+      // SizeManager.createUi()
     );
   }
 
