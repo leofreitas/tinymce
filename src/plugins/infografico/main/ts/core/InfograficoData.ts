@@ -26,7 +26,7 @@ interface InfograficoData {
   backgroundcolorbox: string;
   bordercolorbox: string;
   textcolorbox: string;
-  backgroundcolorbmarcador: string;
+  backgroundcolormarcador: string;
   bordercolormarcador: string;
   textcolormarcador: string;
   style: string;

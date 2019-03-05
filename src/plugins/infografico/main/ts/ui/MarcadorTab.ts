@@ -69,7 +69,7 @@ const updateObjectColor = function (editor) {
   return function (evt) {
     const rootControl = evt.control.rootControl;
     const data = rootControl.toJSON();
-    rootControl.find('#'+evt.control._name).value(data.value);
+    rootControl.find('#' + evt.control._name).value(data.value);
    };
 };
 

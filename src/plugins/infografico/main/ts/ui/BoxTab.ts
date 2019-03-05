@@ -45,7 +45,7 @@ const updateVSpaceHSpaceBorder = function (editor) {
     } else {
       rootControl.find('#borderStyle').value('');
     }
-console.log("Gre "+css);
+    // console.log("Gre "+css);
     rootControl.find('#style').value(dom.serializeStyle(dom.parseStyle(dom.serializeStyle(css))));
   };
 };
@@ -76,7 +76,7 @@ const updateObjectColor = function (editor) {
   return function (evt) {
     const rootControl = evt.control.rootControl;
     const data = rootControl.toJSON();
-    rootControl.find('#'+evt.control._name).value(data.value);
+    rootControl.find('#' + evt.control._name).value(data.value);
    };
 };
 
@@ -107,12 +107,12 @@ const makeTab = function (editor) {
         onaction: createColorPickAction(editor),
         onchange: updateObjectColor(editor)
       },
-      /*{
+      {
         label: 'CSS adic.',
         name: 'style',
         type: 'textbox',
         onchange: updateVSpaceHSpaceBorder(editor)
-      },*/
+      },
       {
         type: 'form',
         layout: 'grid',

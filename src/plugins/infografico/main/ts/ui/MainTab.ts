@@ -16,9 +16,9 @@ const onSrcChange = function (evt, editor) {
     imageListCtrl.value(editor.convertURL(control.value(), 'src'));
   }
 
-  if(nitems > 0){
-rootControl.find('#numberitems').value(nitems);  
-}
+  if (nitems > 0) {
+    rootControl.find('#numberitems').value(nitems);
+  }
 
   Tools.each(meta, function (value, key) {
     rootControl.find('#' + key).value(value);
