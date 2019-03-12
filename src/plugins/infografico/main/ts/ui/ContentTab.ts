@@ -1,47 +1,45 @@
 import Settings from '../api/Settings';
-// import Utils from '../core/Utils';
-// import { Editor } from 'tinymce/core/api/Editor';
-// import { normalizeCss } from 'tinymce/plugins/infografico/core/InfograficoSelection';
-// import { defaultData, getStyleValue } from 'tinymce/plugins/infografico/core/InfograficoData';
-// import { Merger } from '@ephox/katamari';
 import { document, HTMLInputElement } from '@ephox/dom-globals';
-// import { document } from '@ephox/dom-globals';
 
 const registerText = function (editor) {
-  // const cont = editor.getBody();
-  // console.log(editor.get('blk1'));
-
-  const ni = Settings.getNumberItems(editor);
+   const cont = editor.getBody();
+  const ni = Settings.getNumberItems(editor)+2;
   let addHtml = '';
   if (ni > 0) {
-    for (let i = 1; i <= ni; i++) {
-      const bl = document.getElementById('bloco-' + i) as HTMLInputElement;
+    for (const i = 2; i < ni; i++) {
+      const bl = document.getElementById('bloco' + i) as HTMLInputElement;
       if (bl.value !== '') {
         const linkElm = editor.dom.createHTML('div', {
-           style: 'padding: 15px;  width: 80%; ',
-           id: 'blk' + i,
-            contenteditable: 'false'
+           style: 'padding: 15px;',
+           id: 'contentBlock' + i,
+           name: 'contentBlock' + i,
         }, bl.value );
         addHtml += linkElm;
       }
     }
-    const divMaster = editor.dom.createHTML('div', { id: 'divmaster', contenteditable: 'false' }, addHtml);
-    // console.log(divMaster);
+    const divMaster = editor.dom.createHTML('div', { id: 'divmaster', name: 'divmaster', contenteditable: 'false' }, addHtml);
     if (addHtml !== '') {
-      editor.execCommand('mceInsertContent', false, divMaster);
+       cont.innerHTML = divMaster;
     }
   }
 };
 
 const getContentItems = function (editor) {
     const generalContentItems = [];
-    const ni = Settings.getNumberItems(editor);
+    const ni = Settings.getNumberItems(editor)+2;
 
     if (ni > 0) {
-        for (let i = 1; i <= ni; i++) {
-            generalContentItems.push( { id: 'bloco-' + i, type: 'textbox', label: 'Bloco ' + i } );
-           // editor.execCommand('mceInsertContent', true, '<div>Texto 1</div>');
-           // editor.insertContent('<div id=div' + i + ' contentEditable="false">Texto bloco ' + i + '</div>');
+        let blocoValue = '';
+        let indice = 0;
+        for (const i = 2; i < ni; i++) {
+            indice = i - 1;
+            if(editor.dom.get('contentBlock'+i)){
+              blocoValue = editor.dom.get('contentBlock'+i).innerHTML;
+            }
+            else{
+              blocoValue = '';
+            }
+            generalContentItems.push( { name: 'bloco' + i , id: 'bloco' + i, type: 'textbox', label: 'Bloco ' + indice, value:  blocoValue } );
         }
     }
 
