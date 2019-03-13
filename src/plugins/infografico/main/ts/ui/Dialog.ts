@@ -25,72 +25,31 @@ const submitForm = (editor: Editor, evt) => {
     const data = Merger.merge(readInfograficoDataFromSelection(editor), win.toJSON());
     insertOrUpdateInfografico(editor, data);
   });
-
-  editor.editorUpload.uploadImagesAuto();
   ContentTab.registerText(editor);
+
+  // editor.editorUpload.uploadImagesAuto();
 };
 
 export default function (editor) {
-  function showDialog(imageList) {
+  function showDialog() {
     const data = readInfograficoDataFromSelection(editor);
-    let win, imageListCtrl;
+    let win;
 
-    if (imageList) {
-      imageListCtrl = {
-        type: 'listbox',
-        label: 'Infografico list',
-        name: 'image-list',
-        values: Utils.buildListItems(
-          imageList,
-          function (item) {
-            item.value = editor.convertURL(item.value || item.url, 'src');
-          },
-          [{ text: 'None', value: '' }]
-        ),
-        value: data.src && editor.convertURL(data.src, 'src'),
-        onselect (e) {
-          const altCtrl = win.find('#alt');
+    const body = [];
 
-          if (!altCtrl.value() || (e.lastControl && altCtrl.value() === e.lastControl.text())) {
-            altCtrl.value(e.control.text());
-          }
+    body.push(ContentTab.makeTab(editor));
+    body.push(MarcadorTab.makeTab(editor));
+    body.push(BoxTab.makeTab(editor));
 
-          win.find('#src').value(e.control.value()).fire('change');
-        },
-        onPostRender () {
-          /*eslint consistent-this: 0*/
-          imageListCtrl = this;
-        }
-      };
-    }
-
-    if (!Settings.hasUploadUrl(editor) || Settings.hasUploadHandler(editor)) {
-      const body = [
-        MainTab.makeTab(editor, imageListCtrl)
-      ];
-
-      body.push(MarcadorTab.makeTab(editor));
-      body.push(BoxTab.makeTab(editor));
-      body.push(ContentTab.makeTab(editor));
-
-      // Advanced dialog shows general+advanced tabs
-      win = editor.windowManager.open({
-        title: 'Inserir/editar infográfico',
-        data,
-        bodyType: 'tabpanel',
-        body,
-        onSubmit: Fun.curry(submitForm, editor)
-      });
-    } else {
-      // Simple default dialog
-      win = editor.windowManager.open({
-        title: 'Inserir/editar infográfico',
-        data,
-        body: MainTab.getGeneralItems(editor, imageListCtrl),
-        onSubmit: Fun.curry(submitForm, editor)
-      });
-    }
-
+    // Advanced dialog shows general+advanced tabs
+    win = editor.windowManager.open({
+      title: 'Inserir/editar infográfico',
+      data,
+      bodyType: 'tabpanel',
+      body,
+      onSubmit: Fun.curry(submitForm, editor)
+    });
+ 
   }
 
   function open() {

@@ -22,9 +22,10 @@ const normalizeCss = (editor: Editor, cssText: string): string => {
 
 const getSelectedInfografico = (editor: Editor): HTMLElement => {
   const imgElm = editor.selection.getNode() as HTMLElement;
-  const figureElm = editor.dom.getParent(imgElm, 'figure.image') as HTMLElement;
+  console.log (imgElm);
+  // const figureElm = editor.dom.getParent(imgElm, 'figure.image') as HTMLElement;
 
-  if (figureElm) {
+  /*if (figureElm) {
     return editor.dom.select('img', figureElm)[0];
   }
 
@@ -33,28 +34,28 @@ const getSelectedInfografico = (editor: Editor): HTMLElement => {
       imgElm.getAttribute('data-mce-object') ||
       imgElm.getAttribute('data-mce-placeholder'))) {
     return null;
-  }
+  }*/
 
   return imgElm;
 };
 
-const splitTextBlock = (editor: Editor, figure: HTMLElement) => {
+const splitTextBlock = (editor: Editor, componentHTML: HTMLElement) => {
   const dom = editor.dom;
 
-  const textBlock = dom.getParent(figure.parentNode, function (node) {
+  const textBlock = dom.getParent(componentHTML.parentNode, function (node) {
     return editor.schema.getTextBlockElements()[node.nodeName];
   }, editor.getBody());
 
   if (textBlock) {
-    return dom.split(textBlock, figure);
+    return dom.split(textBlock, componentHTML);
   } else {
-    return figure;
+    return componentHTML;
   }
 };
 
 const readInfograficoDataFromSelection = (editor: Editor): InfograficoData => {
-  const image = getSelectedInfografico(editor);
-  return image ? read((css) => normalizeCss(editor, css), image) : defaultData();
+  const componentHTML = getSelectedInfografico(editor);
+  return componentHTML ? read((css) => normalizeCss(editor, css), componentHTML) : defaultData();
 };
 
 const insertInfograficoAtCaret = (editor: Editor, data: InfograficoData) => {
@@ -75,13 +76,9 @@ const insertInfograficoAtCaret = (editor: Editor, data: InfograficoData) => {
   }
 };
 
-const syncSrcAttr = (editor: Editor, image: HTMLElement) => {
-  editor.dom.setAttrib(image, 'src', image.getAttribute('src'));
-};
-
-const deleteInfografico = (editor: Editor, image: HTMLElement) => {
-  if (image) {
-    const elm = editor.dom.is(image.parentNode, 'figure.image') ? image.parentNode : image;
+const deleteInfografico = (editor: Editor, componentHTML: HTMLElement) => {
+  if (componentHTML) {
+    const elm = editor.dom.is(componentHTML.parentNode, 'figure.image') ? componentHTML.parentNode : componentHTML;
 
     editor.dom.remove(elm);
     editor.focus();
@@ -95,29 +92,28 @@ const deleteInfografico = (editor: Editor, image: HTMLElement) => {
 };
 
 const writeInfograficoDataToSelection = (editor: Editor, data: InfograficoData) => {
-  const image = getSelectedInfografico(editor);
+  const componentHTML = getSelectedInfografico(editor);
 
-  write((css) => normalizeCss(editor, css), data, image);
-  syncSrcAttr(editor, image);
+  write((css) => normalizeCss(editor, css), data, componentHTML);
 
-  if (isFigure(image.parentNode)) {
-    const figure = image.parentNode as HTMLElement;
+  if (isFigure(componentHTML.parentNode)) {
+    const figure = componentHTML.parentNode as HTMLElement;
     splitTextBlock(editor, figure);
-    editor.selection.select(image.parentNode);
+    editor.selection.select(componentHTML.parentNode);
   } else {
-    editor.selection.select(image);
-    Utils.waitLoadInfografico(editor, data, image);
+    editor.selection.select(componentHTML);
+    Utils.waitLoadInfografico(editor, data, componentHTML);
   }
 };
 
 const insertOrUpdateInfografico = (editor: Editor, data: InfograficoData) => {
-  const image = getSelectedInfografico(editor);
-  if (image) {
-    if (data.src) {
+  const componentHTML = getSelectedInfografico(editor);
+  if (componentHTML) {
+    // if (data.src) {
       writeInfograficoDataToSelection(editor, data);
-    } else {
-      deleteInfografico(editor, image);
-    }
+    // } else {
+    //   deleteInfografico(editor, componentHTML);
+    // }
   } else if (data.src) {
     insertInfograficoAtCaret(editor, data);
   }
