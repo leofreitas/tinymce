@@ -86,6 +86,39 @@ const makeTab = function (editor) {
     type: 'form',
     pack: 'start',
     items: [
+           {
+        name: 'typemarcador',
+        type: 'listbox',
+        label: 'Índice do marcador',
+        values: Utils.buildListItems(
+          Settings.getClassList(editor),
+          function (item) {
+            if (item.value) {
+              item.textStyle = function () {
+                //return editor.formatter.getCssText({ inline: 'div', classes: [item.value] });
+              };
+            }
+          }
+        )
+      },
+      {
+        name: 'shapeitems',
+        type: 'listbox',
+        label: 'Forma do marcador',
+        values: [
+              { text: 'Selecione...', value: '' },
+              { text: 'Círculo', value: 'circulo' },
+              { text: 'Quadrado', value: 'quadrado' },
+              { text: 'Triângulo', value: 'triangulo' }
+        ],
+        function (item) {
+            if (item.value) {
+              item.textStyle = function () {
+                //return editor.formatter.getCssText({ inline: 'div', classes: [item.value] });
+              };
+            }
+          }
+      },
      {
         label: 'Cor da borda',
         type: 'colorbox',
@@ -113,29 +146,19 @@ const makeTab = function (editor) {
         type: 'textbox',
         onchange: updateVSpaceHSpaceBorder(editor)
       },
-      {
-        type: 'form',
-        layout: 'grid',
-        packV: 'start',
-        columns: 2,
-        padding: 0,
-        defaults: {
-          type: 'textbox',
-          maxWidth: 50,
-          onchange (evt) {
-            updateStyle(editor, evt.control.rootControl);
-          }
-        },
-        items: [
-          { label: 'Vertical space', name: 'vspace' },
-          { label: 'Largura da borda', name: 'border' },
-          { label: 'Horizontal space', name: 'hspace' },
+
+          { 
+            label: 'Largura da borda',
+            type: 'textbox',
+            name: 'border',
+            onchange (evt) {
+              updateStyle(editor, evt.control.rootControl);
+            }
+          },
           {
             label: 'Estilo da borda',
             type: 'listbox',
             name: 'borderStyle',
-            width: 90,
-            maxWidth: 90,
             onselect (evt) {
               updateStyle(editor, evt.control.rootControl);
             },
@@ -154,8 +177,6 @@ const makeTab = function (editor) {
             ]
           },
         ]
-      }
-    ]
   };
 };
 

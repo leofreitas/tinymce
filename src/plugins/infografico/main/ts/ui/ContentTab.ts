@@ -3,6 +3,7 @@ import { document, HTMLInputElement } from '@ephox/dom-globals';
 
 const registerText = function (editor) {
   const cont = editor.getBody();
+  const textSel = editor.dom.get('info-main') as HTMLElement;
   const ni = Settings.getNumberItems(editor) + 2;
   let addHtml = '';
   if (ni > 0) {
@@ -17,10 +18,16 @@ const registerText = function (editor) {
         addHtml += linkElm;
       }
     }
-    const divInfografico = editor.dom.createHTML('div', { id: 'info-main', name: 'info-main', contenteditable: 'false' }, addHtml);
-    if (addHtml !== '') {
-       cont.innerHTML = divInfografico;
+    if(!textSel){
+        const divInfografico = editor.dom.createHTML('div', { id: 'info-main', name: 'info-main', contenteditable: 'false' }, addHtml);
+        
+        if (addHtml !== '') {
+           cont.innerHTML = divInfografico;
+        }
     }
+else{
+console.log(textSel.getAttribute('shapeitems'));
+}
   }
 };
 

@@ -21,13 +21,13 @@ import { insertOrUpdateInfografico, readInfograficoDataFromSelection } from 'tin
 const submitForm = (editor: Editor, evt) => {
   const win = evt.control.getRoot();
 
+
   editor.undoManager.transact(() => {
     const data = Merger.merge(readInfograficoDataFromSelection(editor), win.toJSON());
     insertOrUpdateInfografico(editor, data);
   });
   ContentTab.registerText(editor);
 
-  // editor.editorUpload.uploadImagesAuto();
 };
 
 export default function (editor) {
@@ -38,7 +38,6 @@ export default function (editor) {
     const body = [];
 
     body.push(ContentTab.makeTab(editor));
-    body.push(MarcadorTab.makeTab(editor));
     body.push(BoxTab.makeTab(editor));
 
     // Advanced dialog shows general+advanced tabs

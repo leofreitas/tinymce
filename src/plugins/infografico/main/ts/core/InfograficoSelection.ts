@@ -22,7 +22,8 @@ const normalizeCss = (editor: Editor, cssText: string): string => {
 
 const getSelectedInfografico = (editor: Editor): HTMLElement => {
   const imgElm = editor.selection.getNode() as HTMLElement;
-  console.log (imgElm);
+  const textSel = editor.dom.get('info-main');
+  //console.log (textSel);
   // const figureElm = editor.dom.getParent(imgElm, 'figure.image') as HTMLElement;
 
   /*if (figureElm) {
@@ -36,7 +37,7 @@ const getSelectedInfografico = (editor: Editor): HTMLElement => {
     return null;
   }*/
 
-  return imgElm;
+  return textSel;
 };
 
 const splitTextBlock = (editor: Editor, componentHTML: HTMLElement) => {

@@ -1,7 +1,7 @@
 import { Chain, Logger, Pipeline, Assertions, ApproxStructure, RawAssertions, Step } from '@ephox/agar';
 import { Element, Html, SelectorFind, Node } from '@ephox/sugar';
 import { UnitTest } from '@ephox/bedrock';
-import { read, write, create, isInfografico, isFigure, defaultData, getStyleValue } from 'tinymce/plugins/infografico/core/InfograficoData';
+import { read, write, create, isInfografico, defaultData, getStyleValue } from 'tinymce/plugins/infografico/core/InfograficoData';
 import { Merger, Obj, Arr } from '@ephox/katamari';
 import { DOMUtils } from 'tinymce/core/api/dom/DOMUtils';
 
@@ -56,10 +56,6 @@ UnitTest.asynctest('browser.tinymce.plugins.image.core.InfograficoDataTest', (su
 
   const cAssertInfografico = Chain.op(function (data: any) {
     RawAssertions.assertEq('Should be an image', true, isInfografico(data.image.dom()));
-  });
-
-  const cAssertFigure = Chain.op(function (data: any) {
-    RawAssertions.assertEq('Parent should be a figure', true, isFigure(data.image.dom().parentNode));
   });
 
   Pipeline.async({}, [

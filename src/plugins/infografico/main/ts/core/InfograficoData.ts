@@ -21,7 +21,7 @@ interface InfograficoData {
   title: string;
   width: string;
   height: string;
-  class: string;
+  typemarcador: string;
   numberitems: string;
   backgroundcolorbox: string;
   bordercolorbox: string;
@@ -31,29 +31,12 @@ interface InfograficoData {
   textcolormarcador: string;
   style: string;
   caption: boolean;
-  hspace: string;
-  vspace: string;
+  shapeitems: string;
   border: string;
   borderStyle: string;
 }
 
 type CssNormalizer = (css: string) => string;
-
-const getHspace = (image: HTMLElement): string => {
-  if (image.style.marginLeft && image.style.marginRight && image.style.marginLeft === image.style.marginRight) {
-    return Utils.removePixelSuffix(image.style.marginLeft);
-  } else {
-    return '';
-  }
-};
-
-const getVspace = (image: HTMLElement): string => {
-  if (image.style.marginTop && image.style.marginBottom && image.style.marginTop === image.style.marginBottom) {
-    return Utils.removePixelSuffix(image.style.marginTop);
-  } else {
-    return '';
-  }
-};
 
 const getBorder = (image: HTMLElement): string => {
   if (image.style.borderWidth) {
@@ -75,10 +58,6 @@ const getStyle = (image: HTMLElement, name: string): string => {
   return image.style[name] ? image.style[name] : '';
 };
 
-const hasCaption = (image: HTMLElement): boolean => {
-  return image.parentNode !== null && image.parentNode.nodeName === 'FIGURE';
-};
-
 const setAttrib = (image: HTMLElement, name: string, value: string) => {
   image.setAttribute(name, value);
 };
@@ -98,14 +77,6 @@ const removeFigure = (image: HTMLElement) => {
   DOM.remove(figureElm);
 };
 
-const toggleCaption = (image: HTMLElement) => {
-  if (hasCaption(image)) {
-    removeFigure(image);
-  } else {
-    wrapInFigure(image);
-  }
-};
-
 const normalizeStyle = (image: HTMLElement, normalizeCss: CssNormalizer) => {
   const attrValue = image.getAttribute('style');
   const value = normalizeCss(attrValue !== null ? attrValue : '');
@@ -118,35 +89,12 @@ const normalizeStyle = (image: HTMLElement, normalizeCss: CssNormalizer) => {
   }
 };
 
-const setSize = (name: string, normalizeCss: CssNormalizer) => {
-  return (image: HTMLElement, name: string, value: string) => {
-    if (image.style[name]) {
-      image.style[name] = Utils.addPixelSuffix(value);
-      normalizeStyle(image, normalizeCss);
-    } else {
-      setAttrib(image, name, value);
-    }
-  };
-};
-
 const getSize = (image: HTMLElement, name: string): string => {
   if (image.style[name]) {
     return Utils.removePixelSuffix(image.style[name]);
   } else {
     return getAttrib(image, name);
   }
-};
-
-const setHspace = (image: HTMLElement, value: string) => {
-  const pxValue = Utils.addPixelSuffix(value);
-  image.style.marginLeft = pxValue;
-  image.style.marginRight = pxValue;
-};
-
-const setVspace = (image: HTMLElement, value: string) => {
-  const pxValue = Utils.addPixelSuffix(value);
-  image.style.marginTop = pxValue;
-  image.style.marginBottom = pxValue;
 };
 
 const setBorder = (image: HTMLElement, value: string) => {
@@ -170,7 +118,7 @@ const defaultData = (): InfograficoData => {
     title: '',
     width: '',
     height: '',
-    class: '',
+    typemarcador: '',
     numberitems: '',
     backgroundcolorbox: '',
     bordercolorbox: '',
@@ -180,8 +128,7 @@ const defaultData = (): InfograficoData => {
     textcolormarcador: '',
     style: '',
     caption: false,
-    hspace: '',
-    vspace: '',
+    shapeitems: '',
     border: '',
     borderStyle: ''
   };
@@ -191,14 +138,6 @@ const getStyleValue = (normalizeCss: CssNormalizer, data: InfograficoData): stri
   const image = document.createElement('div');
 
   setAttrib(image, 'style', data.style);
-
-  if (getHspace(image) || data.hspace !== '') {
-    setHspace(image, data.hspace);
-  }
-
-  if (getVspace(image) || data.vspace !== '') {
-    setVspace(image, data.vspace);
-  }
 
   if (getBorder(image) || data.border !== '') {
     setBorder(image, data.border);
@@ -212,51 +151,27 @@ const getStyleValue = (normalizeCss: CssNormalizer, data: InfograficoData): stri
 };
 
 const create = (normalizeCss: CssNormalizer, data: InfograficoData): HTMLElement => {
-  const image = document.createElement('img');
+  const image = document.createElement('div');
   write(normalizeCss, Merger.merge(data, { caption: false }), image);
 
-  // Always set alt even if data.alt is an empty string
-  setAttrib(image, 'alt', data.alt);
   setAttrib(image, 'numberitems', data.numberitems);
   setAttrib(image, 'backgroundcolorbox', data.backgroundcolorbox);
   setAttrib(image, 'bordercolorbox', data.bordercolorbox);
   setAttrib(image, 'textcolorbox', data.textcolorbox);
-  setAttrib(image, 'backgroundcolormarcador', data.backgroundcolormarcador);
-  setAttrib(image, 'bordercolormarcador', data.bordercolormarcador);
-  setAttrib(image, 'textcolormarcador', data.textcolormarcador);
+  setAttrib(image, 'shapeitems', data.shapeitems);
 
-  if (data.caption) {
-    const figure = DOM.create('figure', { class: 'image' });
 
-    figure.appendChild(image);
-    figure.appendChild(DOM.create('figcaption', { contentEditable: true }, 'Caption'));
-    figure.contentEditable = 'false';
-
-    return figure;
-  } else {
-    return image;
-  }
 };
 
 const read = (normalizeCss: CssNormalizer, image: HTMLElement): InfograficoData => {
   return {
-    src: getAttrib(image, 'src'),
-    alt: getAttrib(image, 'alt'),
-    title: getAttrib(image, 'title'),
-    width: getSize(image, 'width'),
-    height: getSize(image, 'height'),
-    class: getAttrib(image, 'class'),
+    typemarcador: getAttrib(image, 'typemarcador'),
     numberitems: getAttrib(image, 'numberitems'),
     backgroundcolorbox: getAttrib(image, 'backgroundcolorbox'),
     bordercolorbox: getAttrib(image, 'bordercolorbox'),
     textcolorbox: getAttrib(image, 'textcolorbox'),
-    backgroundcolormarcador: getAttrib(image, 'backgroundcolormarcador'),
-    bordercolormarcador: getAttrib(image, 'bordercolormarcador'),
-    textcolormarcador: getAttrib(image, 'textcolormarcador'),
     style: normalizeCss(getAttrib(image, 'style')),
-    caption: hasCaption(image),
-    hspace: getHspace(image),
-    vspace: getVspace(image),
+    shapeitems: getAttrib(image, 'shapeitems'),
     border: getBorder(image),
     borderStyle: getStyle(image, 'borderStyle')
   };
@@ -278,23 +193,13 @@ const normalized = (set: (image: HTMLElement, value: string) => void, normalizeC
 const write = (normalizeCss: CssNormalizer, newData: InfograficoData, image: HTMLElement) => {
   const oldData = read(normalizeCss, image);
 
-  updateProp(image, oldData, newData, 'caption', (image, _name, _value) => toggleCaption(image));
-  updateProp(image, oldData, newData, 'src', setAttrib);
-  updateProp(image, oldData, newData, 'alt', setAttrib);
-  updateProp(image, oldData, newData, 'title', setAttrib);
-  updateProp(image, oldData, newData, 'width', setSize('width', normalizeCss));
-  updateProp(image, oldData, newData, 'height', setSize('height', normalizeCss));
-  updateProp(image, oldData, newData, 'class', setAttrib);
+  updateProp(image, oldData, newData, 'typemarcador', setAttrib);
   updateProp(image, oldData, newData, 'numberitems', setAttrib);
   updateProp(image, oldData, newData, 'backgroundcolorbox', setAttrib);
   updateProp(image, oldData, newData, 'bordercolorbox', setAttrib);
   updateProp(image, oldData, newData, 'textcolorbox', setAttrib);
-  updateProp(image, oldData, newData, 'backgroundcolormarcador', setAttrib);
-  updateProp(image, oldData, newData, 'bordercolormarcador', setAttrib);
-  updateProp(image, oldData, newData, 'textcolormarcador', setAttrib);
+  updateProp(image, oldData, newData, 'shapeitems', setAttrib);
   updateProp(image, oldData, newData, 'style', normalized((image, value) => setAttrib(image, 'style', value), normalizeCss));
-  updateProp(image, oldData, newData, 'hspace', normalized(setHspace, normalizeCss));
-  updateProp(image, oldData, newData, 'vspace', normalized(setVspace, normalizeCss));
   updateProp(image, oldData, newData, 'border', normalized(setBorder, normalizeCss));
   updateProp(image, oldData, newData, 'borderStyle', normalized(setBorderStyle, normalizeCss));
 };
