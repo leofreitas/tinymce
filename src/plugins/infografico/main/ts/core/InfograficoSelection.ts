@@ -23,20 +23,7 @@ const normalizeCss = (editor: Editor, cssText: string): string => {
 const getSelectedInfografico = (editor: Editor): HTMLElement => {
   const imgElm = editor.selection.getNode() as HTMLElement;
   const textSel = editor.dom.get('info-main');
-  //console.log (textSel);
-  // const figureElm = editor.dom.getParent(imgElm, 'figure.image') as HTMLElement;
-
-  /*if (figureElm) {
-    return editor.dom.select('img', figureElm)[0];
-  }
-
-  if (imgElm &&
-    (imgElm.nodeName !== 'IMG' ||
-      imgElm.getAttribute('data-mce-object') ||
-      imgElm.getAttribute('data-mce-placeholder'))) {
-    return null;
-  }*/
-
+  
   return textSel;
 };
 

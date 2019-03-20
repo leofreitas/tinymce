@@ -82,7 +82,7 @@ const updateObjectColor = function (editor) {
 
 const makeTab = function (editor) {
   return {
-    title: 'Box Texto',
+    title: 'Propriedades Box/Texto',
     type: 'form',
     pack: 'start',
     items: [

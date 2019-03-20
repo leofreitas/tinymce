@@ -3,7 +3,7 @@ import { document, HTMLInputElement } from '@ephox/dom-globals';
 
 const registerText = function (editor) {
   const cont = editor.getBody();
-  const textSel = editor.dom.get('info-main') as HTMLElement;
+  const textSel = editor.selection.dom.get('info-main');
   const ni = Settings.getNumberItems(editor) + 2;
   let addHtml = '';
   if (ni > 0) {
@@ -25,9 +25,12 @@ const registerText = function (editor) {
            cont.innerHTML = divInfografico;
         }
     }
-else{
-console.log(textSel.getAttribute('shapeitems'));
-}
+    else{
+    textSel.innerHTML = addHtml;
+    //textSel.setContent(addHtml);
+    //editor.setContent(textSel.innerHtml);
+    //console.log(textSel.getAttribute('shapeitems'));
+    }
   }
 };
 
