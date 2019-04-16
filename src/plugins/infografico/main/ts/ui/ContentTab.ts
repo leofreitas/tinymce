@@ -18,18 +18,16 @@ const registerText = function (editor) {
         addHtml += linkElm;
       }
     }
-    if(!textSel){
+    if (!textSel) {
         const divInfografico = editor.dom.createHTML('div', { id: 'info-main', name: 'info-main', contenteditable: 'false' }, addHtml);
-        
         if (addHtml !== '') {
            cont.innerHTML = divInfografico;
         }
-    }
-    else{
-    textSel.innerHTML = addHtml;
-    //textSel.setContent(addHtml);
-    //editor.setContent(textSel.innerHtml);
-    //console.log(textSel.getAttribute('shapeitems'));
+    } else {
+      textSel.innerHTML = addHtml;
+      // textSel.setContent(addHtml);
+      // editor.setContent(textSel.innerHtml);
+      // console.log(textSel.getAttribute('shapeitems'));
     }
   }
 };

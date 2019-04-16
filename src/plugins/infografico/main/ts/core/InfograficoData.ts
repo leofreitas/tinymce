@@ -9,26 +9,23 @@
  */
 
 import Utils from 'tinymce/plugins/infografico/core/Utils';
-import DOMUtils from 'tinymce/core/api/dom/DOMUtils';
+// import DOMUtils from 'tinymce/core/api/dom/DOMUtils';
 import { Merger } from '@ephox/katamari';
 import { HTMLElement, Node, document } from '@ephox/dom-globals';
 
-const DOM = DOMUtils.DOM;
+// const DOM = DOMUtils.DOM;
 
 interface InfograficoData {
-  src: string;
-  alt: string;
-  title: string;
-  width: string;
-  height: string;
+  // src: string;
+  // alt: string;
+  // title: string;
+  // width: string;
+  // height: string;
   typemarcador: string;
   numberitems: string;
   backgroundcolorbox: string;
   bordercolorbox: string;
   textcolorbox: string;
-  backgroundcolormarcador: string;
-  bordercolormarcador: string;
-  textcolormarcador: string;
   style: string;
   caption: boolean;
   shapeitems: string;
@@ -61,7 +58,7 @@ const getStyle = (image: HTMLElement, name: string): string => {
 const setAttrib = (image: HTMLElement, name: string, value: string) => {
   image.setAttribute(name, value);
 };
-
+/*
 const wrapInFigure = (image: HTMLElement) => {
   const figureElm = DOM.create('figure', { class: 'image' });
   DOM.insertAfter(figureElm, image);
@@ -76,7 +73,14 @@ const removeFigure = (image: HTMLElement) => {
   DOM.insertAfter(image, figureElm);
   DOM.remove(figureElm);
 };
-
+const getSize = (image: HTMLElement, name: string): string => {
+  if (image.style[name]) {
+    return Utils.removePixelSuffix(image.style[name]);
+  } else {
+    return getAttrib(image, name);
+  }
+};
+*/
 const normalizeStyle = (image: HTMLElement, normalizeCss: CssNormalizer) => {
   const attrValue = image.getAttribute('style');
   const value = normalizeCss(attrValue !== null ? attrValue : '');
@@ -86,14 +90,6 @@ const normalizeStyle = (image: HTMLElement, normalizeCss: CssNormalizer) => {
     image.setAttribute('data-mce-style', value);
   } else {
     image.removeAttribute('style');
-  }
-};
-
-const getSize = (image: HTMLElement, name: string): string => {
-  if (image.style[name]) {
-    return Utils.removePixelSuffix(image.style[name]);
-  } else {
-    return getAttrib(image, name);
   }
 };
 
@@ -113,19 +109,11 @@ const isInfografico = (elm: Node) => elm.nodeName === 'IMG';
 
 const defaultData = (): InfograficoData => {
   return {
-    src: '',
-    alt: '',
-    title: '',
-    width: '',
-    height: '',
     typemarcador: '',
     numberitems: '',
     backgroundcolorbox: '',
     bordercolorbox: '',
     textcolorbox: '',
-    backgroundcolormarcador: '',
-    bordercolormarcador: '',
-    textcolormarcador: '',
     style: '',
     caption: false,
     shapeitems: '',
@@ -154,13 +142,13 @@ const create = (normalizeCss: CssNormalizer, data: InfograficoData): HTMLElement
   const image = document.createElement('div');
   write(normalizeCss, Merger.merge(data, { caption: false }), image);
 
+  setAttrib(image, 'typemarcador', data.typemarcador);
   setAttrib(image, 'numberitems', data.numberitems);
   setAttrib(image, 'backgroundcolorbox', data.backgroundcolorbox);
   setAttrib(image, 'bordercolorbox', data.bordercolorbox);
   setAttrib(image, 'textcolorbox', data.textcolorbox);
   setAttrib(image, 'shapeitems', data.shapeitems);
-
-
+  return image;
 };
 
 const read = (normalizeCss: CssNormalizer, image: HTMLElement): InfograficoData => {
@@ -170,6 +158,7 @@ const read = (normalizeCss: CssNormalizer, image: HTMLElement): InfograficoData 
     backgroundcolorbox: getAttrib(image, 'backgroundcolorbox'),
     bordercolorbox: getAttrib(image, 'bordercolorbox'),
     textcolorbox: getAttrib(image, 'textcolorbox'),
+    caption: getAttrib(image, 'caption'),
     style: normalizeCss(getAttrib(image, 'style')),
     shapeitems: getAttrib(image, 'shapeitems'),
     border: getBorder(image),

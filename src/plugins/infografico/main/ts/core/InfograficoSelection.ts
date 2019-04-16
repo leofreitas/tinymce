@@ -21,9 +21,9 @@ const normalizeCss = (editor: Editor, cssText: string): string => {
 };
 
 const getSelectedInfografico = (editor: Editor): HTMLElement => {
-  const imgElm = editor.selection.getNode() as HTMLElement;
+  // const imgElm = editor.selection.getNode() as HTMLElement;
   const textSel = editor.dom.get('info-main');
-  
+
   return textSel;
 };
 
@@ -63,7 +63,7 @@ const insertInfograficoAtCaret = (editor: Editor, data: InfograficoData) => {
     editor.selection.select(insertedElm);
   }
 };
-
+/*
 const deleteInfografico = (editor: Editor, componentHTML: HTMLElement) => {
   if (componentHTML) {
     const elm = editor.dom.is(componentHTML.parentNode, 'figure.image') ? componentHTML.parentNode : componentHTML;
@@ -78,6 +78,7 @@ const deleteInfografico = (editor: Editor, componentHTML: HTMLElement) => {
     }
   }
 };
+*/
 
 const writeInfograficoDataToSelection = (editor: Editor, data: InfograficoData) => {
   const componentHTML = getSelectedInfografico(editor);
@@ -102,7 +103,8 @@ const insertOrUpdateInfografico = (editor: Editor, data: InfograficoData) => {
     // } else {
     //   deleteInfografico(editor, componentHTML);
     // }
-  } else if (data.src) {
+  // } else if (data.src) {
+  } else {
     insertInfograficoAtCaret(editor, data);
   }
 };

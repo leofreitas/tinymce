@@ -8,19 +8,18 @@
  * Contributing: http://www.tinymce.com/contributing
  */
 
-import Settings from '../api/Settings';
+// import Settings from '../api/Settings';
 import Utils from '../core/Utils';
-import MarcadorTab from './MarcadorTab';
+// import MarcadorTab from './MarcadorTab';
 import BoxTab from './BoxTab';
 import ContentTab from './ContentTab';
-import MainTab from './MainTab';
+// import MainTab from './MainTab';
 import { Fun, Merger } from '@ephox/katamari';
 import { Editor } from 'tinymce/core/api/Editor';
 import { insertOrUpdateInfografico, readInfograficoDataFromSelection } from 'tinymce/plugins/infografico/core/InfograficoSelection';
 
 const submitForm = (editor: Editor, evt) => {
   const win = evt.control.getRoot();
-
 
   editor.undoManager.transact(() => {
     const data = Merger.merge(readInfograficoDataFromSelection(editor), win.toJSON());
@@ -48,7 +47,6 @@ export default function (editor) {
       body,
       onSubmit: Fun.curry(submitForm, editor)
     });
- 
   }
 
   function open() {

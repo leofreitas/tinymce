@@ -95,7 +95,7 @@ const makeTab = function (editor) {
           function (item) {
             if (item.value) {
               item.textStyle = function () {
-                //return editor.formatter.getCssText({ inline: 'div', classes: [item.value] });
+                // return editor.formatter.getCssText({ inline: 'div', classes: [item.value] });
               };
             }
           }
@@ -114,7 +114,7 @@ const makeTab = function (editor) {
         function (item) {
             if (item.value) {
               item.textStyle = function () {
-                //return editor.formatter.getCssText({ inline: 'div', classes: [item.value] });
+                // return editor.formatter.getCssText({ inline: 'div', classes: [item.value] });
               };
             }
           }
@@ -146,37 +146,36 @@ const makeTab = function (editor) {
         type: 'textbox',
         onchange: updateVSpaceHSpaceBorder(editor)
       },
-
-          { 
-            label: 'Largura da borda',
-            type: 'textbox',
-            name: 'border',
-            onchange (evt) {
-              updateStyle(editor, evt.control.rootControl);
-            }
-          },
-          {
-            label: 'Estilo da borda',
-            type: 'listbox',
-            name: 'borderStyle',
-            onselect (evt) {
-              updateStyle(editor, evt.control.rootControl);
-            },
-            values: [
-              { text: 'Selecione...', value: '' },
-              { text: 'Solid', value: 'solid' },
-              { text: 'Dotted', value: 'dotted' },
-              { text: 'Dashed', value: 'dashed' },
-              { text: 'Double', value: 'double' },
-              { text: 'Groove', value: 'groove' },
-              { text: 'Ridge', value: 'ridge' },
-              { text: 'Inset', value: 'inset' },
-              { text: 'Outset', value: 'outset' },
-              { text: 'None', value: 'none' },
-              { text: 'Hidden', value: 'hidden' }
-            ]
-          },
-        ]
+      {
+        label: 'Largura da borda',
+        type: 'textbox',
+        name: 'border',
+        onchange (evt) {
+          updateStyle(editor, evt.control.rootControl);
+        }
+      },
+      {
+        label: 'Estilo da borda',
+        type: 'listbox',
+        name: 'borderStyle',
+        onselect (evt) {
+        updateStyle(editor, evt.control.rootControl);
+      },
+      values: [
+        { text: 'Selecione...', value: '' },
+        { text: 'Solid', value: 'solid' },
+        { text: 'Dotted', value: 'dotted' },
+        { text: 'Dashed', value: 'dashed' },
+        { text: 'Double', value: 'double' },
+        { text: 'Groove', value: 'groove' },
+        { text: 'Ridge', value: 'ridge' },
+        { text: 'Inset', value: 'inset' },
+        { text: 'Outset', value: 'outset' },
+        { text: 'None', value: 'none' },
+        { text: 'Hidden', value: 'hidden' }
+      ]
+     },
+    ]
   };
 };
 
