@@ -22,7 +22,7 @@ const normalizeCss = (editor: Editor, cssText: string): string => {
 
 const getSelectedInfografico = (editor: Editor): HTMLElement => {
   // const imgElm = editor.selection.getNode() as HTMLElement;
-  const textSel = editor.dom.get('info-main');
+  const textSel = editor.dom.get('info01-main');
 
   return textSel;
 };

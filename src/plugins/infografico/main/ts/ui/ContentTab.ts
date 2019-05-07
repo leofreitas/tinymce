@@ -3,7 +3,7 @@ import { document, HTMLInputElement } from '@ephox/dom-globals';
 
 const registerText = function (editor) {
   const cont = editor.getBody();
-  const textSel = editor.selection.dom.get('info-main');
+  const textSel = editor.selection.dom.get('info01-main');
   const ni = Settings.getNumberItems(editor) + 2;
   let addHtml = '';
   if (ni > 0) {
@@ -11,7 +11,6 @@ const registerText = function (editor) {
       const bl = document.getElementById('bloco' + i) as HTMLInputElement;
       if (bl.value !== '') {
         const linkElm = editor.dom.createHTML('div', {
-           style: 'padding: 15px;',
            id: 'contentBlock' + i,
            name: 'contentBlock' + i,
         }, bl.value );
@@ -19,7 +18,7 @@ const registerText = function (editor) {
       }
     }
     if (!textSel) {
-        const divInfografico = editor.dom.createHTML('div', { id: 'info-main', name: 'info-main', contenteditable: 'false' }, addHtml);
+        const divInfografico = editor.dom.createHTML('div', { id: 'info01-main', name: 'info01-main', contenteditable: 'false' }, addHtml);
         if (addHtml !== '') {
            cont.innerHTML = divInfografico;
         }

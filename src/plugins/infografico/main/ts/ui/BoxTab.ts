@@ -108,8 +108,7 @@ const makeTab = function (editor) {
         values: [
               { text: 'Selecione...', value: '' },
               { text: 'Círculo', value: 'circulo' },
-              { text: 'Quadrado', value: 'quadrado' },
-              { text: 'Triângulo', value: 'triangulo' }
+              { text: 'Quadrado', value: 'quadrado' }
         ],
         function (item) {
             if (item.value) {
@@ -140,7 +139,7 @@ const makeTab = function (editor) {
         onaction: createColorPickAction(editor),
         onchange: updateObjectColor(editor)
       },
-      {
+      /*{
         label: 'CSS adic.',
         name: 'style',
         type: 'textbox',
@@ -174,7 +173,7 @@ const makeTab = function (editor) {
         { text: 'None', value: 'none' },
         { text: 'Hidden', value: 'hidden' }
       ]
-     },
+     },*/
     ]
   };
 };
