@@ -239,7 +239,6 @@ UnitTest.asynctest('browser.tinymce.plugins.image.core.InfograficoDataTest', (su
           ]
         });
       })),
-      cAssertFigure
     ])),
     Logger.t('Read/write model to simple image without change', Chain.asStep(Element.fromTag('div'), [
       cSetHtml('<img src="some.gif">'),

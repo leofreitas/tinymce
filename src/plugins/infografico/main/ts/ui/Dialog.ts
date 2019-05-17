@@ -32,7 +32,7 @@ const submitForm = (editor: Editor, evt) => {
 export default function (editor) {
   function showDialog() {
     const data = readInfograficoDataFromSelection(editor);
-    let win;
+    // let win;
 
     const body = [];
 
@@ -40,7 +40,7 @@ export default function (editor) {
     body.push(BoxTab.makeTab(editor));
 
     // Advanced dialog shows general+advanced tabs
-    win = editor.windowManager.open({
+    editor.windowManager.open({
       title: 'Inserir/editar infográfico',
       data,
       bodyType: 'tabpanel',

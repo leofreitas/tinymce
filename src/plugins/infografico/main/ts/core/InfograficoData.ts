@@ -16,18 +16,12 @@ import { HTMLElement, Node, document } from '@ephox/dom-globals';
 // const DOM = DOMUtils.DOM;
 
 interface InfograficoData {
-  // src: string;
-  // alt: string;
-  // title: string;
-  // width: string;
-  // height: string;
   typemarcador: string;
   numberitems: string;
   backgroundcolorbox: string;
   bordercolorbox: string;
   textcolorbox: string;
   style: string;
-  caption: boolean;
   shapeitems: string;
   border: string;
   borderStyle: string;
@@ -115,7 +109,6 @@ const defaultData = (): InfograficoData => {
     bordercolorbox: '',
     textcolorbox: '',
     style: '',
-    caption: false,
     shapeitems: '',
     border: '',
     borderStyle: ''
@@ -158,7 +151,6 @@ const read = (normalizeCss: CssNormalizer, image: HTMLElement): InfograficoData 
     backgroundcolorbox: getAttrib(image, 'backgroundcolorbox'),
     bordercolorbox: getAttrib(image, 'bordercolorbox'),
     textcolorbox: getAttrib(image, 'textcolorbox'),
-    caption: getAttrib(image, 'caption'),
     style: normalizeCss(getAttrib(image, 'style')),
     shapeitems: getAttrib(image, 'shapeitems'),
     border: getBorder(image),

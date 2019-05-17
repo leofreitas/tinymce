@@ -17,7 +17,6 @@ tinymce.init({
   skin_url: '../../../../../js/tinymce/skins/lightgray',
   plugins: 'infografico code',
   toolbar: 'undo redo | image code',
-  infografico_caption: true,
   infograficos_dimensions: false,
   infografico_advtab: true,
   infografico_title: true,

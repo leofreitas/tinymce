@@ -20,7 +20,7 @@ const register = function (editor) {
 
   editor.addMenuItem('image', {
     icon: 'image',
-    text: 'Infografico',
+    text: 'Infográfico',
     onclick: Dialog(editor).open,
     context: 'insert',
     prependToContext: true
