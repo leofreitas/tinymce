@@ -2,7 +2,7 @@ import { Assertions, Chain, Guard, Mouse, NamedChain, Pipeline, UiFinder } from 
 import { UnitTest } from '@ephox/bedrock';
 import { ApiChains, Editor, TinyDom, UiChains } from '@ephox/mcagar';
 
-import InfograficoPlugin from 'tinymce/plugins/infotimeline/Plugin';
+import InfoTimelinePlugin from 'tinymce/plugins/infotimeline/Plugin';
 import ModernTheme from 'tinymce/themes/modern/Theme';
 
 UnitTest.asynctest('browser.tinymce.plugins.infografico.FigureResizeTest', function () {
@@ -10,7 +10,7 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.FigureResizeTest', funct
   const failure = arguments[arguments.length - 1];
 
   ModernTheme();
-  InfograficoPlugin();
+  InfoTimelinePlugin();
 
   const cGetBody = Chain.mapper(function (editor: any) {
     return TinyDom.fromDom(editor.getBody());
@@ -43,7 +43,7 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.FigureResizeTest', funct
         height: 400,
         skin_url: '/project/js/tinymce/skins/lightgray'
       }),
-      UiChains.cClickOnToolbar('click image button', 'div[aria-label="Inserir/editar infográfico"]'),
+      UiChains.cClickOnToolbar('click image button', 'div[aria-label="Inserir/editar infotimeline"]'),
       UiChains.cFillActiveDialog({
         src: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
         width: 100,

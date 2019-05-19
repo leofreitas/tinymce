@@ -1,5 +1,5 @@
 /**
- * InfograficoData.ts
+ * InfoTimelineData.ts
  *
  * Released under LGPL License.
  * Copyright (c) 1999-2018 Ephox Corp. All rights reserved
@@ -15,7 +15,7 @@ import { HTMLElement, Node, document } from '@ephox/dom-globals';
 
 // const DOM = DOMUtils.DOM;
 
-interface InfograficoData {
+interface InfoTimelineData {
   typemarcador: string;
   numberitems: string;
   backgroundcolorbox: string;
@@ -99,9 +99,9 @@ const setBorderStyle = (image: HTMLElement, value: string) => {
 const getBorderStyle = (image: HTMLElement) => getStyle(image, 'borderStyle');
 
 const isFigure = (elm: Node) => elm.nodeName === 'FIGURE';
-const isInfografico = (elm: Node) => elm.nodeName === 'IMG';
+const isInfoTimeline = (elm: Node) => elm.nodeName === 'IMG';
 
-const defaultData = (): InfograficoData => {
+const defaultData = (): InfoTimelineData => {
   return {
     typemarcador: '',
     numberitems: '',
@@ -115,7 +115,7 @@ const defaultData = (): InfograficoData => {
   };
 };
 
-const getStyleValue = (normalizeCss: CssNormalizer, data: InfograficoData): string => {
+const getStyleValue = (normalizeCss: CssNormalizer, data: InfoTimelineData): string => {
   const image = document.createElement('div');
 
   setAttrib(image, 'style', data.style);
@@ -131,7 +131,7 @@ const getStyleValue = (normalizeCss: CssNormalizer, data: InfograficoData): stri
   return normalizeCss(image.getAttribute('style'));
 };
 
-const create = (normalizeCss: CssNormalizer, data: InfograficoData): HTMLElement => {
+const create = (normalizeCss: CssNormalizer, data: InfoTimelineData): HTMLElement => {
   const image = document.createElement('div');
   write(normalizeCss, Merger.merge(data, { caption: false }), image);
 
@@ -144,7 +144,7 @@ const create = (normalizeCss: CssNormalizer, data: InfograficoData): HTMLElement
   return image;
 };
 
-const read = (normalizeCss: CssNormalizer, image: HTMLElement): InfograficoData => {
+const read = (normalizeCss: CssNormalizer, image: HTMLElement): InfoTimelineData => {
   return {
     typemarcador: getAttrib(image, 'typemarcador'),
     numberitems: getAttrib(image, 'numberitems'),
@@ -158,7 +158,7 @@ const read = (normalizeCss: CssNormalizer, image: HTMLElement): InfograficoData 
   };
 };
 
-const updateProp = (image: HTMLElement, oldData: InfograficoData, newData: InfograficoData, name: string, set: (image: HTMLElement, name: string, value: string) => void) => {
+const updateProp = (image: HTMLElement, oldData: InfoTimelineData, newData: InfoTimelineData, name: string, set: (image: HTMLElement, name: string, value: string) => void) => {
   if (newData[name] !== oldData[name]) {
     set(image, name, newData[name]);
   }
@@ -171,7 +171,7 @@ const normalized = (set: (image: HTMLElement, value: string) => void, normalizeC
   };
 };
 
-const write = (normalizeCss: CssNormalizer, newData: InfograficoData, image: HTMLElement) => {
+const write = (normalizeCss: CssNormalizer, newData: InfoTimelineData, image: HTMLElement) => {
   const oldData = read(normalizeCss, image);
 
   updateProp(image, oldData, newData, 'typemarcador', setAttrib);
@@ -186,11 +186,11 @@ const write = (normalizeCss: CssNormalizer, newData: InfograficoData, image: HTM
 };
 
 export {
-  InfograficoData,
+  InfoTimelineData,
   getStyleValue,
   defaultData,
   isFigure,
-  isInfografico,
+  isInfoTimeline,
   create,
   read,
   write

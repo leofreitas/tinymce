@@ -16,14 +16,14 @@ import ContentTab from './ContentTab';
 // import MainTab from './MainTab';
 import { Fun, Merger } from '@ephox/katamari';
 import { Editor } from 'tinymce/core/api/Editor';
-import { insertOrUpdateInfografico, readInfograficoDataFromSelection } from 'tinymce/plugins/infotimeline/core/InfograficoSelection';
+import { insertOrUpdateInfoTimeline, readInfoTimelineDataFromSelection } from 'tinymce/plugins/infotimeline/core/InfoTimelineSelection';
 
 const submitForm = (editor: Editor, evt) => {
   const win = evt.control.getRoot();
 
   editor.undoManager.transact(() => {
-    const data = Merger.merge(readInfograficoDataFromSelection(editor), win.toJSON());
-    insertOrUpdateInfografico(editor, data);
+    const data = Merger.merge(readInfoTimelineDataFromSelection(editor), win.toJSON());
+    insertOrUpdateInfoTimeline(editor, data);
   });
   ContentTab.registerText(editor);
 
@@ -31,7 +31,7 @@ const submitForm = (editor: Editor, evt) => {
 
 export default function (editor) {
   function showDialog() {
-    const data = readInfograficoDataFromSelection(editor);
+    const data = readInfoTimelineDataFromSelection(editor);
     // let win;
 
     const body = [];
@@ -41,7 +41,7 @@ export default function (editor) {
 
     // Advanced dialog shows general+advanced tabs
     editor.windowManager.open({
-      title: 'Inserir/editar infográfico',
+      title: 'Inserir/editar infotimeline',
       data,
       bodyType: 'tabpanel',
       body,
@@ -50,7 +50,7 @@ export default function (editor) {
   }
 
   function open() {
-    Utils.createInfograficoList(editor, showDialog);
+    Utils.createInfoTimelineList(editor, showDialog);
   }
 
   return {

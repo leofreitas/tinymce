@@ -11,7 +11,7 @@
 import Dialog from '../ui/Dialog';
 
 const register = function (editor) {
-  editor.addCommand('mceInfografico', Dialog(editor).open);
+  editor.addCommand('mceInfoTimeline', Dialog(editor).open);
 };
 
 export default {

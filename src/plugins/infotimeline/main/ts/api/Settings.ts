@@ -33,15 +33,15 @@ const hasDescription = function (editor) {
   return editor.settings.infograficos_description === false ? false : true;
 };
 
-const hasInfograficoTitle = function (editor) {
+const hasInfoTimelineTitle = function (editor) {
   return editor.settings.infograficos_title === true ? true : false;
 };
 
-const hasInfograficoCaption = function (editor) {
+const hasInfoTimelineCaption = function (editor) {
   return editor.settings.infograficos_caption === true ? true : false;
 };
 
-const getInfograficoList = function (editor) {
+const getInfoTimelineList = function (editor) {
   return editor.getParam('infografico_list', false);
 };
 
@@ -75,9 +75,9 @@ export default {
   getClassList,
   getNumberItems,
   hasDescription,
-  hasInfograficoTitle,
-  hasInfograficoCaption,
-  getInfograficoList,
+  hasInfoTimelineTitle,
+  hasInfoTimelineCaption,
+  getInfoTimelineList,
   hasUploadUrl,
   hasUploadHandler,
   getUploadUrl,

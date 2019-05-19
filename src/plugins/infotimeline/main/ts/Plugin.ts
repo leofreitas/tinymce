@@ -14,7 +14,7 @@ import FilterContent from './core/FilterContent';
 import Buttons from './ui/Buttons';
 import DialogColor from './ui/DialogColor';
 
-PluginManager.add('infografico', function (editor) {
+PluginManager.add('infotimeline', function (editor) {
   FilterContent.setup(editor);
   Buttons.register(editor);
   Commands.register(editor);

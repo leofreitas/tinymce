@@ -15,7 +15,7 @@ tinymce.init({
   extended_valid_elements: 'div[id|style|shapeitems|numberitems|typemarcador|backgroundcolorbox|bordercolorbox|textcolorbox]',
   theme: 'modern',
   skin_url: '../../../../../js/tinymce/skins/lightgray',
-  plugins: 'infografico code',
+  plugins: 'infotimeline code',
   toolbar: 'undo redo | image code',
   infograficos_dimensions: false,
   infografico_advtab: true,

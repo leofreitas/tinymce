@@ -7,7 +7,7 @@ import Plugin from 'tinymce/plugins/infotimeline/Plugin';
 import Theme from 'tinymce/themes/modern/Theme';
 import { document } from '@ephox/dom-globals';
 
-UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', function () {
+UnitTest.asynctest('browser.tinymce.plugins.infografico.InfoTimelinePluginTest', function () {
   const success = arguments[arguments.length - 2];
   const failure = arguments[arguments.length - 1];
   const suite = LegacyUnit.createSuite();
@@ -55,7 +55,7 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', 
 
   suite.test('Default image dialog on empty editor', function (editor) {
     editor.setContent('');
-    editor.execCommand('mceInfografico', true);
+    editor.execCommand('mceInfoTimeline', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',
@@ -78,10 +78,10 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', 
     );
   });
 
-  suite.test('Infografico dialog infografico_dimensions: false', function (editor) {
+  suite.test('InfoTimeline dialog infografico_dimensions: false', function (editor) {
     editor.settings.infograficos_dimensions = false;
     editor.setContent('');
-    editor.execCommand('mceInfografico', true);
+    editor.execCommand('mceInfoTimeline', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',
@@ -115,7 +115,7 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', 
       ];
 
       editor.setContent('');
-      editor.execCommand('mceInfografico', true);
+      editor.execCommand('mceInfoTimeline', true);
 
       LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
         'alt': '',
@@ -162,7 +162,7 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', 
       ];
 
       editor.setContent('');
-      editor.execCommand('mceInfografico', true);
+      editor.execCommand('mceInfoTimeline', true);
 
       LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
         alt: '',
@@ -190,12 +190,12 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', 
     });
   }
 
-  suite.test('Infografico recognizes relative src url and prepends relative infografico_prepend_url setting.', function (editor) {
+  suite.test('InfoTimeline recognizes relative src url and prepends relative infografico_prepend_url setting.', function (editor) {
     let win, elementId, element;
 
     editor.settings.infograficos_prepend_url = 'testing/images/';
     editor.setContent('');
-    editor.execCommand('mceInfografico', true);
+    editor.execCommand('mceInfoTimeline', true);
 
     const data = {
       src: 'src',
@@ -218,12 +218,12 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', 
     );
   });
 
-  suite.test('Infografico recognizes relative src url and prepends absolute infografico_prepend_url setting.', function (editor) {
+  suite.test('InfoTimeline recognizes relative src url and prepends absolute infografico_prepend_url setting.', function (editor) {
     let win, elementId, element;
 
     editor.settings.infograficos_prepend_url = 'http://abc.local/images/';
     editor.setContent('');
-    editor.execCommand('mceInfografico', true);
+    editor.execCommand('mceInfoTimeline', true);
 
     const data = {
       src: 'src',
@@ -256,7 +256,7 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', 
     rng.setEnd(editor.dom.select('p')[0].firstChild, 1);
     editor.selection.setRng(rng);
 
-    editor.execCommand('mceInfografico', true);
+    editor.execCommand('mceInfoTimeline', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',
@@ -286,7 +286,7 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', 
     editor.settings.infograficos_dimensions = false;
 
     editor.setContent('');
-    editor.execCommand('mceInfografico', true);
+    editor.execCommand('mceInfoTimeline', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',
@@ -317,7 +317,7 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', 
     editor.settings.infograficos_dimensions = false;
 
     editor.setContent('');
-    editor.execCommand('mceInfografico', true);
+    editor.execCommand('mceInfoTimeline', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',
@@ -347,7 +347,7 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', 
     editor.settings.infograficos_dimensions = false;
 
     editor.setContent('');
-    editor.execCommand('mceInfografico', true);
+    editor.execCommand('mceInfoTimeline', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',
@@ -377,7 +377,7 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', 
     editor.settings.infograficos_dimensions = false;
 
     editor.setContent('');
-    editor.execCommand('mceInfografico', true);
+    editor.execCommand('mceInfoTimeline', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',
@@ -408,7 +408,7 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', 
     editor.settings.infograficos_dimensions = false;
 
     editor.setContent('');
-    editor.execCommand('mceInfografico', true);
+    editor.execCommand('mceInfoTimeline', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',
@@ -440,7 +440,7 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', 
     editor.settings.infograficos_dimensions = false;
 
     editor.setContent('');
-    editor.execCommand('mceInfografico', true);
+    editor.execCommand('mceInfoTimeline', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',
@@ -471,7 +471,7 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', 
     editor.settings.infograficos_dimensions = false;
 
     editor.setContent('');
-    editor.execCommand('mceInfografico', true);
+    editor.execCommand('mceInfoTimeline', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',
@@ -502,7 +502,7 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', 
     editor.settings.infograficos_dimensions = false;
 
     editor.setContent('');
-    editor.execCommand('mceInfografico', true);
+    editor.execCommand('mceInfoTimeline', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',
@@ -533,7 +533,7 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', 
     editor.settings.infograficos_dimensions = false;
 
     editor.setContent('');
-    editor.execCommand('mceInfografico', true);
+    editor.execCommand('mceInfoTimeline', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',
@@ -564,7 +564,7 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', 
     editor.settings.infograficos_dimensions = false;
 
     editor.setContent('');
-    editor.execCommand('mceInfografico', true);
+    editor.execCommand('mceInfoTimeline', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',
@@ -595,7 +595,7 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', 
     editor.settings.infograficos_dimensions = false;
 
     editor.setContent('');
-    editor.execCommand('mceInfografico', true);
+    editor.execCommand('mceInfoTimeline', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',
@@ -626,7 +626,7 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', 
     editor.settings.infograficos_dimensions = false;
 
     editor.setContent('');
-    editor.execCommand('mceInfografico', true);
+    editor.execCommand('mceInfoTimeline', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',
@@ -657,7 +657,7 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', 
     editor.settings.infograficos_dimensions = false;
 
     editor.setContent('');
-    editor.execCommand('mceInfografico', true);
+    editor.execCommand('mceInfoTimeline', true);
 
     LegacyUnit.deepEqual(getFrontmostWindow(editor).toJSON(), {
       alt: '',

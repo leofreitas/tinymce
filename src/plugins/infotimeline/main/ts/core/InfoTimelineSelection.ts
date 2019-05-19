@@ -1,5 +1,5 @@
 /**
- * InfograficoSelection.ts
+ * InfoTimelineSelection.ts
  *
  * Released under LGPL License.
  * Copyright (c) 1999-2018 Ephox Corp. All rights reserved
@@ -9,7 +9,7 @@
  */
 
 import { Editor } from 'tinymce/core/api/Editor';
-import { defaultData, read, InfograficoData, create, isFigure, write } from 'tinymce/plugins/infotimeline/core/InfograficoData';
+import { defaultData, read, InfoTimelineData, create, isFigure, write } from 'tinymce/plugins/infotimeline/core/InfoTimelineData';
 import Utils from 'tinymce/plugins/infotimeline/core/Utils';
 import { HTMLElement } from '@ephox/dom-globals';
 
@@ -20,9 +20,9 @@ const normalizeCss = (editor: Editor, cssText: string): string => {
   return editor.dom.styles.serialize(compressed);
 };
 
-const getSelectedInfografico = (editor: Editor): HTMLElement => {
+const getSelectedInfoTimeline = (editor: Editor): HTMLElement => {
   // const imgElm = editor.selection.getNode() as HTMLElement;
-  const textSel = editor.dom.get('info01-main');
+  const textSel = editor.dom.get('info02-main');
 
   return textSel;
 };
@@ -41,12 +41,12 @@ const splitTextBlock = (editor: Editor, componentHTML: HTMLElement) => {
   }
 };
 
-const readInfograficoDataFromSelection = (editor: Editor): InfograficoData => {
-  const componentHTML = getSelectedInfografico(editor);
+const readInfoTimelineDataFromSelection = (editor: Editor): InfoTimelineData => {
+  const componentHTML = getSelectedInfoTimeline(editor);
   return componentHTML ? read((css) => normalizeCss(editor, css), componentHTML) : defaultData();
 };
 
-const insertInfograficoAtCaret = (editor: Editor, data: InfograficoData) => {
+const insertInfoTimelineAtCaret = (editor: Editor, data: InfoTimelineData) => {
   const elm = create((css) => normalizeCss(editor, css), data);
 
   editor.dom.setAttrib(elm, 'data-mce-id', '__mcenew');
@@ -64,7 +64,7 @@ const insertInfograficoAtCaret = (editor: Editor, data: InfograficoData) => {
   }
 };
 /*
-const deleteInfografico = (editor: Editor, componentHTML: HTMLElement) => {
+const deleteInfoTimeline = (editor: Editor, componentHTML: HTMLElement) => {
   if (componentHTML) {
     const elm = editor.dom.is(componentHTML.parentNode, 'figure.image') ? componentHTML.parentNode : componentHTML;
 
@@ -80,8 +80,8 @@ const deleteInfografico = (editor: Editor, componentHTML: HTMLElement) => {
 };
 */
 
-const writeInfograficoDataToSelection = (editor: Editor, data: InfograficoData) => {
-  const componentHTML = getSelectedInfografico(editor);
+const writeInfoTimelineDataToSelection = (editor: Editor, data: InfoTimelineData) => {
+  const componentHTML = getSelectedInfoTimeline(editor);
 
   write((css) => normalizeCss(editor, css), data, componentHTML);
 
@@ -91,26 +91,26 @@ const writeInfograficoDataToSelection = (editor: Editor, data: InfograficoData) 
     editor.selection.select(componentHTML.parentNode);
   } else {
     editor.selection.select(componentHTML);
-    Utils.waitLoadInfografico(editor, data, componentHTML);
+    Utils.waitLoadInfoTimeline(editor, data, componentHTML);
   }
 };
 
-const insertOrUpdateInfografico = (editor: Editor, data: InfograficoData) => {
-  const componentHTML = getSelectedInfografico(editor);
+const insertOrUpdateInfoTimeline = (editor: Editor, data: InfoTimelineData) => {
+  const componentHTML = getSelectedInfoTimeline(editor);
   if (componentHTML) {
     // if (data.src) {
-      writeInfograficoDataToSelection(editor, data);
+      writeInfoTimelineDataToSelection(editor, data);
     // } else {
-    //   deleteInfografico(editor, componentHTML);
+    //   deleteInfoTimeline(editor, componentHTML);
     // }
   // } else if (data.src) {
   } else {
-    insertInfograficoAtCaret(editor, data);
+    insertInfoTimelineAtCaret(editor, data);
   }
 };
 
 export {
   normalizeCss,
-  readInfograficoDataFromSelection,
-  insertOrUpdateInfografico
+  readInfoTimelineDataFromSelection,
+  insertOrUpdateInfoTimeline
 };

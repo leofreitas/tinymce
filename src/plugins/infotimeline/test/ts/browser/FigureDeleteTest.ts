@@ -2,7 +2,7 @@ import { Chain, GeneralSteps, Logger, Mouse, Pipeline, UiControls, UiFinder } fr
 import { UnitTest } from '@ephox/bedrock';
 import { TinyApis, TinyDom, TinyLoader, TinyUi } from '@ephox/mcagar';
 
-import InfograficoPlugin from 'tinymce/plugins/infotimeline/Plugin';
+import InfoTimelinePlugin from 'tinymce/plugins/infotimeline/Plugin';
 import ModernTheme from 'tinymce/themes/modern/Theme';
 import { document } from '@ephox/dom-globals';
 
@@ -11,7 +11,7 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.FigureDeleteTest', funct
   const failure = arguments[arguments.length - 1];
 
   ModernTheme();
-  InfograficoPlugin();
+  InfoTimelinePlugin();
 
   TinyLoader.setup(function (editor, onSuccess, onFailure) {
     const tinyApis = TinyApis(editor);
@@ -22,7 +22,7 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.FigureDeleteTest', funct
       Logger.t('removing src in dialog should remove figure element', GeneralSteps.sequence([
         tinyApis.sSetContent('<figure class="image"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" /><figcaption>x</figcaption></figure>'),
         tinyApis.sSetSelection([], 1, [], 2),
-        tinyUi.sClickOnToolbar('click on image button', 'div[aria-label="Inserir/editar infográfico"] button'),
+        tinyUi.sClickOnToolbar('click on image button', 'div[aria-label="Inserir/editar infotimeline"] button'),
         Chain.asStep({}, [
           tinyUi.cWaitForPopup('Wait for dialog', 'div[role="dialog"]'),
           UiFinder.cFindIn('label:contains("Source")'),
@@ -39,7 +39,7 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.FigureDeleteTest', funct
       Logger.t('clicking caption textbox removes figure and adds image only', GeneralSteps.sequence([
         tinyApis.sSetContent('<figure class="image"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" /><figcaption>x</figcaption></figure>'),
         tinyApis.sSetSelection([], 1, [], 2),
-        tinyUi.sClickOnToolbar('click on image button', 'div[aria-label="Inserir/editar infográfico"] button'),
+        tinyUi.sClickOnToolbar('click on image button', 'div[aria-label="Inserir/editar infotimeline"] button'),
         Chain.asStep({}, [
           tinyUi.cWaitForPopup('Wait for dialog', 'div[role="dialog"]'),
           UiFinder.cFindIn('label:contains("Caption")'),

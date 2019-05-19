@@ -6,16 +6,16 @@ import { Merger } from '@ephox/katamari';
 import Plugin from 'tinymce/plugins/infotimeline/Plugin';
 import Theme from 'tinymce/themes/modern/Theme';
 
-import { insertOrUpdateInfografico } from 'tinymce/plugins/infotimeline/core/InfograficoSelection';
+import { insertOrUpdateInfoTimeline } from 'tinymce/plugins/infotimeline/core/InfoTimelineSelection';
 import { Element } from '@ephox/sugar';
 
-UnitTest.asynctest('browser.tinymce.plugins.image.core.InfograficoSelectionTest',  (success, failure) => {
+UnitTest.asynctest('browser.tinymce.plugins.image.core.InfoTimelineSelectionTest',  (success, failure) => {
   Theme();
   Plugin();
 
-  const sUpdateInfograficoOrFigure = (editor, data) => {
+  const sUpdateInfoTimelineOrFigure = (editor, data) => {
     return Step.sync(() => {
-      insertOrUpdateInfografico(editor, Merger.merge({
+      insertOrUpdateInfoTimeline(editor, Merger.merge({
         src: 'image.png',
         alt: '',
         title: '',
@@ -43,7 +43,7 @@ UnitTest.asynctest('browser.tinymce.plugins.image.core.InfograficoSelectionTest'
       Logger.t('Insert image, size 100x100', GeneralSteps.sequence([
         tinyApis.sSetContent('<p></p>'),
         tinyApis.sSetCursor([0], 0),
-        sUpdateInfograficoOrFigure(editor, {
+        sUpdateInfoTimelineOrFigure(editor, {
           src: 'image.png',
           height: '100',
           width: '100'
@@ -76,7 +76,7 @@ UnitTest.asynctest('browser.tinymce.plugins.image.core.InfograficoSelectionTest'
       Logger.t('Insert figure, size 100x100', GeneralSteps.sequence([
         tinyApis.sSetContent('<p></p>'),
         tinyApis.sSetCursor([0], 0),
-        sUpdateInfograficoOrFigure(editor, {
+        sUpdateInfoTimelineOrFigure(editor, {
           src: 'image.png',
           caption: true,
           height: '100',
@@ -126,7 +126,7 @@ UnitTest.asynctest('browser.tinymce.plugins.image.core.InfograficoSelectionTest'
           '<figcaption contenteditable="true">Caption</figcaption>' +
           '</figure>'),
         tinyApis.sSelect('figure', []),
-        sUpdateInfograficoOrFigure(editor, {
+        sUpdateInfoTimelineOrFigure(editor, {
           src: 'updated-image.png',
           caption: true,
           height: '100',
@@ -175,7 +175,7 @@ UnitTest.asynctest('browser.tinymce.plugins.image.core.InfograficoSelectionTest'
           '<img src="image.png" alt="" width="200" height="200">' +
           '</p>'),
         tinyApis.sSelect('img', []),
-        sUpdateInfograficoOrFigure(editor, {
+        sUpdateInfoTimelineOrFigure(editor, {
           src: 'updated-image.png',
           height: '100',
           width: '100'

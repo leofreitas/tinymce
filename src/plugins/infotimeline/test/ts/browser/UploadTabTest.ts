@@ -7,7 +7,7 @@ import Conversions from 'tinymce/core/file/Conversions';
 import Plugin from 'tinymce/plugins/infotimeline/Plugin';
 import Theme from 'tinymce/themes/modern/Theme';
 
-UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', function () {
+UnitTest.asynctest('browser.tinymce.plugins.infografico.InfoTimelinePluginTest', function () {
   const success = arguments[arguments.length - 2];
   const failure = arguments[arguments.length - 1];
 
@@ -34,11 +34,11 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', 
       ]);
     };
 
-    const sAssertInfograficoTab = function (title, isPresent) {
+    const sAssertInfoTimelineTab = function (title, isPresent) {
       return GeneralSteps.sequence([
-        ui.sClickOnToolbar('Trigger Infografico dialog', 'div[aria-label="Inserir/editar infográfico"]'),
+        ui.sClickOnToolbar('Trigger InfoTimeline dialog', 'div[aria-label="Inserir/editar infotimeline"]'),
         Chain.asStep({}, [
-          ui.cWaitForPopup('Wait for Infografico dialog', 'div[role="dialog"][aria-label="Inserir/editar infográfico"]'),
+          ui.cWaitForPopup('Wait for InfoTimeline dialog', 'div[role="dialog"][aria-label="Inserir/editar infotimeline"]'),
           Chain.op(function (container) {
             const expected = {};
             expected['.mce-tab:contains("' + title + '")'] = isPresent ? 1 : 0;
@@ -53,7 +53,7 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', 
       Conversions.uriToBlob(b64).then(function (blob) {
         Pipeline.async({}, [
           Chain.asStep({}, [
-            cPopupToDialog('div[role="dialog"][aria-label="Inserir/editar infográfico"]'),
+            cPopupToDialog('div[role="dialog"][aria-label="Inserir/editar infotimeline"]'),
             Chain.op(function (win) {
               const browseBtn = win.find('browsebutton')[0];
               browseBtn.value = function () {
@@ -68,7 +68,7 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', 
 
     const sAssertTextValue = function (fieldName, value) {
       return Chain.asStep({}, [
-        cPopupToDialog('div[role="dialog"][aria-label="Inserir/editar infográfico"]'),
+        cPopupToDialog('div[role="dialog"][aria-label="Inserir/editar infotimeline"]'),
         Chain.op(function (win) {
           Assertions.assertEq('Assert field ' + src + ' value ', value, win.find('#' + fieldName).value());
         })
@@ -79,7 +79,7 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', 
       Logger.t('Upload tab should not be present without infograficos_upload_url or infograficos_upload_handler', GeneralSteps.sequence([
         api.sSetContent('<p><img src="' + src + '" /></p>'),
         api.sSelect('img', []),
-        sAssertInfograficoTab('Upload', false)
+        sAssertInfoTimelineTab('Upload', false)
       ])),
 
       Logger.t('Upload tab should be present when infograficos_upload_url is set to some truthy value', GeneralSteps.sequence([
@@ -87,12 +87,12 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', 
         api.sSelect('img', []),
         api.sSetSetting('infografico_advtab', false), // make sure that Advanced tab appears separately
         api.sSetSetting('infograficos_upload_url', 'postAcceptor.php'),
-        sAssertInfograficoTab('Upload', true),
-        sAssertInfograficoTab('Advanced', false),
+        sAssertInfoTimelineTab('Upload', true),
+        sAssertInfoTimelineTab('Advanced', false),
         api.sSetSetting('infografico_advtab', true),
         api.sDeleteSetting('infograficos_upload_url'),
-        sAssertInfograficoTab('Upload', false),
-        sAssertInfograficoTab('Advanced', true)
+        sAssertInfoTimelineTab('Upload', false),
+        sAssertInfoTimelineTab('Advanced', true)
       ])),
 
       Logger.t('Upload tab should be present when infograficos_upload_handler is set to some truthy value', GeneralSteps.sequence([
@@ -102,19 +102,19 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', 
         api.sSetSetting('infograficos_upload_handler', function (blobInfo, success) {
           return success('file.jpg');
         }),
-        sAssertInfograficoTab('Upload', true),
-        sAssertInfograficoTab('Advanced', false),
+        sAssertInfoTimelineTab('Upload', true),
+        sAssertInfoTimelineTab('Advanced', false),
         api.sSetSetting('infografico_advtab', true),
         api.sDeleteSetting('infograficos_upload_handler'),
-        sAssertInfograficoTab('Upload', false),
-        sAssertInfograficoTab('Advanced', true)
+        sAssertInfoTimelineTab('Upload', false),
+        sAssertInfoTimelineTab('Advanced', true)
       ])),
 
-      Logger.t('Infografico uploader test with custom route', GeneralSteps.sequence([
+      Logger.t('InfoTimeline uploader test with custom route', GeneralSteps.sequence([
         api.sSetContent(''),
         api.sSetSetting('infograficos_upload_url', '/custom/imageUpload'),
-        ui.sClickOnToolbar('Trigger Infografico dialog', 'div[aria-label="Inserir/editar infográfico"]'),
-        ui.sWaitForPopup('Wait for Infografico dialog', 'div[role="dialog"][aria-label="Inserir/editar infográfico"]'),
+        ui.sClickOnToolbar('Trigger InfoTimeline dialog', 'div[aria-label="Inserir/editar infotimeline"]'),
+        ui.sWaitForPopup('Wait for InfoTimeline dialog', 'div[role="dialog"][aria-label="Inserir/editar infotimeline"]'),
         ui.sClickOnUi('Switch to Upload tab', '.mce-tab:contains("Upload")'),
         sTriggerUpload,
         ui.sWaitForUi('Wait for General tab to activate', '.mce-tab.mce-active:contains("General")'),
@@ -123,13 +123,13 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', 
         ui.sClickOnUi('Close dialog', 'button:contains("Cancel")')
       ])),
 
-      Logger.t('Infografico uploader test with infograficos_upload_handler', GeneralSteps.sequence([
+      Logger.t('InfoTimeline uploader test with infograficos_upload_handler', GeneralSteps.sequence([
         api.sSetContent(''),
         api.sSetSetting('infograficos_upload_handler', function (blobInfo, success) {
           return success('file.jpg');
         }),
-        ui.sClickOnToolbar('Trigger Infografico dialog', 'div[aria-label="Inserir/editar infográfico"]'),
-        ui.sWaitForPopup('Wait for Infografico dialog', 'div[role="dialog"][aria-label="Inserir/editar infográfico"]'),
+        ui.sClickOnToolbar('Trigger InfoTimeline dialog', 'div[aria-label="Inserir/editar infotimeline"]'),
+        ui.sWaitForPopup('Wait for InfoTimeline dialog', 'div[role="dialog"][aria-label="Inserir/editar infotimeline"]'),
         ui.sClickOnUi('Switch to Upload tab', '.mce-tab:contains("Upload")'),
         sTriggerUpload,
         ui.sWaitForUi('Wait for General tab to activate', '.mce-tab.mce-active:contains("General")'),
@@ -142,8 +142,8 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoPluginTest', 
         api.sSetSetting('infograficos_upload_handler', function (blobInfo, success) {
           return success(blobInfo.base64());
         }),
-        ui.sClickOnToolbar('Trigger Infografico dialog', 'div[aria-label="Inserir/editar infográfico"]'),
-        ui.sWaitForPopup('Wait for Infografico dialog', 'div[role="dialog"][aria-label="Inserir/editar infográfico"]'),
+        ui.sClickOnToolbar('Trigger InfoTimeline dialog', 'div[aria-label="Inserir/editar infotimeline"]'),
+        ui.sWaitForPopup('Wait for InfoTimeline dialog', 'div[role="dialog"][aria-label="Inserir/editar infotimeline"]'),
         ui.sClickOnUi('Switch to Upload tab', '.mce-tab:contains("Upload")'),
         sTriggerUpload,
         ui.sWaitForUi('Wait for General tab to activate', '.mce-tab.mce-active:contains("General")'),

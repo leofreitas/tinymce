@@ -5,17 +5,17 @@ import { UnitTest } from '@ephox/bedrock';
 import { TinyApis, TinyDom, TinyLoader, TinyUi } from '@ephox/mcagar';
 
 import DOMUtils from 'tinymce/core/api/dom/DOMUtils';
-import InfograficoPlugin from 'tinymce/plugins/infotimeline/Plugin';
+import InfoTimelinePlugin from 'tinymce/plugins/infotimeline/Plugin';
 import ModernTheme from 'tinymce/themes/modern/Theme';
 import { document } from '@ephox/dom-globals';
 import { Element } from '@ephox/sugar';
 
-UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoListTest', function () {
+UnitTest.asynctest('browser.tinymce.plugins.infografico.InfoTimelineListTest', function () {
   const success = arguments[arguments.length - 2];
   const failure = arguments[arguments.length - 1];
 
   ModernTheme();
-  InfograficoPlugin();
+  InfoTimelinePlugin();
 
   const cFakeEvent = function (name) {
     return Chain.op(function (elm: Element) {
@@ -33,10 +33,10 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoListTest', fu
           { title: 'Dog', value: 'mydog.jpg' },
           { title: 'Cat', value: 'mycat.jpg' }
         ]),
-        tinyUi.sClickOnToolbar('click image button', 'div[aria-label="Inserir/editar infográfico"] button'),
+        tinyUi.sClickOnToolbar('click image button', 'div[aria-label="Inserir/editar infotimeline"] button'),
         Chain.asStep({}, [
           tinyUi.cWaitForPopup('wait for dialog', 'div[role="dialog"]'),
-          UiFinder.cFindIn('label:contains("Infografico list") + div > button'),
+          UiFinder.cFindIn('label:contains("InfoTimeline list") + div > button'),
           Mouse.cClick
         ]),
         Chain.asStep(TinyDom.fromDom(document.body), [
@@ -57,7 +57,7 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfograficoListTest', fu
                 cFakeEvent('change')
               ]),
               Chain.fromChains([
-                UiFinder.cFindIn('label:contains("Infografico list") + div > button > span:contains("Cat")')
+                UiFinder.cFindIn('label:contains("InfoTimeline list") + div > button > span:contains("Cat")')
               ])
             ]
           )
