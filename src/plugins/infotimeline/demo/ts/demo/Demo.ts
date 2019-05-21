@@ -12,7 +12,7 @@ declare let tinymce: any;
 
 tinymce.init({
   selector: 'textarea.tinymce',
-  extended_valid_elements: 'div[id|style|shapeitems|numberitems|typemarcador|backgroundcolorbox|bordercolorbox|textcolorbox]',
+  extended_valid_elements: 'div[id|class|style|borderstyle|numberitems|timeline|backgroundcolorbox|bordercolorbox|textcolorbox|backgroundcolortimeline|bordercolortimeline|textcolortimeline|contenteditable],span[class]',
   theme: 'modern',
   skin_url: '../../../../../js/tinymce/skins/lightgray',
   plugins: 'infotimeline code',
@@ -22,10 +22,10 @@ tinymce.init({
   infografico_title: true,
   infografico_class_list: [
     { title: 'Nenhum', value: '' },
-    { title: 'Números', value: 'numeros' },
-    { title: 'Letras', value: 'letras' }
+    { title: 'Estreita', value: 'estreita' },
+    { title: 'Larga', value: 'larga' }
   ],
-  infografico_number_items: 6,
+  infografico_number_items: 8,
   // infograficos_upload_url: 'postAcceptor.php',
   file_picker_callback (callback, value, meta) {
      callback('https://www.google.com/logos/google.jpg', { alt: 'My alt text' });

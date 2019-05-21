@@ -16,13 +16,16 @@ import { HTMLElement, Node, document } from '@ephox/dom-globals';
 // const DOM = DOMUtils.DOM;
 
 interface InfoTimelineData {
-  typemarcador: string;
+  timeline: string;
   numberitems: string;
   backgroundcolorbox: string;
   bordercolorbox: string;
   textcolorbox: string;
+  backgroundcolortimeline: string;
+  bordercolortimeline: string;
+  textcolortimeline: string;
   style: string;
-  shapeitems: string;
+  borderstyle: string;
   border: string;
   borderStyle: string;
 }
@@ -103,13 +106,16 @@ const isInfoTimeline = (elm: Node) => elm.nodeName === 'IMG';
 
 const defaultData = (): InfoTimelineData => {
   return {
-    typemarcador: '',
+    timeline: '',
     numberitems: '',
     backgroundcolorbox: '',
     bordercolorbox: '',
     textcolorbox: '',
+    backgroundcolortimeline: '',
+    bordercolortimeline: '',
+    textcolortimeline: '',
     style: '',
-    shapeitems: '',
+    borderstyle: '',
     border: '',
     borderStyle: ''
   };
@@ -135,24 +141,30 @@ const create = (normalizeCss: CssNormalizer, data: InfoTimelineData): HTMLElemen
   const image = document.createElement('div');
   write(normalizeCss, Merger.merge(data, { caption: false }), image);
 
-  setAttrib(image, 'typemarcador', data.typemarcador);
+  setAttrib(image, 'timeline', data.timeline);
   setAttrib(image, 'numberitems', data.numberitems);
   setAttrib(image, 'backgroundcolorbox', data.backgroundcolorbox);
   setAttrib(image, 'bordercolorbox', data.bordercolorbox);
   setAttrib(image, 'textcolorbox', data.textcolorbox);
-  setAttrib(image, 'shapeitems', data.shapeitems);
+  setAttrib(image, 'backgroundcolortimeline', data.backgroundcolortimeline);
+  setAttrib(image, 'bordercolortimeline', data.bordercolortimeline);
+  setAttrib(image, 'textcolortimeline', data.textcolortimeline);
+  setAttrib(image, 'borderstyle', data.borderstyle);
   return image;
 };
 
 const read = (normalizeCss: CssNormalizer, image: HTMLElement): InfoTimelineData => {
   return {
-    typemarcador: getAttrib(image, 'typemarcador'),
+    timeline: getAttrib(image, 'timeline'),
     numberitems: getAttrib(image, 'numberitems'),
     backgroundcolorbox: getAttrib(image, 'backgroundcolorbox'),
     bordercolorbox: getAttrib(image, 'bordercolorbox'),
     textcolorbox: getAttrib(image, 'textcolorbox'),
+    backgroundcolortimeline: getAttrib(image, 'backgroundcolortimeline'),
+    bordercolortimeline: getAttrib(image, 'bordercolortimeline'),
+    textcolortimeline: getAttrib(image, 'textcolortimeline'),
     style: normalizeCss(getAttrib(image, 'style')),
-    shapeitems: getAttrib(image, 'shapeitems'),
+    borderstyle: getAttrib(image, 'borderstyle'),
     border: getBorder(image),
     borderStyle: getStyle(image, 'borderStyle')
   };
@@ -174,12 +186,15 @@ const normalized = (set: (image: HTMLElement, value: string) => void, normalizeC
 const write = (normalizeCss: CssNormalizer, newData: InfoTimelineData, image: HTMLElement) => {
   const oldData = read(normalizeCss, image);
 
-  updateProp(image, oldData, newData, 'typemarcador', setAttrib);
+  updateProp(image, oldData, newData, 'timeline', setAttrib);
   updateProp(image, oldData, newData, 'numberitems', setAttrib);
   updateProp(image, oldData, newData, 'backgroundcolorbox', setAttrib);
   updateProp(image, oldData, newData, 'bordercolorbox', setAttrib);
   updateProp(image, oldData, newData, 'textcolorbox', setAttrib);
-  updateProp(image, oldData, newData, 'shapeitems', setAttrib);
+  updateProp(image, oldData, newData, 'backgroundcolortimeline', setAttrib);
+  updateProp(image, oldData, newData, 'bordercolortimeline', setAttrib);
+  updateProp(image, oldData, newData, 'textcolortimeline', setAttrib);
+  updateProp(image, oldData, newData, 'borderstyle', setAttrib);
   updateProp(image, oldData, newData, 'style', normalized((image, value) => setAttrib(image, 'style', value), normalizeCss));
   updateProp(image, oldData, newData, 'border', normalized(setBorder, normalizeCss));
   updateProp(image, oldData, newData, 'borderStyle', normalized(setBorderStyle, normalizeCss));

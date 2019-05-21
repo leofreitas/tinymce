@@ -5,28 +5,34 @@ const registerText = function (editor) {
   const cont = editor.getBody();
   const textSel = editor.selection.dom.get('info02-main');
   const ni = Settings.getNumberItems(editor) + 2;
-  let addHtml = '';
+  let addHtml = '<span class="cntl-bar cntl-center"> <span class="cntl-bar-fill"></span> </span>';
   if (ni > 0) {
     for (let i = 2; i < ni; i++) {
-      const bl = document.getElementById('bloco' + i) as HTMLInputElement;
-      if (bl.value !== '') {
-        const linkElm = editor.dom.createHTML('div', {
+      const txt = document.getElementById('texto' + i) as HTMLInputElement;
+      const y = document.getElementById('year' + i) as HTMLInputElement;
+
+      if (txt.value !== '' || y.value !== '') {
+        const txtElm = editor.dom.createHTML('div', {
            id: 'contentBlock' + i,
            name: 'contentBlock' + i,
-        }, bl.value );
-        addHtml += linkElm;
+           class:  'cntl-content'
+        }, txt.value );
+        const yearElm = editor.dom.createHTML('div', {
+           id: 'contentYear' + i,
+           name: 'contentYear' + i,
+           class: 'cntl-icon cntl-center'
+        }, y.value );
+        const nodeTimeline = editor.dom.createHTML('div', {class: 'cntl-state'},  txtElm + yearElm);
+        addHtml += nodeTimeline;
       }
     }
     if (!textSel) {
-        const divInfoTimeline = editor.dom.createHTML('div', { id: 'info02-main', name: 'info02-main', contenteditable: 'false' }, addHtml);
+        const divInfoTimeline = editor.dom.createHTML('div', { id: 'info02-main', name: 'info02-main', class: 'cntl', contenteditable: 'false' }, addHtml);
         if (addHtml !== '') {
            cont.innerHTML = divInfoTimeline;
         }
     } else {
       textSel.innerHTML = addHtml;
-      // textSel.setContent(addHtml);
-      // editor.setContent(textSel.innerHtml);
-      // console.log(textSel.getAttribute('shapeitems'));
     }
   }
 };
@@ -36,16 +42,25 @@ const getContentItems = function (editor) {
     const ni = Settings.getNumberItems(editor) + 2;
 
     if (ni > 0) {
-      let blocoValue = '';
-      let indice = 0;
+      let textoValue = '';
+      let yearValue = '';
+      // let indice = 0;
       for (let i = 2; i < ni; i++) {
-        indice = i - 1;
+        // indice = i - 1;
         if (editor.dom.get('contentBlock' + i)) {
-           blocoValue = editor.dom.get('contentBlock' + i).innerHTML;
+           textoValue = editor.dom.get('contentBlock' + i).innerHTML;
         } else {
-          blocoValue = '';
+          textoValue = '';
         }
-        generalContentItems.push( { name: 'bloco' + i , id: 'bloco' + i, type: 'textbox', label: 'Bloco ' + indice, value:  blocoValue } );
+        if (editor.dom.get('contentYear' + i)) {
+           yearValue = editor.dom.get('contentYear' + i).innerHTML;
+        } else {
+          yearValue = '';
+        }
+        generalContentItems.push( { type: 'label', text: 'Ano - Texto' } );
+        generalContentItems.push( { name: 'year' + i , id: 'year' + i, type: 'textbox', value:  yearValue, maxLength: 4, size: 4 } );
+        generalContentItems.push( { type: 'label', text: '-' } );
+        generalContentItems.push( { name: 'texto' + i , id: 'texto' + i, type: 'textbox', value:  textoValue } );
       }
     }
 
@@ -54,8 +69,10 @@ const getContentItems = function (editor) {
 
 const makeTab = function (editor) {
   return {
-    title: 'Conteúdos',
+    title: 'Textos',
     type: 'form',
+        layout: 'grid',
+        columns: 4,
     id: 'ContenTab',
     pack: 'start',
     items: getContentItems(editor)

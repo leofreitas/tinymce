@@ -25,45 +25,38 @@ const updateObjectColor = function (editor) {
 
 const makeTab = function (editor) {
   return {
-    title: 'Box/Texto',
+    title: 'TimeLine',
     type: 'form',
     pack: 'start',
     items: [
-      {
-        name: 'borderstyle',
+           {
+        name: 'timeline',
         type: 'listbox',
-        label: 'Estilo da Borda',
+        label: 'Linha central',
         values: [
               { text: 'Selecione...', value: '' },
-              { text: 'Padrão', value: 'default' },
-              { text: 'Top', value: 'top' },
-              { text: 'Bottom', value: 'bottom' },
-              { text: 'Left', value: 'left' },
-              { text: 'Right', value: 'right' }
+              { text: 'Estreita', value: 'estreita' },
+              { text: 'Larga', value: 'larga' }
         ],
-        function (item) {
-            if (item.value) {
-            }
-          }
       },
      {
         label: 'Cor da borda',
         type: 'colorbox',
-        name: 'bordercolorbox',
+        name: 'bordercolortimeline',
         onaction: createColorPickAction(editor),
         onchange: updateObjectColor(editor)
       },
       {
         label: 'Cor do Fundo',
         type: 'colorbox',
-        name: 'backgroundcolorbox',
+        name: 'backgroundcolortimeline',
         onaction: createColorPickAction(editor),
         onchange: updateObjectColor(editor)
       },
       {
         label: 'Cor do Texto',
         type: 'colorbox',
-        name: 'textcolorbox',
+        name: 'textcolortimeline',
         onaction: createColorPickAction(editor),
         onchange: updateObjectColor(editor)
       },

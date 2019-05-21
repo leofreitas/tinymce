@@ -8,12 +8,10 @@
  * Contributing: http://www.tinymce.com/contributing
  */
 
-// import Settings from '../api/Settings';
 import Utils from '../core/Utils';
-// import MarcadorTab from './MarcadorTab';
 import BoxTab from './BoxTab';
 import ContentTab from './ContentTab';
-// import MainTab from './MainTab';
+import TimelineTab from './TimelineTab';
 import { Fun, Merger } from '@ephox/katamari';
 import { Editor } from 'tinymce/core/api/Editor';
 import { insertOrUpdateInfoTimeline, readInfoTimelineDataFromSelection } from 'tinymce/plugins/infotimeline/core/InfoTimelineSelection';
@@ -37,6 +35,7 @@ export default function (editor) {
     const body = [];
 
     body.push(ContentTab.makeTab(editor));
+    body.push(TimelineTab.makeTab(editor));
     body.push(BoxTab.makeTab(editor));
 
     // Advanced dialog shows general+advanced tabs
