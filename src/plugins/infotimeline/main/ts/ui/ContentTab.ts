@@ -22,7 +22,7 @@ const registerText = function (editor) {
            name: 'contentYear' + i,
            class: 'cntl-icon cntl-center'
         }, y.value );
-        const nodeTimeline = editor.dom.createHTML('div', {class: 'cntl-state'},  txtElm + yearElm);
+        const nodeTimeline = editor.dom.createHTML('div', {class: 'cntl-state cntl-animate'},  txtElm + yearElm);
         addHtml += nodeTimeline;
       }
     }
