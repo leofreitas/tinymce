@@ -16,14 +16,14 @@ import { HTMLElement, Node, document } from '@ephox/dom-globals';
 // const DOM = DOMUtils.DOM;
 
 interface InfoLeavesData {
-  timeline: string;
   numberitems: string;
-  backgroundcolorbox: string;
-  bordercolorbox: string;
-  textcolorbox: string;
-  backgroundcolortimeline: string;
-  bordercolortimeline: string;
-  textcolortimeline: string;
+  leafcolor1: string;
+  leafcolor2: string;
+  leafcolor3: string;
+  leafcolor4: string;
+  leafcolor5: string;
+  leafcolor6: string;
+  leafcolor7: string;
   style: string;
   borderstyle: string;
   border: string;
@@ -32,88 +32,66 @@ interface InfoLeavesData {
 
 type CssNormalizer = (css: string) => string;
 
-const getBorder = (image: HTMLElement): string => {
-  if (image.style.borderWidth) {
-    return Utils.removePixelSuffix(image.style.borderWidth);
+const getBorder = (objLeaf: HTMLElement): string => {
+  if (objLeaf.style.borderWidth) {
+    return Utils.removePixelSuffix(objLeaf.style.borderWidth);
   } else {
     return '';
   }
 };
 
-const getAttrib = (image: HTMLElement, name: string): string => {
-  if (image.hasAttribute(name)) {
-    return image.getAttribute(name);
+const getAttrib = (objLeaf: HTMLElement, name: string): string => {
+  if (objLeaf.hasAttribute(name)) {
+    return objLeaf.getAttribute(name);
   } else {
     return '';
   }
 };
 
-const getStyle = (image: HTMLElement, name: string): string => {
-  return image.style[name] ? image.style[name] : '';
+const getStyle = (objLeaf: HTMLElement, name: string): string => {
+  return objLeaf.style[name] ? objLeaf.style[name] : '';
 };
 
-const setAttrib = (image: HTMLElement, name: string, value: string) => {
-  image.setAttribute(name, value);
-};
-/*
-const wrapInFigure = (image: HTMLElement) => {
-  const figureElm = DOM.create('figure', { class: 'image' });
-  DOM.insertAfter(figureElm, image);
-
-  figureElm.appendChild(image);
-  figureElm.appendChild(DOM.create('figcaption', { contentEditable: true }, 'Caption'));
-  figureElm.contentEditable = 'false';
+const setAttrib = (objLeaf: HTMLElement, name: string, value: string) => {
+  objLeaf.setAttribute(name, value);
 };
 
-const removeFigure = (image: HTMLElement) => {
-  const figureElm = image.parentNode;
-  DOM.insertAfter(image, figureElm);
-  DOM.remove(figureElm);
-};
-const getSize = (image: HTMLElement, name: string): string => {
-  if (image.style[name]) {
-    return Utils.removePixelSuffix(image.style[name]);
-  } else {
-    return getAttrib(image, name);
-  }
-};
-*/
-const normalizeStyle = (image: HTMLElement, normalizeCss: CssNormalizer) => {
-  const attrValue = image.getAttribute('style');
+const normalizeStyle = (objLeaf: HTMLElement, normalizeCss: CssNormalizer) => {
+  const attrValue = objLeaf.getAttribute('style');
   const value = normalizeCss(attrValue !== null ? attrValue : '');
 
   if (value.length > 0) {
-    image.setAttribute('style', value);
-    image.setAttribute('data-mce-style', value);
+    objLeaf.setAttribute('style', value);
+    objLeaf.setAttribute('data-mce-style', value);
   } else {
-    image.removeAttribute('style');
+    objLeaf.removeAttribute('style');
   }
 };
 
-const setBorder = (image: HTMLElement, value: string) => {
+const setBorder = (objLeaf: HTMLElement, value: string) => {
   const pxValue = Utils.addPixelSuffix(value);
-  image.style.borderWidth = pxValue;
+  objLeaf.style.borderWidth = pxValue;
 };
 
-const setBorderStyle = (image: HTMLElement, value: string) => {
-  image.style.borderStyle = value;
+const setBorderStyle = (objLeaf: HTMLElement, value: string) => {
+  objLeaf.style.borderStyle = value;
 };
 
-const getBorderStyle = (image: HTMLElement) => getStyle(image, 'borderStyle');
+const getBorderStyle = (objLeaf: HTMLElement) => getStyle(objLeaf, 'borderStyle');
 
 const isFigure = (elm: Node) => elm.nodeName === 'FIGURE';
 const isInfoLeaves = (elm: Node) => elm.nodeName === 'IMG';
 
 const defaultData = (): InfoLeavesData => {
   return {
-    timeline: '',
     numberitems: '',
-    backgroundcolorbox: '',
-    bordercolorbox: '',
-    textcolorbox: '',
-    backgroundcolortimeline: '',
-    bordercolortimeline: '',
-    textcolortimeline: '',
+    leafcolor1: '',
+    leafcolor2: '',
+    leafcolor3: '',
+    leafcolor4: '',
+    leafcolor5: '',
+    leafcolor6: '',
+    leafcolor7: '',
     style: '',
     borderstyle: '',
     border: '',
@@ -122,82 +100,82 @@ const defaultData = (): InfoLeavesData => {
 };
 
 const getStyleValue = (normalizeCss: CssNormalizer, data: InfoLeavesData): string => {
-  const image = document.createElement('div');
+  const objLeaf = document.createElement('div');
 
-  setAttrib(image, 'style', data.style);
+  setAttrib(objLeaf, 'style', data.style);
 
-  if (getBorder(image) || data.border !== '') {
-    setBorder(image, data.border);
+  if (getBorder(objLeaf) || data.border !== '') {
+    setBorder(objLeaf, data.border);
   }
 
-  if (getBorderStyle(image) || data.borderStyle !== '') {
-    setBorderStyle(image, data.borderStyle);
+  if (getBorderStyle(objLeaf) || data.borderStyle !== '') {
+    setBorderStyle(objLeaf, data.borderStyle);
   }
 
-  return normalizeCss(image.getAttribute('style'));
+  return normalizeCss(objLeaf.getAttribute('style'));
 };
 
 const create = (normalizeCss: CssNormalizer, data: InfoLeavesData): HTMLElement => {
-  const image = document.createElement('div');
-  write(normalizeCss, Merger.merge(data, { caption: false }), image);
+  const objLeaf = document.createElement('div');
+  write(normalizeCss, Merger.merge(data, { caption: false }), objLeaf);
 
-  setAttrib(image, 'timeline', data.timeline);
-  setAttrib(image, 'numberitems', data.numberitems);
-  setAttrib(image, 'backgroundcolorbox', data.backgroundcolorbox);
-  setAttrib(image, 'bordercolorbox', data.bordercolorbox);
-  setAttrib(image, 'textcolorbox', data.textcolorbox);
-  setAttrib(image, 'backgroundcolortimeline', data.backgroundcolortimeline);
-  setAttrib(image, 'bordercolortimeline', data.bordercolortimeline);
-  setAttrib(image, 'textcolortimeline', data.textcolortimeline);
-  setAttrib(image, 'borderstyle', data.borderstyle);
-  return image;
+  setAttrib(objLeaf, 'numberitems', data.numberitems);
+  setAttrib(objLeaf, 'leafcolor1', data.leafcolor1);
+  setAttrib(objLeaf, 'leafcolor2', data.leafcolor2);
+  setAttrib(objLeaf, 'leafcolor3', data.leafcolor3);
+  setAttrib(objLeaf, 'leafcolor4', data.leafcolor4);
+  setAttrib(objLeaf, 'leafcolor5', data.leafcolor5);
+  setAttrib(objLeaf, 'leafcolor6', data.leafcolor6);
+  setAttrib(objLeaf, 'leafcolor7', data.leafcolor7);
+  setAttrib(objLeaf, 'borderstyle', data.borderstyle);
+  return objLeaf;
 };
 
-const read = (normalizeCss: CssNormalizer, image: HTMLElement): InfoLeavesData => {
+const read = (normalizeCss: CssNormalizer, objLeaf: HTMLElement): InfoLeavesData => {
   return {
-    timeline: getAttrib(image, 'timeline'),
-    numberitems: getAttrib(image, 'numberitems'),
-    backgroundcolorbox: getAttrib(image, 'backgroundcolorbox'),
-    bordercolorbox: getAttrib(image, 'bordercolorbox'),
-    textcolorbox: getAttrib(image, 'textcolorbox'),
-    backgroundcolortimeline: getAttrib(image, 'backgroundcolortimeline'),
-    bordercolortimeline: getAttrib(image, 'bordercolortimeline'),
-    textcolortimeline: getAttrib(image, 'textcolortimeline'),
-    style: normalizeCss(getAttrib(image, 'style')),
-    borderstyle: getAttrib(image, 'borderstyle'),
-    border: getBorder(image),
-    borderStyle: getStyle(image, 'borderStyle')
+    numberitems: getAttrib(objLeaf, 'numberitems'),
+    leafcolor1: getAttrib(objLeaf, 'leafcolor1'),
+    leafcolor2: getAttrib(objLeaf, 'leafcolor2'),
+    leafcolor3: getAttrib(objLeaf, 'leafcolor3'),
+    leafcolor4: getAttrib(objLeaf, 'leafcolor4'),
+    leafcolor5: getAttrib(objLeaf, 'leafcolor5'),
+    leafcolor6: getAttrib(objLeaf, 'leafcolor6'),
+    leafcolor7: getAttrib(objLeaf, 'leafcolor7'),
+    style: normalizeCss(getAttrib(objLeaf, 'style')),
+    borderstyle: getAttrib(objLeaf, 'borderstyle'),
+    border: getBorder(objLeaf),
+    borderStyle: getStyle(objLeaf, 'borderStyle')
   };
 };
 
-const updateProp = (image: HTMLElement, oldData: InfoLeavesData, newData: InfoLeavesData, name: string, set: (image: HTMLElement, name: string, value: string) => void) => {
+const updateProp = (objLeaf: HTMLElement, oldData: InfoLeavesData, newData: InfoLeavesData, name: string, set: (objLeaf: HTMLElement, name: string, value: string) => void) => {
   if (newData[name] !== oldData[name]) {
-    set(image, name, newData[name]);
+    set(objLeaf, name, newData[name]);
   }
 };
 
-const normalized = (set: (image: HTMLElement, value: string) => void, normalizeCss: CssNormalizer) => {
-  return (image: HTMLElement, name: string, value: string) => {
-    set(image, value);
-    normalizeStyle(image, normalizeCss);
+const normalized = (set: (objLeaf: HTMLElement, value: string) => void, normalizeCss: CssNormalizer) => {
+  return (objLeaf: HTMLElement, name: string, value: string) => {
+    set(objLeaf, value);
+    normalizeStyle(objLeaf, normalizeCss);
   };
 };
 
-const write = (normalizeCss: CssNormalizer, newData: InfoLeavesData, image: HTMLElement) => {
-  const oldData = read(normalizeCss, image);
+const write = (normalizeCss: CssNormalizer, newData: InfoLeavesData, objLeaf: HTMLElement) => {
+  const oldData = read(normalizeCss, objLeaf);
 
-  updateProp(image, oldData, newData, 'timeline', setAttrib);
-  updateProp(image, oldData, newData, 'numberitems', setAttrib);
-  updateProp(image, oldData, newData, 'backgroundcolorbox', setAttrib);
-  updateProp(image, oldData, newData, 'bordercolorbox', setAttrib);
-  updateProp(image, oldData, newData, 'textcolorbox', setAttrib);
-  updateProp(image, oldData, newData, 'backgroundcolortimeline', setAttrib);
-  updateProp(image, oldData, newData, 'bordercolortimeline', setAttrib);
-  updateProp(image, oldData, newData, 'textcolortimeline', setAttrib);
-  updateProp(image, oldData, newData, 'borderstyle', setAttrib);
-  updateProp(image, oldData, newData, 'style', normalized((image, value) => setAttrib(image, 'style', value), normalizeCss));
-  updateProp(image, oldData, newData, 'border', normalized(setBorder, normalizeCss));
-  updateProp(image, oldData, newData, 'borderStyle', normalized(setBorderStyle, normalizeCss));
+  updateProp(objLeaf, oldData, newData, 'numberitems', setAttrib);
+  updateProp(objLeaf, oldData, newData, 'leafcolor1', setAttrib);
+  updateProp(objLeaf, oldData, newData, 'leafcolor2', setAttrib);
+  updateProp(objLeaf, oldData, newData, 'leafcolor3', setAttrib);
+  updateProp(objLeaf, oldData, newData, 'leafcolor4', setAttrib);
+  updateProp(objLeaf, oldData, newData, 'leafcolor5', setAttrib);
+  updateProp(objLeaf, oldData, newData, 'leafcolor6', setAttrib);
+  updateProp(objLeaf, oldData, newData, 'leafcolor7', setAttrib);
+  updateProp(objLeaf, oldData, newData, 'borderstyle', setAttrib);
+  updateProp(objLeaf, oldData, newData, 'style', normalized((objLeaf, value) => setAttrib(objLeaf, 'style', value), normalizeCss));
+  updateProp(objLeaf, oldData, newData, 'border', normalized(setBorder, normalizeCss));
+  updateProp(objLeaf, oldData, newData, 'borderStyle', normalized(setBorderStyle, normalizeCss));
 };
 
 export {

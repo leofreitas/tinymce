@@ -29,34 +29,52 @@ const makeTab = function (editor) {
     type: 'form',
     pack: 'start',
     items: [
-           {
-        name: 'timeline',
-        type: 'listbox',
-        label: 'Linha central',
-        values: [
-              { text: 'Selecione...', value: '' },
-              { text: 'Estreita', value: 'estreita' },
-              { text: 'Larga', value: 'larga' }
-        ],
-      },
-     {
-        label: 'Cor da borda',
+      {
+        label: 'Folha 1',
         type: 'colorbox',
-        name: 'bordercolortimeline',
+        name: 'leafcolor1',
         onaction: createColorPickAction(editor),
         onchange: updateObjectColor(editor)
       },
       {
-        label: 'Cor do Fundo',
+        label: 'Folha 2',
         type: 'colorbox',
-        name: 'backgroundcolortimeline',
+        name: 'leafcolor2',
         onaction: createColorPickAction(editor),
         onchange: updateObjectColor(editor)
       },
       {
-        label: 'Cor do Texto',
+        label: 'Folha 3',
         type: 'colorbox',
-        name: 'textcolortimeline',
+        name: 'leafcolor3',
+        onaction: createColorPickAction(editor),
+        onchange: updateObjectColor(editor)
+      },
+      {
+        label: 'Folha 4',
+        type: 'colorbox',
+        name: 'leafcolor4',
+        onaction: createColorPickAction(editor),
+        onchange: updateObjectColor(editor)
+      },
+      {
+        label: 'Folha 5',
+        type: 'colorbox',
+        name: 'leafcolor5',
+        onaction: createColorPickAction(editor),
+        onchange: updateObjectColor(editor)
+      },
+      {
+        label: 'Folha 6',
+        type: 'colorbox',
+        name: 'leafcolor6',
+        onaction: createColorPickAction(editor),
+        onchange: updateObjectColor(editor)
+      },
+      {
+        label: 'Folha 7',
+        type: 'colorbox',
+        name: 'leafcolor7',
         onaction: createColorPickAction(editor),
         onchange: updateObjectColor(editor)
       },

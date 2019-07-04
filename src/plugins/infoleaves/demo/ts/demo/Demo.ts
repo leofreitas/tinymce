@@ -12,7 +12,7 @@ declare let tinymce: any;
 
 tinymce.init({
   selector: 'textarea.tinymce',
-  extended_valid_elements: 'div[id|class|style|borderstyle|numberitems|timeline|backgroundcolorbox|bordercolorbox|textcolorbox|backgroundcolortimeline|bordercolortimeline|textcolortimeline|contenteditable],span[class], li',
+  extended_valid_elements: 'div[id|class|style|borderstyle|numberitems|leafcolor1|leafcolor2|leafcolor3|leafcolor4|leafcolor5|leafcolor6|leafcolor7|contenteditable],span[id|class], ul[class]',
   theme: 'modern',
   skin_url: '../../../../../js/tinymce/skins/lightgray',
   plugins: 'infoleaves code',
@@ -25,7 +25,7 @@ tinymce.init({
     { title: 'Estreita', value: 'estreita' },
     { title: 'Larga', value: 'larga' }
   ],
-  infografico_number_items: 8,
+  infografico_number_items: 7,
   // infograficos_upload_url: 'postAcceptor.php',
   file_picker_callback (callback, value, meta) {
      callback('https://www.google.com/logos/google.jpg', { alt: 'My alt text' });

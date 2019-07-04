@@ -7,7 +7,9 @@ const registerText = function (editor) {
   const ni = Settings.getNumberItems(editor) + 2;
   let addHtml = '';
   if (ni > 0) {
+    let indice = 0;
     for (let i = 2; i < ni; i++) {
+      indice = i - 1;
       const txt = document.getElementById('texto' + i) as HTMLInputElement;
       const y = document.getElementById('leaf' + i) as HTMLInputElement;
 
@@ -19,7 +21,7 @@ const registerText = function (editor) {
         const leafElm = editor.dom.createHTML('div', {
            id: 'contentLeaf' + i,
            name: 'contentLeaf' + i,
-           class: 'leaf'
+           class: 'leaf leafcolor' + indice +''
         }, y.value );
         const nodeLeaf = editor.dom.createHTML('li', {class: 'fact'},  leafElm + txtElm);
         addHtml += nodeLeaf;
@@ -27,12 +29,13 @@ const registerText = function (editor) {
     }
     if (!textSel) {
         const nodeLeaves = editor.dom.createHTML('ul', {class: 'facts-list'}, addHtml);
-        const divInfoLeaves = editor.dom.createHTML('div', { id: 'info03-main', class: 'infoleaves',name: 'info03-main', contenteditable: 'false' }, nodeLeaves);
+        const divInfoLeaves = editor.dom.createHTML('div', { id: 'info03-main', class: 'infoleaves', name: 'info03-main', contenteditable: 'false' }, nodeLeaves);
         if (addHtml !== '') {
            cont.innerHTML = divInfoLeaves;
         }
     } else {
-      textSel.innerHTML = addHtml;
+      const nodeLeaves = editor.dom.createHTML('ul', {class: 'facts-list'}, addHtml);
+      textSel.innerHTML = nodeLeaves;
     }
   }
 };
@@ -44,9 +47,9 @@ const getContentItems = function (editor) {
     if (ni > 0) {
       let textoValue = '';
       let leafValue = '';
-      // let indice = 0;
+      let indice = 0;
       for (let i = 2; i < ni; i++) {
-        // indice = i - 1;
+        indice = i - 1;
         if (editor.dom.get('contentBlock' + i)) {
            textoValue = editor.dom.get('contentBlock' + i).innerHTML;
         } else {
@@ -57,7 +60,7 @@ const getContentItems = function (editor) {
         } else {
           leafValue = '';
         }
-        generalContentItems.push( { type: 'label', text: 'Folha - Texto' } );
+        generalContentItems.push( { type: 'label', text: 'Folha ' + indice + ' - Texto' } );
         generalContentItems.push( { name: 'leaf' + i , id: 'leaf' + i, type: 'textbox', value:  leafValue, maxLength: 1, size: 1 } );
         generalContentItems.push( { type: 'label', text: '-' } );
         generalContentItems.push( { name: 'texto' + i , id: 'texto' + i, type: 'textbox', value:  textoValue } );
