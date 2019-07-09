@@ -21,7 +21,7 @@ const registerText = function (editor) {
         const leafElm = editor.dom.createHTML('div', {
            id: 'contentLeaf' + i,
            name: 'contentLeaf' + i,
-           class: 'leaf leafcolor' + indice +''
+           class: 'leaf leafcolor' + indice + ''
         }, y.value );
         const nodeLeaf = editor.dom.createHTML('li', {class: 'fact'},  leafElm + txtElm);
         addHtml += nodeLeaf;
