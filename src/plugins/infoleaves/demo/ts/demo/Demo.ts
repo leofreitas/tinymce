@@ -16,7 +16,7 @@ tinymce.init({
   theme: 'modern',
   skin_url: '../../../../../js/tinymce/skins/lightgray',
   plugins: 'infoleaves code',
-  toolbar: 'undo redo | image code',
+  toolbar: 'undo redo | infoleaves code',
   infograficos_dimensions: false,
   infografico_advtab: true,
   infografico_title: true,
@@ -26,10 +26,6 @@ tinymce.init({
     { title: 'Larga', value: 'larga' }
   ],
   infografico_number_items: 7,
-  // infograficos_upload_url: 'postAcceptor.php',
-  file_picker_callback (callback, value, meta) {
-     callback('https://www.google.com/logos/google.jpg', { alt: 'My alt text' });
-  },
   height: 600
 });
 

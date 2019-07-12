@@ -16,7 +16,7 @@ tinymce.init({
   theme: 'modern',
   skin_url: '../../../../../js/tinymce/skins/lightgray',
   plugins: 'infosimple code',
-  toolbar: 'undo redo | image code',
+  toolbar: 'undo redo | infosimple code',
   infosimples_dimensions: false,
   infosimple_advtab: true,
   infosimple_title: true,

@@ -21,9 +21,7 @@ const normalizeCss = (editor: Editor, cssText: string): string => {
 };
 
 const getSelectedInfografico = (editor: Editor): HTMLElement => {
-  // const imgElm = editor.selection.getNode() as HTMLElement;
-  const textSel = editor.dom.get('info01-main');
-
+  const textSel = editor.dom.get('infosequencial');
   return textSel;
 };
 
@@ -63,22 +61,6 @@ const insertInfograficoAtCaret = (editor: Editor, data: InfograficoData) => {
     editor.selection.select(insertedElm);
   }
 };
-/*
-const deleteInfografico = (editor: Editor, componentHTML: HTMLElement) => {
-  if (componentHTML) {
-    const elm = editor.dom.is(componentHTML.parentNode, 'figure.image') ? componentHTML.parentNode : componentHTML;
-
-    editor.dom.remove(elm);
-    editor.focus();
-    editor.nodeChanged();
-
-    if (editor.dom.isEmpty(editor.getBody())) {
-      editor.setContent('');
-      editor.selection.setCursorLocation();
-    }
-  }
-};
-*/
 
 const writeInfograficoDataToSelection = (editor: Editor, data: InfograficoData) => {
   const componentHTML = getSelectedInfografico(editor);
@@ -98,12 +80,7 @@ const writeInfograficoDataToSelection = (editor: Editor, data: InfograficoData) 
 const insertOrUpdateInfografico = (editor: Editor, data: InfograficoData) => {
   const componentHTML = getSelectedInfografico(editor);
   if (componentHTML) {
-    // if (data.src) {
       writeInfograficoDataToSelection(editor, data);
-    // } else {
-    //   deleteInfografico(editor, componentHTML);
-    // }
-  // } else if (data.src) {
   } else {
     insertInfograficoAtCaret(editor, data);
   }

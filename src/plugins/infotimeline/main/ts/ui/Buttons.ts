@@ -11,16 +11,16 @@
 import Dialog from './Dialog';
 
 const register = function (editor) {
-  editor.addButton('image', {
-    icon: 'image',
-    tooltip: 'Inserir/editar infotimeline',
-    onclick: Dialog(editor).open,
-    stateSelector: 'img:not([data-mce-object],[data-mce-placeholder]),figure.image'
+  editor.addButton('infotimeline', {
+    icon: false,
+    text: 'Linha do Tempo',
+    tooltip: 'Inserir/editar Infotimeline',
+    onclick: Dialog(editor).open
   });
 
-  editor.addMenuItem('image', {
-    icon: 'image',
-    text: 'InfoTimeline',
+  editor.addMenuItem('infotimeline', {
+    icon: false,
+    text: 'Linha do tempo',
     onclick: Dialog(editor).open,
     context: 'insert',
     prependToContext: true

@@ -11,16 +11,17 @@
 import Dialog from './Dialog';
 
 const register = function (editor) {
-  editor.addButton('image', {
-    icon: 'image',
-    tooltip: 'Inserir/editar infoleaves',
+  editor.addButton('infoleaves', {
+    icon: false,
+    text: 'Infográfico Folhas',
+    tooltip: 'Inserir/editar Folhas',
     onclick: Dialog(editor).open,
     stateSelector: 'img:not([data-mce-object],[data-mce-placeholder]),figure.image'
   });
 
-  editor.addMenuItem('image', {
-    icon: 'image',
-    text: 'InfoLeaves',
+  editor.addMenuItem('infoleaves', {
+    icon: false,
+    text: 'Infográfico Folhas',
     onclick: Dialog(editor).open,
     context: 'insert',
     prependToContext: true

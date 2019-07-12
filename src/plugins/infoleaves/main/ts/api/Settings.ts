@@ -21,10 +21,6 @@ const getPrependUrl = function (editor) {
   return editor.getParam('infografico_prepend_url', '');
 };
 
-const getClassList = function (editor) {
-  return editor.getParam('infografico_class_list');
-};
-
 const getNumberItems = function (editor) {
   return editor.settings.infografico_number_items;
 };
@@ -72,7 +68,6 @@ const getUploadCredentials = function (editor) {
 export default {
   hasDimensions,
   getPrependUrl,
-  getClassList,
   getNumberItems,
   hasDescription,
   hasInfoLeavesTitle,

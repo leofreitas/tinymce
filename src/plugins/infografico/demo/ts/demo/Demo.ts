@@ -12,11 +12,11 @@ declare let tinymce: any;
 
 tinymce.init({
   selector: 'textarea.tinymce',
-  extended_valid_elements: 'div[id|style|shapeitems|numberitems|typemarcador|backgroundcolorbox|bordercolorbox|textcolorbox|contenteditable]',
+  extended_valid_elements: 'div[id|class|style|shapeitems|numberitems|typemarcador|backgroundcolorbox|bordercolorbox|textcolorbox|contenteditable]',
   theme: 'modern',
   skin_url: '../../../../../js/tinymce/skins/lightgray',
   plugins: 'infografico code',
-  toolbar: 'undo redo | image code',
+  toolbar: 'undo redo | infografico code',
   infograficos_dimensions: false,
   infografico_advtab: true,
   infografico_title: true,

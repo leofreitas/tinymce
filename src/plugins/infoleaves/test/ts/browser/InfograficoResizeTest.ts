@@ -69,8 +69,5 @@ UnitTest.asynctest('browser.tinymce.plugins.infografico.InfoLeavesResizeTest', f
     plugins: 'image',
     toolbar: 'image',
     skin_url: '/project/js/tinymce/skins/lightgray',
-    file_picker_callback (callback) {
-      callback('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
-    }
   }, success, failure);
 });

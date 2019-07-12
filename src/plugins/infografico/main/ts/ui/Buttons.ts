@@ -11,16 +11,16 @@
 import Dialog from './Dialog';
 
 const register = function (editor) {
-  editor.addButton('image', {
-    icon: 'image',
+  editor.addButton('infografico', {
+    icon: false,
+    text: 'Infográfico sequencial',
     tooltip: 'Inserir/editar infográfico',
-    onclick: Dialog(editor).open,
-    stateSelector: 'img:not([data-mce-object],[data-mce-placeholder]),figure.image'
+    onclick: Dialog(editor).open
   });
 
-  editor.addMenuItem('image', {
-    icon: 'image',
-    text: 'Infográfico',
+  editor.addMenuItem('infografico', {
+    icon: false,
+    text: 'Infográfico sequencial',
     onclick: Dialog(editor).open,
     context: 'insert',
     prependToContext: true

@@ -3,7 +3,7 @@ import { document, HTMLInputElement } from '@ephox/dom-globals';
 
 const registerText = function (editor) {
   const cont = editor.getBody();
-  const textSel = editor.selection.dom.get('info01-main');
+  const textSel = editor.selection.dom.get('infosequencial');
   const ni = Settings.getNumberItems(editor) + 2;
   let addHtml = '';
   if (ni > 0) {
@@ -18,15 +18,12 @@ const registerText = function (editor) {
       }
     }
     if (!textSel) {
-        const divInfografico = editor.dom.createHTML('div', { id: 'info01-main', name: 'info01-main', contenteditable: 'false' }, addHtml);
+        const divInfografico = editor.dom.createHTML('div', { id: 'infosequencial', name: 'infosequencial', class: 'infosequencial', contenteditable: 'false' }, addHtml);
         if (addHtml !== '') {
            cont.innerHTML = divInfografico;
         }
     } else {
       textSel.innerHTML = addHtml;
-      // textSel.setContent(addHtml);
-      // editor.setContent(textSel.innerHtml);
-      // console.log(textSel.getAttribute('shapeitems'));
     }
   }
 };

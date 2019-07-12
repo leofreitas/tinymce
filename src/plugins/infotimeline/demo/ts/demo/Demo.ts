@@ -16,7 +16,7 @@ tinymce.init({
   theme: 'modern',
   skin_url: '../../../../../js/tinymce/skins/lightgray',
   plugins: 'infotimeline code',
-  toolbar: 'undo redo | image code',
+  toolbar: 'undo redo | infotimeline code',
   infograficos_dimensions: false,
   infografico_advtab: true,
   infografico_title: true,

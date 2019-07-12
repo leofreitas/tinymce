@@ -37,7 +37,6 @@ const getInfosimpleList = function (editor) {
   return editor.getParam('infosimple_list', false);
 };
 
-
 export default {
   hasDimensions,
   getNumberItems,
