@@ -23,13 +23,19 @@ const registerText = function (editor) {
            name: 'contentLeaf' + i,
            class: 'leaf leafcolor' + indice + ''
         }, y.value );
-        const nodeLeaf = editor.dom.createHTML('li', {class: 'fact'},  leafElm + txtElm);
+        const leafLine = editor.dom.createHTML('div', {
+           class: 'line-leaf'
+        }, '');
+        const line = editor.dom.createHTML('div', {
+           class: 'line'
+        }, '');
+        const nodeLeaf = editor.dom.createHTML('li', {class: 'fact'},  leafElm + leafLine + txtElm);
         addHtml += nodeLeaf;
       }
     }
     if (!textSel) {
         const nodeLeaves = editor.dom.createHTML('ul', {class: 'facts-list'}, addHtml);
-        const divInfoLeaves = editor.dom.createHTML('div', { id: 'info03-main', class: 'infoleaves', name: 'info03-main', contenteditable: 'false' }, nodeLeaves);
+        const divInfoLeaves = editor.dom.createHTML('div', { id: 'info03-main', class: 'infoleaves', name: 'info03-main', contenteditable: 'false' }, line + nodeLeaves);
         if (addHtml !== '') {
            cont.innerHTML = divInfoLeaves;
         }
