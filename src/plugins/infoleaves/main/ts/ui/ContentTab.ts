@@ -26,13 +26,13 @@ const registerText = function (editor) {
         const leafLine = editor.dom.createHTML('div', {
            class: 'line-leaf'
         }, '');
-        const line = editor.dom.createHTML('div', {
-           class: 'line'
-        }, '');
         const nodeLeaf = editor.dom.createHTML('li', {class: 'fact'},  leafElm + leafLine + txtElm);
         addHtml += nodeLeaf;
       }
     }
+    const line = editor.dom.createHTML('div', {
+        class: 'line'
+    }, '');
     if (!textSel) {
         const nodeLeaves = editor.dom.createHTML('ul', {class: 'facts-list'}, addHtml);
         const divInfoLeaves = editor.dom.createHTML('div', { id: 'info03-main', class: 'infoleaves', name: 'info03-main', contenteditable: 'false' }, line + nodeLeaves);
