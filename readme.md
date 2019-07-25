@@ -11,6 +11,7 @@ O gerador de infográfico utilizou a biblioteca: TinyMCE - JavaScript Library fo
 > Os arquivos estão no vm13->Programas->Desenvolvimento Cursos (\\vm13\Programas\Desenvolvimento Cursos)
 > A versão do nodejs precisa ser 9.4.0
 > A versão do Python precisa ser 2.7.14
+> npm install -g windows-build-tools (https://superuser.com/questions/1032689/how-do-i-add-vcbuild-exe-to-windows-10-w-o-visual-studio)
 
 ## Instalação do gerador
 
@@ -18,7 +19,7 @@ O gerador de infográfico utilizou a biblioteca: TinyMCE - JavaScript Library fo
 * Acesse o diretório do repositório por um terminal: `cd caminho para o diretório do repositório`.
 * Em seguida, como administrador execute o comando `npm install` para instalar as dependências do curso.
 * Depois de instalar as dependências, execute os comandos `grunt` e `grunt start` para começar o desenvolvimento.
-* Nos PC usando windows execute os comandos `grunt --force` e `grunt start --force`
+* Para o sistema operacional usando Windows execute os comandos `grunt --force` e `grunt start --force`
 
 
 Build tasks
