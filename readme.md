@@ -3,15 +3,14 @@ Gerador de infográfico (HTML)
 O gerador de infográfico utilizou a biblioteca: TinyMCE - JavaScript Library for Rich Text Editing (https://github.com/tinymce/tinymce.git)
 
 ## Configuração
-> Para rodar no PC com Windows:
-> [Python](https://www.python.org/getit/), [Ruby](https://rubyinstaller.org/downloads/), o Ruby precisa ser com With DEVKIT, escolha a versão do seu Windows 32bits ou 64 bits
-
-> É necessário ter o [Node.js](https://nodejs.org/en/), [Typescript](https://www.typescriptlang.org/#download-links) e [Grunt] (https://gruntjs.com/) previamente instalado globalmente no seu computador.
+> Para PC's com Windows:
+* [Python](https://www.python.org/getit/), [Ruby](https://rubyinstaller.org/downloads/), o Ruby precisa ser com With DEVKIT, escolha a versão do seu Windows 32bits ou 64 bits
+* É necessário ter o [Node.js](https://nodejs.org/en/), [Typescript](https://www.typescriptlang.org/#download-links) e [Grunt] (https://gruntjs.com/) previamente instalado globalmente no seu computador.
 
 > Os arquivos estão no vm13->Programas->Desenvolvimento Cursos (\\vm13\Programas\Desenvolvimento Cursos)
-> A versão do nodejs precisa ser 9.4.0
-> A versão do Python precisa ser 2.7.14
-> npm install -g windows-build-tools (https://superuser.com/questions/1032689/how-do-i-add-vcbuild-exe-to-windows-10-w-o-visual-studio)
+* A versão do nodejs precisa ser 9.4.0
+* A versão do Python precisa ser 2.7.14
+* `npm install -g windows-build-tools` (https://superuser.com/questions/1032689/how-do-i-add-vcbuild-exe-to-windows-10-w-o-visual-studio)
 
 ## Instalação do gerador
 
