@@ -22,7 +22,7 @@ const normalizeCss = (editor: Editor, cssText: string): string => {
 
 const getSelectedInfoLeaves = (editor: Editor): HTMLElement => {
   // const imgElm = editor.selection.getNode() as HTMLElement;
-  const textSel = editor.dom.get('info03-main');
+  const textSel = editor.dom.get('info-leaves');
 
   return textSel;
 };

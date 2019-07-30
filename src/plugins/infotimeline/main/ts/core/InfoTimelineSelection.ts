@@ -22,7 +22,7 @@ const normalizeCss = (editor: Editor, cssText: string): string => {
 
 const getSelectedInfoTimeline = (editor: Editor): HTMLElement => {
   // const imgElm = editor.selection.getNode() as HTMLElement;
-  const textSel = editor.dom.get('info02-main');
+  const textSel = editor.dom.get('info-timeline-upright');
 
   return textSel;
 };

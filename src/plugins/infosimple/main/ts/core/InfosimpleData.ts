@@ -17,9 +17,9 @@ import { HTMLElement, Node, document } from '@ephox/dom-globals';
 
 interface InfosimpleData {
   numberitems: string;
-  backgroundcolorbox: string;
-  bordercolorbox: string;
-  textcolorbox: string;
+  colorN2: string;
+  colorN1: string;
+  colorN3: string;
   style: string;
   border: string;
   borderStyle: string;
@@ -80,9 +80,9 @@ const isInfosimple = (elm: Node) => elm.nodeName === 'IMG';
 const defaultData = (): InfosimpleData => {
   return {
     numberitems: '',
-    backgroundcolorbox: '',
-    bordercolorbox: '',
-    textcolorbox: '',
+    colorN2: '',
+    colorN1: '',
+    colorN3: '',
     style: '',
     border: '',
     borderStyle: ''
@@ -110,18 +110,18 @@ const create = (normalizeCss: CssNormalizer, data: InfosimpleData): HTMLElement 
   write(normalizeCss, Merger.merge(data, { caption: false }), image);
 
   setAttrib(image, 'numberitems', data.numberitems);
-  setAttrib(image, 'backgroundcolorbox', data.backgroundcolorbox);
-  setAttrib(image, 'bordercolorbox', data.bordercolorbox);
-  setAttrib(image, 'textcolorbox', data.textcolorbox);
+  setAttrib(image, 'colorN2', data.colorN2);
+  setAttrib(image, 'colorN1', data.colorN1);
+  setAttrib(image, 'colorN3', data.colorN3);
   return image;
 };
 
 const read = (normalizeCss: CssNormalizer, image: HTMLElement): InfosimpleData => {
   return {
     numberitems: getAttrib(image, 'numberitems'),
-    backgroundcolorbox: getAttrib(image, 'backgroundcolorbox'),
-    bordercolorbox: getAttrib(image, 'bordercolorbox'),
-    textcolorbox: getAttrib(image, 'textcolorbox'),
+    colorN2: getAttrib(image, 'colorN2'),
+    colorN1: getAttrib(image, 'colorN1'),
+    colorN3: getAttrib(image, 'colorN3'),
     style: normalizeCss(getAttrib(image, 'style')),
     border: getBorder(image),
     borderStyle: getStyle(image, 'borderStyle')
@@ -145,9 +145,9 @@ const write = (normalizeCss: CssNormalizer, newData: InfosimpleData, image: HTML
   const oldData = read(normalizeCss, image);
 
   updateProp(image, oldData, newData, 'numberitems', setAttrib);
-  updateProp(image, oldData, newData, 'backgroundcolorbox', setAttrib);
-  updateProp(image, oldData, newData, 'bordercolorbox', setAttrib);
-  updateProp(image, oldData, newData, 'textcolorbox', setAttrib);
+  updateProp(image, oldData, newData, 'colorN2', setAttrib);
+  updateProp(image, oldData, newData, 'colorN1', setAttrib);
+  updateProp(image, oldData, newData, 'colorN3', setAttrib);
   updateProp(image, oldData, newData, 'style', normalized((image, value) => setAttrib(image, 'style', value), normalizeCss));
   updateProp(image, oldData, newData, 'border', normalized(setBorder, normalizeCss));
   updateProp(image, oldData, newData, 'borderStyle', normalized(setBorderStyle, normalizeCss));

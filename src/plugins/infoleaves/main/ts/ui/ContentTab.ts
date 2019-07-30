@@ -3,7 +3,7 @@ import { document, HTMLInputElement } from '@ephox/dom-globals';
 
 const registerText = function (editor) {
   const cont = editor.getBody();
-  const textSel = editor.selection.dom.get('info03-main');
+  const textSel = editor.selection.dom.get('info-leaves');
   const ni = Settings.getNumberItems(editor) + 2;
   let addHtml = '';
   if (ni > 0) {
@@ -35,13 +35,13 @@ const registerText = function (editor) {
     }, '');
     if (!textSel) {
         const nodeLeaves = editor.dom.createHTML('ul', {class: 'facts-list'}, addHtml);
-        const divInfoLeaves = editor.dom.createHTML('div', { id: 'info03-main', class: 'infoleaves', name: 'info03-main', contenteditable: 'false' }, line + nodeLeaves);
+        const divInfoLeaves = editor.dom.createHTML('div', { id: 'info-leaves', class: 'info-leaf', name: 'info-leaves', contenteditable: 'false' }, line + nodeLeaves);
         if (addHtml !== '') {
            cont.innerHTML = divInfoLeaves;
         }
     } else {
       const nodeLeaves = editor.dom.createHTML('ul', {class: 'facts-list'}, addHtml);
-      textSel.innerHTML = nodeLeaves;
+      textSel.innerHTML = line + nodeLeaves;
     }
   }
 };

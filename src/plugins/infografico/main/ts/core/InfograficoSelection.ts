@@ -21,7 +21,7 @@ const normalizeCss = (editor: Editor, cssText: string): string => {
 };
 
 const getSelectedInfografico = (editor: Editor): HTMLElement => {
-  const textSel = editor.dom.get('infosequencial');
+  const textSel = editor.dom.get('info-box-flat');
   return textSel;
 };
 

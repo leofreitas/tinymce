@@ -3,7 +3,7 @@ import { document, HTMLInputElement } from '@ephox/dom-globals';
 
 const registerText = function (editor) {
   const cont = editor.getBody();
-  const textSel = editor.selection.dom.get('info02-main');
+  const textSel = editor.selection.dom.get('info-timeline-upright');
   const ni = Settings.getNumberItems(editor) + 2;
   let addHtml = '<span class="cntl-bar cntl-center"> <span class="cntl-bar-fill"></span> </span>';
   if (ni > 0) {
@@ -27,7 +27,7 @@ const registerText = function (editor) {
       }
     }
     if (!textSel) {
-        const divInfoTimeline = editor.dom.createHTML('div', { id: 'info02-main', name: 'info02-main', class: 'cntl', contenteditable: 'false' }, addHtml);
+        const divInfoTimeline = editor.dom.createHTML('div', { id: 'info-timeline-upright', name: 'info-timeline-upright', class: 'cntl info-timeline-upright', contenteditable: 'false' }, addHtml);
         if (addHtml !== '') {
            cont.innerHTML = divInfoTimeline;
         }

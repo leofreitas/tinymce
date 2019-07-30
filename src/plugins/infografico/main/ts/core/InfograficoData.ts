@@ -52,29 +52,7 @@ const getStyle = (image: HTMLElement, name: string): string => {
 const setAttrib = (image: HTMLElement, name: string, value: string) => {
   image.setAttribute(name, value);
 };
-/*
-const wrapInFigure = (image: HTMLElement) => {
-  const figureElm = DOM.create('figure', { class: 'image' });
-  DOM.insertAfter(figureElm, image);
 
-  figureElm.appendChild(image);
-  figureElm.appendChild(DOM.create('figcaption', { contentEditable: true }, 'Caption'));
-  figureElm.contentEditable = 'false';
-};
-
-const removeFigure = (image: HTMLElement) => {
-  const figureElm = image.parentNode;
-  DOM.insertAfter(image, figureElm);
-  DOM.remove(figureElm);
-};
-const getSize = (image: HTMLElement, name: string): string => {
-  if (image.style[name]) {
-    return Utils.removePixelSuffix(image.style[name]);
-  } else {
-    return getAttrib(image, name);
-  }
-};
-*/
 const normalizeStyle = (image: HTMLElement, normalizeCss: CssNormalizer) => {
   const attrValue = image.getAttribute('style');
   const value = normalizeCss(attrValue !== null ? attrValue : '');

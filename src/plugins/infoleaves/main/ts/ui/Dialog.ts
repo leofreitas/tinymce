@@ -9,7 +9,6 @@
  */
 
 import Utils from '../core/Utils';
-import BoxTab from './BoxTab';
 import ContentTab from './ContentTab';
 import LeavesTab from './LeavesTab';
 import { Fun, Merger } from '@ephox/katamari';
@@ -36,7 +35,6 @@ export default function (editor) {
 
     body.push(ContentTab.makeTab(editor));
     body.push(LeavesTab.makeTab(editor));
-    body.push(BoxTab.makeTab(editor));
 
     // Advanced dialog shows general+advanced tabs
     editor.windowManager.open({

@@ -26,28 +26,28 @@ const updateObjectColor = function (editor) {
 
 const makeTab = function (editor) {
   return {
-    title: 'Propriedades Box/Texto',
+    title: 'Cor dos Botões',
     type: 'form',
     pack: 'start',
     items: [
      {
-        label: 'Cor da borda',
+        label: 'Cor n+1',
         type: 'colorbox',
-        name: 'bordercolorbox',
+        name: 'colorN1',
         onaction: createColorPickAction(editor),
         onchange: updateObjectColor(editor)
       },
       {
-        label: 'Cor do Fundo',
+        label: 'Cor n+2',
         type: 'colorbox',
-        name: 'backgroundcolorbox',
+        name: 'colorN2',
         onaction: createColorPickAction(editor),
         onchange: updateObjectColor(editor)
       },
       {
-        label: 'Cor do Texto',
+        label: 'Cor n+3',
         type: 'colorbox',
-        name: 'textcolorbox',
+        name: 'colorN3',
         onaction: createColorPickAction(editor),
         onchange: updateObjectColor(editor)
       },

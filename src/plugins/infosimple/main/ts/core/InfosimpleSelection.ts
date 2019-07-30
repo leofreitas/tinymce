@@ -22,7 +22,7 @@ const normalizeCss = (editor: Editor, cssText: string): string => {
 
 const getSelectedInfosimple = (editor: Editor): HTMLElement => {
   // const imgElm = editor.selection.getNode() as HTMLElement;
-  const textSel = editor.dom.get('info-simple');
+  const textSel = editor.dom.get('info-box-upright');
 
   return textSel;
 };
