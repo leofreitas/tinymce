@@ -6,7 +6,7 @@ const registerText = function (editor) {
   const textSel = editor.selection.dom.get('info-box-flat');
   const ni = Settings.getNumberItems(editor) + 2;
   let addHtml = '';
-  let arrow = '<div class="arrow-box-flat"></div>';
+  const arrow = '<div class="arrow-box-flat"></div>';
   if (ni > 0) {
     for (let i = 2; i < ni; i++) {
       const bl = document.getElementById('bloco' + i) as HTMLInputElement;
