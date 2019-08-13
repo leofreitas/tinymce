@@ -11,6 +11,7 @@
 import Utils from '../core/Utils';
 import ContentTab from './ContentTab';
 import LeavesTab from './LeavesTab';
+import BackgroundTab from './BackgroundTab';
 import { Fun, Merger } from '@ephox/katamari';
 import { Editor } from 'tinymce/core/api/Editor';
 import { insertOrUpdateInfoLeaves, readInfoLeavesDataFromSelection } from 'tinymce/plugins/infoleaves/core/InfoLeavesSelection';
@@ -35,6 +36,7 @@ export default function (editor) {
 
     body.push(ContentTab.makeTab(editor));
     body.push(LeavesTab.makeTab(editor));
+    body.push(BackgroundTab.makeTab(editor));
 
     // Advanced dialog shows general+advanced tabs
     editor.windowManager.open({

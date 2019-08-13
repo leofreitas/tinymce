@@ -12,7 +12,7 @@ declare let tinymce: any;
 
 tinymce.init({
   selector: 'textarea.tinymce',
-  extended_valid_elements: 'div[id|class|style|borderstyle|numberitems|timeline|backgroundcolorbox|bordercolorbox|textcolorbox|backgroundcolortimeline|bordercolortimeline|textcolortimeline|contenteditable],span[class]',
+  extended_valid_elements: 'div[id|class|style|borderstyle|numberitems|timeline|backgroundcolorbox|bordercolorbox|textcolorbox|backgroundcolortimeline|bordercolortimeline|textcolortimeline|colorbackground|urlimagebackground|contenteditable],span[class]',
   theme: 'modern',
   skin_url: '../../../../../js/tinymce/skins/lightgray',
   plugins: 'infotimeline code',

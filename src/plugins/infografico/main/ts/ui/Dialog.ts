@@ -12,6 +12,7 @@
 import Utils from '../core/Utils';
 // import MarcadorTab from './MarcadorTab';
 import BoxTab from './BoxTab';
+import BackgroundTab from './BackgroundTab';
 import ContentTab from './ContentTab';
 // import MainTab from './MainTab';
 import { Fun, Merger } from '@ephox/katamari';
@@ -38,6 +39,7 @@ export default function (editor) {
 
     body.push(ContentTab.makeTab(editor));
     body.push(BoxTab.makeTab(editor));
+    body.push(BackgroundTab.makeTab(editor));
 
     // Advanced dialog shows general+advanced tabs
     editor.windowManager.open({

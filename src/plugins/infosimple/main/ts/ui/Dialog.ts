@@ -8,12 +8,9 @@
  * Contributing: http://www.tinymce.com/contributing
  */
 
-// import Settings from '../api/Settings';
 import Utils from '../core/Utils';
-// import MarcadorTab from './MarcadorTab';
-// import BoxTab from './BoxTab';
+import BackgroundTab from './BackgroundTab';
 import ContentTab from './ContentTab';
-// import MainTab from './MainTab';
 import { Fun, Merger } from '@ephox/katamari';
 import { Editor } from 'tinymce/core/api/Editor';
 import { insertOrUpdateInfosimple, readInfosimpleDataFromSelection } from 'tinymce/plugins/infosimple/core/InfosimpleSelection';
@@ -37,7 +34,7 @@ export default function (editor) {
     const body = [];
 
     body.push(ContentTab.makeTab(editor));
-    // body.push(BoxTab.makeTab(editor));
+    body.push(BackgroundTab.makeTab(editor));
 
     // Advanced dialog shows general+advanced tabs
     editor.windowManager.open({

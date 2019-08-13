@@ -27,7 +27,7 @@ const registerText = function (editor) {
            cont.innerHTML = divInfosimple;
         }
     } else {
-      const objectList = editor.dom.createHTML('div', {class: 'items-list'}, addHtml);
+      const objectList = addHtml;
       textSel.innerHTML = objectList;
     }
   }

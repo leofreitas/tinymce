@@ -12,7 +12,7 @@ declare let tinymce: any;
 
 tinymce.init({
   selector: 'textarea.tinymce',
-  extended_valid_elements: 'div[id|class|style|shapeitems|numberitems|typemarcador|backgroundcolorbox|bordercolorbox|textcolorbox|contenteditable]',
+  extended_valid_elements: 'div[id|class|style|shapeitems|numberitems|typemarcador|backgroundcolorbox|bordercolorbox|textcolorbox|colorbackground|urlimagebackground|contenteditable]',
   theme: 'modern',
   skin_url: '../../../../../js/tinymce/skins/lightgray',
   plugins: 'infografico code',

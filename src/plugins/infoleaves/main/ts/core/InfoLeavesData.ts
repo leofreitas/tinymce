@@ -25,6 +25,8 @@ interface InfoLeavesData {
   leafcolor6: string;
   leafcolor7: string;
   style: string;
+  colorbackground: string;
+  urlimagebackground: string;
   borderstyle: string;
   border: string;
   borderStyle: string;
@@ -93,6 +95,8 @@ const defaultData = (): InfoLeavesData => {
     leafcolor6: '',
     leafcolor7: '',
     style: '',
+    colorbackground: '',
+    urlimagebackground: '',
     borderstyle: '',
     border: '',
     borderStyle: ''
@@ -128,6 +132,8 @@ const create = (normalizeCss: CssNormalizer, data: InfoLeavesData): HTMLElement 
   setAttrib(objLeaf, 'leafcolor6', data.leafcolor6);
   setAttrib(objLeaf, 'leafcolor7', data.leafcolor7);
   setAttrib(objLeaf, 'borderstyle', data.borderstyle);
+  setAttrib(objLeaf, 'colorbackground', data.colorbackground);
+  setAttrib(objLeaf, 'urlimagebackground', data.urlimagebackground);
   return objLeaf;
 };
 
@@ -142,6 +148,8 @@ const read = (normalizeCss: CssNormalizer, objLeaf: HTMLElement): InfoLeavesData
     leafcolor6: getAttrib(objLeaf, 'leafcolor6'),
     leafcolor7: getAttrib(objLeaf, 'leafcolor7'),
     style: normalizeCss(getAttrib(objLeaf, 'style')),
+    colorbackground: getAttrib(objLeaf, 'colorbackground'),
+    urlimagebackground: getAttrib(objLeaf, 'urlimagebackground'),
     borderstyle: getAttrib(objLeaf, 'borderstyle'),
     border: getBorder(objLeaf),
     borderStyle: getStyle(objLeaf, 'borderStyle')
@@ -174,6 +182,8 @@ const write = (normalizeCss: CssNormalizer, newData: InfoLeavesData, objLeaf: HT
   updateProp(objLeaf, oldData, newData, 'leafcolor7', setAttrib);
   updateProp(objLeaf, oldData, newData, 'borderstyle', setAttrib);
   updateProp(objLeaf, oldData, newData, 'style', normalized((objLeaf, value) => setAttrib(objLeaf, 'style', value), normalizeCss));
+  updateProp(objLeaf, oldData, newData, 'colorbackground', setAttrib);
+  updateProp(objLeaf, oldData, newData, 'urlimagebackground', setAttrib);
   updateProp(objLeaf, oldData, newData, 'border', normalized(setBorder, normalizeCss));
   updateProp(objLeaf, oldData, newData, 'borderStyle', normalized(setBorderStyle, normalizeCss));
 };

@@ -1,5 +1,4 @@
 import Settings from '../api/Settings';
-// import Utils from '../core/Utils';
 
 const createColorPickAction = function (editor) {
   const colorPickerCallback = Settings.getColorPickerCallback(editor);
@@ -26,30 +25,21 @@ const updateObjectColor = function (editor) {
 
 const makeTab = function (editor) {
   return {
-    title: 'Cor dos Botões',
+    title: 'Configurações de Fundo',
     type: 'form',
     pack: 'start',
     items: [
      {
-        label: 'Cor n+1',
+        label: 'Cor de fundo',
         type: 'colorbox',
-        name: 'colorN1',
+        name: 'colorbackground',
         onaction: createColorPickAction(editor),
         onchange: updateObjectColor(editor)
       },
       {
-        label: 'Cor n+2',
-        type: 'colorbox',
-        name: 'colorN2',
-        onaction: createColorPickAction(editor),
-        onchange: updateObjectColor(editor)
-      },
-      {
-        label: 'Cor n+3',
-        type: 'colorbox',
-        name: 'colorN3',
-        onaction: createColorPickAction(editor),
-        onchange: updateObjectColor(editor)
+        label: 'Imagem de fundo',
+        type: 'textbox',
+        name: 'urlimagebackground',
       },
     ]
   };

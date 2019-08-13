@@ -9,7 +9,6 @@
  */
 
 import Utils from 'tinymce/plugins/infotimeline/core/Utils';
-// import DOMUtils from 'tinymce/core/api/dom/DOMUtils';
 import { Merger } from '@ephox/katamari';
 import { HTMLElement, Node, document } from '@ephox/dom-globals';
 
@@ -25,6 +24,8 @@ interface InfoTimelineData {
   bordercolortimeline: string;
   textcolortimeline: string;
   style: string;
+  colorbackground: string;
+  urlimagebackground: string;
   borderstyle: string;
   border: string;
   borderStyle: string;
@@ -55,29 +56,7 @@ const getStyle = (image: HTMLElement, name: string): string => {
 const setAttrib = (image: HTMLElement, name: string, value: string) => {
   image.setAttribute(name, value);
 };
-/*
-const wrapInFigure = (image: HTMLElement) => {
-  const figureElm = DOM.create('figure', { class: 'image' });
-  DOM.insertAfter(figureElm, image);
 
-  figureElm.appendChild(image);
-  figureElm.appendChild(DOM.create('figcaption', { contentEditable: true }, 'Caption'));
-  figureElm.contentEditable = 'false';
-};
-
-const removeFigure = (image: HTMLElement) => {
-  const figureElm = image.parentNode;
-  DOM.insertAfter(image, figureElm);
-  DOM.remove(figureElm);
-};
-const getSize = (image: HTMLElement, name: string): string => {
-  if (image.style[name]) {
-    return Utils.removePixelSuffix(image.style[name]);
-  } else {
-    return getAttrib(image, name);
-  }
-};
-*/
 const normalizeStyle = (image: HTMLElement, normalizeCss: CssNormalizer) => {
   const attrValue = image.getAttribute('style');
   const value = normalizeCss(attrValue !== null ? attrValue : '');
@@ -115,6 +94,8 @@ const defaultData = (): InfoTimelineData => {
     bordercolortimeline: '',
     textcolortimeline: '',
     style: '',
+    colorbackground: '',
+    urlimagebackground: '',
     borderstyle: '',
     border: '',
     borderStyle: ''
@@ -150,6 +131,8 @@ const create = (normalizeCss: CssNormalizer, data: InfoTimelineData): HTMLElemen
   setAttrib(image, 'bordercolortimeline', data.bordercolortimeline);
   setAttrib(image, 'textcolortimeline', data.textcolortimeline);
   setAttrib(image, 'borderstyle', data.borderstyle);
+  setAttrib(image, 'colorbackground', data.colorbackground);
+  setAttrib(image, 'urlimagebackground', data.urlimagebackground);
   return image;
 };
 
@@ -164,6 +147,8 @@ const read = (normalizeCss: CssNormalizer, image: HTMLElement): InfoTimelineData
     bordercolortimeline: getAttrib(image, 'bordercolortimeline'),
     textcolortimeline: getAttrib(image, 'textcolortimeline'),
     style: normalizeCss(getAttrib(image, 'style')),
+    colorbackground: getAttrib(image, 'colorbackground'),
+    urlimagebackground: getAttrib(image, 'urlimagebackground'),
     borderstyle: getAttrib(image, 'borderstyle'),
     border: getBorder(image),
     borderStyle: getStyle(image, 'borderStyle')
@@ -195,6 +180,8 @@ const write = (normalizeCss: CssNormalizer, newData: InfoTimelineData, image: HT
   updateProp(image, oldData, newData, 'bordercolortimeline', setAttrib);
   updateProp(image, oldData, newData, 'textcolortimeline', setAttrib);
   updateProp(image, oldData, newData, 'borderstyle', setAttrib);
+  updateProp(image, oldData, newData, 'colorbackground', setAttrib);
+  updateProp(image, oldData, newData, 'urlimagebackground', setAttrib);
   updateProp(image, oldData, newData, 'style', normalized((image, value) => setAttrib(image, 'style', value), normalizeCss));
   updateProp(image, oldData, newData, 'border', normalized(setBorder, normalizeCss));
   updateProp(image, oldData, newData, 'borderStyle', normalized(setBorderStyle, normalizeCss));

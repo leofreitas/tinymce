@@ -23,6 +23,8 @@ interface InfograficoData {
   textcolorbox: string;
   style: string;
   shapeitems: string;
+  colorbackground: string;
+  urlimagebackground: string;
   border: string;
   borderStyle: string;
 }
@@ -88,6 +90,8 @@ const defaultData = (): InfograficoData => {
     textcolorbox: '',
     style: '',
     shapeitems: '',
+    colorbackground: '',
+    urlimagebackground: '',
     border: '',
     borderStyle: ''
   };
@@ -119,6 +123,8 @@ const create = (normalizeCss: CssNormalizer, data: InfograficoData): HTMLElement
   setAttrib(image, 'bordercolorbox', data.bordercolorbox);
   setAttrib(image, 'textcolorbox', data.textcolorbox);
   setAttrib(image, 'shapeitems', data.shapeitems);
+  setAttrib(image, 'colorbackground', data.colorbackground);
+  setAttrib(image, 'urlimagebackground', data.urlimagebackground);
   return image;
 };
 
@@ -131,6 +137,8 @@ const read = (normalizeCss: CssNormalizer, image: HTMLElement): InfograficoData 
     textcolorbox: getAttrib(image, 'textcolorbox'),
     style: normalizeCss(getAttrib(image, 'style')),
     shapeitems: getAttrib(image, 'shapeitems'),
+    colorbackground: getAttrib(image, 'colorbackground'),
+    urlimagebackground: getAttrib(image, 'urlimagebackground'),
     border: getBorder(image),
     borderStyle: getStyle(image, 'borderStyle')
   };
@@ -158,6 +166,8 @@ const write = (normalizeCss: CssNormalizer, newData: InfograficoData, image: HTM
   updateProp(image, oldData, newData, 'bordercolorbox', setAttrib);
   updateProp(image, oldData, newData, 'textcolorbox', setAttrib);
   updateProp(image, oldData, newData, 'shapeitems', setAttrib);
+  updateProp(image, oldData, newData, 'colorbackground', setAttrib);
+  updateProp(image, oldData, newData, 'urlimagebackground', setAttrib);
   updateProp(image, oldData, newData, 'style', normalized((image, value) => setAttrib(image, 'style', value), normalizeCss));
   updateProp(image, oldData, newData, 'border', normalized(setBorder, normalizeCss));
   updateProp(image, oldData, newData, 'borderStyle', normalized(setBorderStyle, normalizeCss));

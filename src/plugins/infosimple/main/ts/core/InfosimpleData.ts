@@ -18,8 +18,8 @@ import { HTMLElement, Node, document } from '@ephox/dom-globals';
 interface InfosimpleData {
   numberitems: string;
   colorN2: string;
-  colorN1: string;
-  colorN3: string;
+  colorbackground: string;
+  urlimagebackground: string;
   style: string;
   border: string;
   borderStyle: string;
@@ -81,8 +81,8 @@ const defaultData = (): InfosimpleData => {
   return {
     numberitems: '',
     colorN2: '',
-    colorN1: '',
-    colorN3: '',
+    colorbackground: '',
+    urlimagebackground: '',
     style: '',
     border: '',
     borderStyle: ''
@@ -111,8 +111,8 @@ const create = (normalizeCss: CssNormalizer, data: InfosimpleData): HTMLElement 
 
   setAttrib(image, 'numberitems', data.numberitems);
   setAttrib(image, 'colorN2', data.colorN2);
-  setAttrib(image, 'colorN1', data.colorN1);
-  setAttrib(image, 'colorN3', data.colorN3);
+  setAttrib(image, 'colorbackground', data.colorbackground);
+  setAttrib(image, 'urlimagebackground', data.urlimagebackground);
   return image;
 };
 
@@ -120,8 +120,8 @@ const read = (normalizeCss: CssNormalizer, image: HTMLElement): InfosimpleData =
   return {
     numberitems: getAttrib(image, 'numberitems'),
     colorN2: getAttrib(image, 'colorN2'),
-    colorN1: getAttrib(image, 'colorN1'),
-    colorN3: getAttrib(image, 'colorN3'),
+    colorbackground: getAttrib(image, 'colorbackground'),
+    urlimagebackground: getAttrib(image, 'urlimagebackground'),
     style: normalizeCss(getAttrib(image, 'style')),
     border: getBorder(image),
     borderStyle: getStyle(image, 'borderStyle')
@@ -146,8 +146,8 @@ const write = (normalizeCss: CssNormalizer, newData: InfosimpleData, image: HTML
 
   updateProp(image, oldData, newData, 'numberitems', setAttrib);
   updateProp(image, oldData, newData, 'colorN2', setAttrib);
-  updateProp(image, oldData, newData, 'colorN1', setAttrib);
-  updateProp(image, oldData, newData, 'colorN3', setAttrib);
+  updateProp(image, oldData, newData, 'colorbackground', setAttrib);
+  updateProp(image, oldData, newData, 'urlimagebackground', setAttrib);
   updateProp(image, oldData, newData, 'style', normalized((image, value) => setAttrib(image, 'style', value), normalizeCss));
   updateProp(image, oldData, newData, 'border', normalized(setBorder, normalizeCss));
   updateProp(image, oldData, newData, 'borderStyle', normalized(setBorderStyle, normalizeCss));
